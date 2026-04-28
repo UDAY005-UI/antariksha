@@ -24,7 +24,7 @@ export default function Page() {
         {/* HERO */}
         <section className="z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
           <video
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover z-10"
             autoPlay muted loop playsInline preload="auto"
           >
             <source src="/videos/enhanced.mp4" type="video/mp4" />
