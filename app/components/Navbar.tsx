@@ -6,6 +6,7 @@ import { YouTubeIcon } from "./Yt";
 import { FacebookIcon } from "./Fb";
 import { InstagramIcon } from "./Insta";
 import { useAudio } from "./Audio";
+import Link from "next/link";
 
 function SlideText({ label }: { label: string }) {
   const [hovered, setHovered] = useState(false);
@@ -70,8 +71,8 @@ function SlideToggleText({ textA, textB, active }: { textA: string; textB: strin
         position: "relative",
         lineHeight: 1.2,
         verticalAlign: "bottom",
-        width: "3.5ch",      // fixed width — never reflows
-        flexShrink: 0,     // won't shrink inside flex parent
+        width: "3.5ch",
+        flexShrink: 0,
       }}
     >
       <span
@@ -83,7 +84,6 @@ function SlideToggleText({ textA, textB, active }: { textA: string; textB: strin
       >
         {label}
       </span>
-
       <style>{`
         @keyframes slideUpIn {
           from { transform: translateY(110%); }
@@ -111,7 +111,6 @@ function SoundToggle() {
       }}
       className="text-sm font-bold tracking-wide"
     >
-      {/* This span never moves — isolated from the toggle */}
       <span style={{ display: "inline-block", whiteSpace: "nowrap" }}>Sound</span>
       <SlideToggleText textA="ON" textB="OFF" active={isPlaying} />
     </button>
@@ -129,26 +128,26 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-full h-full flex items-start justify-between p-12 z-50 pointer-events-none">
+    <nav className="fixed w-screen h-screen flex items-start justify-between p-4 sm:p-6 md:p-8 lg:p-12 z-50 pointer-events-none">
 
       {/* LEFT */}
       <div className="flex flex-col justify-between h-full pointer-events-auto">
         <div data-cursor="none" onClick={() => router.push("/")}><Logo /></div>
-        <div data-cursor="none" className="flex flex-col gap-4">
-          <YouTubeIcon />
+        <div data-cursor="none" className="flex flex-col gap-2 lg:gap-4">
+          <Link href="https://youtube.com/@theantariksha_in?si=ygBEwLMzszPamYrA"><YouTubeIcon /></Link>
           <FacebookIcon />
-          <InstagramIcon />
+          <Link href="https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA=="><InstagramIcon /></Link>
         </div>
       </div>
 
       {/* RIGHT */}
       <div className="flex flex-col justify-between h-full text-right pointer-events-auto">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-1 lg:gap-2">
           {links.map(({ label, path }) => (
             <div
               key={label}
               data-cursor="none"
-              className="font-bold cursor-pointer"
+              className="font-bold cursor-pointer text-xs sm:text-sm lg:text-base"
               onClick={() => router.push(path)}
             >
               <SlideText label={label} />

@@ -15,13 +15,15 @@ type RowItem = {
 function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: RowItem & { align?: "left" | "right" }) {
     const [hovered, setHovered] = useState(false);
 
+    const textClass = `w-full ${align === "right" ? "lg:pr-60 lg:pl-[40%] pr-6 pl-6 text-end" : "px-6 lg:px-60"}`;
+
     return (
         <div
             className="flex-1 flex items-center border-b border-neutral-800 relative overflow-hidden cursor-pointer"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
-            {/* Orange fill — scales from center on hover, shrinks to center on leave */}
+            {/* Orange fill */}
             <div
                 style={{
                     position: "absolute",
@@ -34,18 +36,17 @@ function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: 
                 }}
             />
 
-            {/* Ghost div — holds row height, never visible */}
-            <div className={`relative w-full ${align === "right" ? "pr-60 pl-[40%] text-end" : "px-60"}`}>
-                <div className="text-4xl font-semibold opacity-0 pointer-events-none select-none">
+            {/* Ghost div — holds row height */}
+            <div className={`relative ${textClass}`}>
+                <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold opacity-0 pointer-events-none select-none">
                     {title}
                 </div>
-                <div className="text-sm opacity-0 pointer-events-none select-none">
+                <div className="text-xs sm:text-sm opacity-0 pointer-events-none select-none">
                     {subtitle}
                 </div>
             </div>
 
-            {/* Base text — slides UP and OUT on hover */}
-            {/* Base text — fades OUT on hover */}
+            {/* Base text */}
             <div
                 style={{
                     position: "absolute",
@@ -57,13 +58,13 @@ function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: 
                     alignItems: "center",
                 }}
             >
-                <div className={`w-full ${align === "right" ? "pr-60 pl-[40%] text-end" : "px-60"}`}>
-                    <div className="text-4xl font-semibold">{title}</div>
-                    <div className="text-sm">{subtitle}</div>
+                <div className={textClass}>
+                    <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold">{title}</div>
+                    <div className="text-xs sm:text-sm">{subtitle}</div>
                 </div>
             </div>
 
-            {/* Masked text — scales into view from center on hover */}
+            {/* Masked text */}
             <div
                 style={{
                     position: "absolute",
@@ -76,9 +77,9 @@ function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: 
                     alignItems: "center",
                 }}
             >
-                <div className={`w-full ${align === "right" ? "pr-60 pl-[40%] text-end" : "px-60"}`}>
-                    <div className="text-4xl font-semibold text-black">{maskTitle}</div>
-                    <div className="text-sm text-black/60">{maskSubtitle}</div>
+                <div className={textClass}>
+                    <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-black">{maskTitle}</div>
+                    <div className="text-xs sm:text-sm text-black/60">{maskSubtitle}</div>
                 </div>
             </div>
         </div>
@@ -123,6 +124,7 @@ const udayRows: RowItem[] = [
 export default function Team() {
     const maskedHero = useRef<HTMLDivElement>(null);
     const maskedContact = useRef<HTMLDivElement>(null);
+
     return (
         <main>
             <SmoothScroll />
@@ -140,21 +142,27 @@ export default function Team() {
                     <div className="relative z-10 flex h-full items-center justify-center text-center px-6">
                         <div data-cursor="expand">
                             <motion.h1
-  className="text-5xl md:text-7xl font-bold"
-  initial={{ y: 60, opacity: 0 }}
-  animate={{ y: 0, opacity: 1 }}
-  transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
->
-  About Us
-</motion.h1>
-<motion.p
-  className="mt-4 text-lg opacity-80"
-  initial={{ y: 40, opacity: 0 }}
-  animate={{ y: 0, opacity: 1 }}
-  transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1], delay: 0.25 }}
->
-  Crafting meaningful digital experiences
-</motion.p>
+                                className="text-base sm:text-lg font-semibold"
+                                initial={{ y: 60, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
+                            >
+                                The Crew
+                            </motion.h1>
+                            <motion.p
+                                className="mt-4 text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold opacity-80"
+                                initial={{ y: 40, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1], delay: 0.25 }}
+                            >
+                                FACES
+                                <br />
+                                OF
+                                <br />
+                                THE
+                                <br />
+                                PROCESS
+                            </motion.p>
                         </div>
                     </div>
                     <div
@@ -162,123 +170,87 @@ export default function Team() {
                         className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
                     >
                         <div>
-                            <h1 className="text-5xl md:text-7xl font-bold text-black">who are we</h1>
-                            <p className="mt-4 text-lg text-black/70">Crafting meaningful digital experiences</p>
+                            <h1 className="text-base sm:text-lg font-semibold text-black">Our Team</h1>
+                            <p className="mt-4 text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-black">
+                                THE
+                                <br />
+                                CORE
+                                <br />
+                                OF
+                                <br />
+                                ANTARIKSHA
+                            </p>
                         </div>
                     </div>
                 </section>
 
                 {/* Tuhin */}
                 <section data-cursor="none" className="bg-[#141414] stack-panel absolute inset-0 h-screen w-full flex flex-col">
-                    <Image
-                        src="/tuhin.png"
-                        alt="Tuhin"
-                        width={500}
-                        height={500}
-                        className="absolute bottom-0 right-0 opacity-40 pointer-events-none"
-                        priority
-                    />
+                    <Image src="/tuhin.png" alt="Tuhin" width={500} height={500} className="absolute bottom-0 right-0 opacity-40 pointer-events-none" priority />
                     <div className="w-full h-full flex flex-col">
-                        {tuhinRows.map((row) => (
-                            <HoverRow key={row.title} {...row} align="left" />
-                        ))}
+                        {tuhinRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
                 </section>
 
                 {/* Annyesha */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col">
-                    <Image
-                        src="/annyesha.png"
-                        alt="Annyesha"
-                        width={400}
-                        height={400}
-                        className="absolute bottom-0 opacity-40 pointer-events-none"
-                        priority
-                    />
+                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="absolute bottom-0 opacity-40 pointer-events-none" priority />
                     <div className="w-full h-full flex flex-col">
-                        {annyeshaRows.map((row) => (
-                            <HoverRow key={row.title} {...row} align="right" />
-                        ))}
+                        {annyeshaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
                 </section>
 
                 {/* Dipangshu */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col">
-                    <Image
-                        src="/dipangshu.png"
-                        alt="Dipangshu"
-                        width={400}
-                        height={400}
-                        className="absolute bottom-0 right-0 opacity-40 pointer-events-none"
-                        priority
-                    />
+                    <Image src="/dipangshu.png" alt="Dipangshu" width={400} height={400} className="absolute bottom-0 right-0 opacity-40 pointer-events-none" priority />
                     <div className="w-full h-full flex flex-col">
-                        {dipangshuRows.map((row) => (
-                            <HoverRow key={row.title} {...row} align="left" />
-                        ))}
+                        {dipangshuRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
                 </section>
 
                 {/* Disha */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col">
-                    <Image
-                        src="/disha.png"
-                        alt="Disha"
-                        width={500}
-                        height={500}
-                        className="absolute bottom-0 opacity-40 pointer-events-none"
-                        priority
-                    />
+                    <Image src="/disha.png" alt="Disha" width={500} height={500} className="absolute bottom-0 opacity-40 pointer-events-none" priority />
                     <div className="w-full h-full flex flex-col">
-                        {dishaRows.map((row) => (
-                            <HoverRow key={row.title} {...row} align="right" />
-                        ))}
+                        {dishaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
                 </section>
 
                 {/* Uday */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col">
-                    <Image
-                        src="/uday.png"
-                        alt="Uday"
-                        width={500}
-                        height={500}
-                        className="absolute bottom-0 right-0 opacity-40 pointer-events-none"
-                        priority
-                    />
+                    <Image src="/uday.png" alt="Uday" width={500} height={500} className="absolute bottom-0 right-0 opacity-40 pointer-events-none" priority />
                     <div className="w-full h-full flex flex-col">
-                        {udayRows.map((row) => (
-                            <HoverRow key={row.title} {...row} align="left" />
-                        ))}
+                        {udayRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
                 </section>
 
                 {/* CONTACT */}
-                <section className="stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center">
-                    <div className="relative z-10 flex flex-col justify-center items-center px-60 text-center w-full">
-                        <div data-cursor="expand" className="font-bold text-2xl mb-4">Ready to start your journey?</div>
-                        <div data-cursor="expand" className="font-semibold text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
-                            We design and build digital experiences that feel effortless,
-                            intentional, and quietly powerful.
+                <section className="z-30 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center justify-center">
+                    <div className="flex flex-col justify-center items-center p-6 sm:p-10 md:p-20 lg:p-60 text-center w-full">
+                        <div data-cursor="expand" className="font-bold text-lg sm:text-xl md:text-2xl mb-4">Ready to start your journey?</div>
+                        <div data-cursor="expand" className="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-5xl leading-tight mb-8">
+                            We design and build digital experiences...
                         </div>
-                        <div data-cursor="expand" className="flex gap-6 text-sm uppercase tracking-wide">
-                            <div className="hover:opacity-70">See our work →</div>
-                            <div className="hover:opacity-70">Contact us →</div>
-                        </div>
-                    </div>
-                    <div ref={maskedContact} className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center">
-                        <div className="text-black flex flex-col justify-center items-center px-60 text-center w-full">
-                            <div className="font-bold text-2xl mb-4">Ready to start your journey?</div>
-                            <div className="font-semibold text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
-                                We design and build digital experiences that feel effortless,
-                                intentional, and quietly powerful.
-                            </div>
-                            <div className="flex gap-6 text-sm uppercase tracking-wide">
-                                <div>See our work →</div>
-                                <div>Contact us →</div>
-                            </div>
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 text-sm uppercase tracking-wide items-center">
+                            <div data-cursor="expand" className="cursor-pointer hover:opacity-70">See our work →</div>
+                            <div data-cursor="expand" className="cursor-pointer hover:opacity-70">Contact us →</div>
                         </div>
                     </div>
+                    <section
+                        ref={maskedContact}
+                        className="cursor-text-layer absolute inset-0 h-screen w-full bg-orange-500 flex items-center justify-center z-30"
+                    >
+                        <div className="flex flex-col justify-center items-center p-6 sm:p-10 md:p-20 lg:p-60 text-center w-full">
+                            <div className="font-bold text-lg sm:text-xl md:text-2xl mb-4 text-black">Want something people watch?</div>
+                            <div className="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-5xl leading-tight mb-8 text-black">
+                                We craft visuals that hit and don&apos;t fade out...
+                            </div>
+                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 text-sm uppercase tracking-wide text-black items-center">
+                                <div className="cursor-pointer hover:opacity-70">Explore work →</div>
+                                <div className="cursor-pointer hover:opacity-70">Get in touch →</div>
+                            </div>
+                        </div>
+                    </section>
                 </section>
             </StackScroll>
         </main>

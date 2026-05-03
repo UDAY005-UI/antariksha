@@ -4,19 +4,22 @@ import { useState } from "react";
 type LinkItem = {
   label: string;
   maskLabel: string;
+  href: string;
   small?: boolean;
 };
 
-function HoverLink({ label, maskLabel, small = false }: LinkItem) {
+function HoverLink({ label, maskLabel, href, small = false }: LinkItem) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div
-      className="relative overflow-hidden cursor-pointer w-full"
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative overflow-hidden cursor-pointer w-full block"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Orange fill */}
       <div
         style={{
           position: "absolute",
@@ -29,13 +32,11 @@ function HoverLink({ label, maskLabel, small = false }: LinkItem) {
         }}
       />
 
-      {/* Ghost — holds height */}
-      <div className={`opacity-0 pointer-events-none select-none flex items-center gap-3 font-semibold px-2 py-1 ${small ? "text-sm" : "text-4xl"}`}>
+      <div className={`opacity-0 pointer-events-none select-none flex items-center gap-3 font-semibold px-2 py-1 ${small ? "text-sm" : "text-2xl md:text-3xl lg:text-4xl"}`}>
         <span className={`${small ? "w-1.5 h-1.5" : "w-2 h-2"} rotate-45 shrink-0`} />
         {label}
       </div>
 
-      {/* Base text — fades out on hover */}
       <div
         style={{
           position: "absolute",
@@ -47,13 +48,12 @@ function HoverLink({ label, maskLabel, small = false }: LinkItem) {
           alignItems: "center",
         }}
       >
-        <div className={`flex items-center gap-3 font-semibold px-2 ${small ? "text-sm" : "text-4xl"}`}>
+        <div className={`flex items-center gap-3 font-semibold px-2 ${small ? "text-sm" : "text-2xl md:text-3xl lg:text-4xl"}`}>
           <span className={`${small ? "w-1.5 h-1.5" : "w-2 h-2"} bg-orange-500 rotate-45 shrink-0`} />
           {label}
         </div>
       </div>
 
-      {/* Masked text — different text, scaleY from center on hover */}
       <div
         style={{
           position: "absolute",
@@ -66,52 +66,52 @@ function HoverLink({ label, maskLabel, small = false }: LinkItem) {
           alignItems: "center",
         }}
       >
-        <div className={`flex items-center gap-3 font-semibold text-black px-2 ${small ? "text-sm" : "text-4xl"}`}>
+        <div className={`flex items-center gap-3 font-semibold text-black px-2 ${small ? "text-sm" : "text-2xl md:text-3xl lg:text-4xl"}`}>
           <span className={`${small ? "w-1.5 h-1.5" : "w-2 h-2"} bg-black rotate-45 shrink-0`} />
           {maskLabel}
         </div>
       </div>
-    </div>
+    </a>
   );
 }
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#0b0b0b] px-60 py-32">
-<div className="flex items-start w-full">
+    <footer className="w-full bg-[#0b0b0b] px-10 py-16 md:px-20 md:py-24 lg:px-60 lg:py-32">
+      <div className="flex flex-col md:flex-row items-start w-full gap-12 md:gap-0">
 
-  {/* LEFT COLUMN */}
-  <div className="flex-1 flex flex-col">
-    <p className="text-xs tracking-[0.3em] mb-10">CONNECT</p>
-    <div className="space-y-6">
-      <HoverLink label="Dribbble" maskLabel="See our shots →" />
-      <HoverLink label="Youtube" maskLabel="Watch our work →" />
-      <HoverLink label="Linkedin" maskLabel="Let's connect →" />
-    </div>
-  </div>
+        {/* LEFT COLUMN */}
+        <div className="flex-1 flex flex-col">
+          <p className="text-xs tracking-[0.3em] mb-10" data-cursor="none">CONNECT</p>
+          <p className="text-sm text-neutral-400 text-balance leading-relaxed max-w-xs md:max-w-md" data-cursor="none">
+            Antariksha is a creative content studio focused on crafting visuals that
+            feel intentional and refined. From concept to final cut, we prioritize
+            clarity, consistency, and storytelling that actually resonates.
+          </p>
+        </div>
 
-  {/* MIDDLE COLUMN */}
-  <div className="pl-2 flex-1 flex flex-col mt-[3.5rem]">
-    <div className="space-y-6">
-      <HoverLink label="Instagram" maskLabel="Follow along →" />
-      <HoverLink label="Facebook" maskLabel="Join the page →" />
-      <HoverLink label="Behance" maskLabel="View projects →" />
-    </div>
-  </div>
+        {/* MIDDLE COLUMN */}
+        <div className="pl-2 flex-1 flex flex-col md:mt-14">
+          <div data-cursor="none" className="space-y-6">
+            <HoverLink label="Instagram" maskLabel="Follow along →" href={"https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA=="} />
+            <HoverLink label="Facebook" maskLabel="Join the page →" href={""} />
+            <HoverLink label="Youtube" maskLabel="Watch our work →" href={"https://youtube.com/@theantariksha_in?si=ygBEwLMzszPamYrA"} />
+          </div>
+        </div>
 
-  {/* RIGHT COLUMN */}
-  <div className="pl-2 flex flex-col mt-[3.5rem] gap-8">
-    <div>
-      <p className="text-xs tracking-[0.2em] mb-3">Email</p>
-      <HoverLink label="yourmail@gmail.com" maskLabel="Drop us a line →" small />
-    </div>
-    <div>
-      <p className="text-xs tracking-[0.2em] mb-3">Phone</p>
-      <HoverLink label="+91 12345 67890" maskLabel="Give us a ring →" small />
-    </div>
-  </div>
+        {/* RIGHT COLUMN */}
+        <div className="pl-2 flex flex-col md:mt-14 gap-8">
+          <div data-cursor="none">
+            <p className="text-xs tracking-[0.2em] mb-3">Email</p>
+            <HoverLink label="antarikshathe@gmail.com" maskLabel="Drop us a line →" small href={"mailto:antarikshathe@gmail.com"} />
+          </div>
+          <div data-cursor="none">
+            <p className="text-xs tracking-[0.2em] mb-3">Phone</p>
+            <HoverLink label="+91 97352 81411" maskLabel="Give us a ring →" small href={"tel:+919735281411"} />
+          </div>
+        </div>
 
-</div>
+      </div>
     </footer>
   );
 }
