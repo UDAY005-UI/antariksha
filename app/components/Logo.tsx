@@ -1,19 +1,25 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 
 export default function Logo() {
     const [hovered, setHovered] = useState(false)
+    const isMouse = useRef(false)
+
+    useEffect(() => {
+        isMouse.current =
+            window.matchMedia("(pointer: fine)").matches &&
+            window.matchMedia("(hover: hover)").matches
+    }, [])
 
     return (
         <div
             className="w-24 h-24 flex items-center justify-center relative"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            onMouseEnter={() => { if (isMouse.current) setHovered(true) }}
+            onMouseLeave={() => { if (isMouse.current) setHovered(false) }}
         >
-            {/* Orange circle animation */}
             <div
-                className="absolute rounded-full bg-orange-500"
+                className="logo-hover-circle absolute rounded-full bg-orange-500"
                 style={{
                     width: "110%",
                     height: "110%",
@@ -24,7 +30,6 @@ export default function Logo() {
                 }}
             />
 
-            {/* White logo (default) */}
             <Image
                 src="/wlogo.png"
                 alt="Logo"
@@ -36,7 +41,6 @@ export default function Logo() {
                 }}
             />
 
-            {/* Black logo (on hover) */}
             <Image
                 src="/blogo.png"
                 alt="Logo"

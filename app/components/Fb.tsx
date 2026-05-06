@@ -1,13 +1,20 @@
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function FacebookIcon() {
   const [hovered, setHovered] = useState(false)
+  const isMouse = useRef(false)
+
+  useEffect(() => {
+    isMouse.current =
+      window.matchMedia("(pointer: fine)").matches &&
+      window.matchMedia("(hover: hover)").matches
+  }, [])
 
   return (
     <div
       className="w-10 h-10 flex items-center justify-center relative"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => { if (isMouse.current) setHovered(true) }}
+      onMouseLeave={() => { if (isMouse.current) setHovered(false) }}
     >
       <div
         className="absolute rounded-full bg-orange-500"

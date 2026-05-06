@@ -10,6 +10,10 @@ export default function Cursor() {
   const variantRef = useRef<"default" | "expand" | "expand-sm" | "none">("default")
 
   useEffect(() => {
+    const isFinePointer = window.matchMedia("(pointer: fine)").matches
+    const isHoverDevice = window.matchMedia("(hover: hover)").matches
+    if (!isFinePointer || !isHoverDevice) return
+
     const handleMove = (e: MouseEvent) => {
       mouse.current.x = e.clientX
       mouse.current.y = e.clientY
@@ -30,6 +34,8 @@ export default function Cursor() {
     }
 
     window.addEventListener("mousemove", handleMove)
+
+    let frameId: number
 
     const loop = () => {
       const dx = mouse.current.x - pos.current.x
@@ -69,14 +75,12 @@ export default function Cursor() {
         }
       }
 
-      // reset all sections
       document.querySelectorAll<HTMLElement>("section").forEach((sec) => {
         sec.style.setProperty("--cx", "-9999px")
         sec.style.setProperty("--cy", "-9999px")
         sec.style.setProperty("--cr", "0px")
       })
 
-      // set vars only on section cursor is inside
       document.querySelectorAll<HTMLElement>("section").forEach((sec) => {
         const rect = sec.getBoundingClientRect()
 
@@ -92,18 +96,21 @@ export default function Cursor() {
         }
       })
 
-      requestAnimationFrame(loop)
+      frameId = requestAnimationFrame(loop)
     }
 
-    requestAnimationFrame(loop)
+    frameId = requestAnimationFrame(loop)
 
-    return () => window.removeEventListener("mousemove", handleMove)
+    return () => {
+      window.removeEventListener("mousemove", handleMove)
+      cancelAnimationFrame(frameId)
+    }
   }, [])
 
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 rounded-full pointer-events-none bg-orange-500"
+      className="fixed top-0 left-0 rounded-full pointer-events-none bg-orange-500 hidden md:block"
       style={{
         width: "20px",
         height: "20px",
