@@ -25,13 +25,18 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+* {
+  cursor: default !important;
+}
 
-[data-cursor="none"],
-[data-cursor="none"] * {
-  cursor: auto !important;
+@media (pointer: coarse) {
+  .logo-hover-circle {
+    display: none !important;
+  }
 }
 
 .cursor-text-layer {
+  cursor: default;
   pointer-events: none;
   z-index: 20;
   position: absolute;

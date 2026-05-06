@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
 import Logo from "./Logo";
 import { YouTubeIcon } from "./Yt";
@@ -119,6 +119,7 @@ function SoundToggle() {
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
 
   const links = [
     { label: "About",   path: "/about"   },
@@ -147,7 +148,9 @@ export default function Navbar() {
             <div
               key={label}
               data-cursor="none"
-              className="font-bold cursor-pointer text-xs sm:text-sm lg:text-base"
+              className={`font-bold cursor-pointer text-xs sm:text-sm lg:text-base transition-colors duration-300 ${
+                pathname === path ? "text-[#847353]" : ""
+              }`}
               onClick={() => router.push(path)}
             >
               <SlideText label={label} />
