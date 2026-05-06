@@ -129,7 +129,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed w-screen h-screen flex items-start justify-between p-4 sm:p-6 md:p-8 lg:p-12 z-50 pointer-events-none">
+    <nav className="fixed inset-0 w-full min-h-dvh flex items-start justify-between p-4 sm:p-6 md:p-8 lg:p-12 z-50 pointer-events-none overflow-hidden">
 
       {/* LEFT */}
       <div className="flex flex-col justify-between h-full pointer-events-auto">
