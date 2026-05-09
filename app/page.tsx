@@ -113,7 +113,7 @@ export default function Page() {
                 HOW WE MAKE SHIT WORK
               </p>
               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-snug font-semibold text-[#1a1a1a]">
-                Not here to churn out mediocre work — everything we ship is thought through and built on purpose. More means nothing if it's weak. Clear direction, tight execution, work that holds up.
+                Not here to churn out mediocre work — everything we ship is thought through and built on purpose. More means nothing if it&apos;s weak. Clear direction, tight execution, work that holds up.
               </h1>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function Page() {
             </p>
             <h1
               data-cursor="expand"
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-snug font-semibold mb-8 max-w-[900px]"
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-snug font-semibold mb-8 max-w-225"
             >
               We design and build digital experiences that feel effortless,
               intentional, and quietly powerful.
