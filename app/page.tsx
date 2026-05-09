@@ -6,6 +6,7 @@ import StackScroll from "./components/StackScroll"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { motion } from "framer-motion"
+import Footer from "./components/Footer"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -16,7 +17,7 @@ export default function Page() {
   const stackRef = useRef<HTMLDivElement>(null)
 
   return (
-    <main className="h-[300vh]">
+    <main>
       <SmoothScroll />
 
       <StackScroll stackRef={stackRef}>
@@ -120,7 +121,7 @@ export default function Page() {
         </section>
 
         {/* CONTACT */}
-        <section className="z-30 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center">
+        <section className="z-30 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center overflow-hidden">
           {/* Base layer — matches about page contact structure */}
           <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20">
             <p
@@ -165,7 +166,6 @@ export default function Page() {
             </div>
           </div>
         </section>
-
       </StackScroll>
     </main>
   )

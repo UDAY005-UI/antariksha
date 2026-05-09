@@ -113,8 +113,8 @@ export default function Footer() {
 
         {/* LEFT */}
         <div className="w-full md:flex-1 flex flex-col items-center md:items-start text-center md:text-left">
-          <p className="text-xs tracking-[0.3em] mb-10">CONNECT</p>
-          <p className="text-sm text-neutral-400 leading-relaxed max-w-sm">
+          <p className="text-xs tracking-[0.3em] mb-10" data-cursor="none">CONNECT</p>
+          <p className="text-sm text-neutral-400 leading-relaxed max-w-sm" data-cursor="none">
             Antariksha is a creative content studio focused on crafting visuals that
             feel intentional and refined. From concept to final cut, we prioritize
             clarity, consistency, and storytelling that actually resonates.
@@ -123,7 +123,7 @@ export default function Footer() {
 
         {/* MIDDLE */}
         <div className="w-full md:flex-1 md:pl-2 md:mt-14 flex flex-col items-center md:items-start">
-          <div className="w-full max-w-xs md:max-w-none space-y-6">
+          <div className="w-full max-w-xs md:max-w-none space-y-6" data-cursor="none">
             <HoverLink label="Instagram" maskLabel="Follow along →" href="https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA==" />
             <HoverLink label="Facebook" maskLabel="Join the page →" href="" />
             <HoverLink label="Youtube" maskLabel="Watch our work →" href="https://youtube.com/@theantariksha_in?si=ygBEwLMzszPamYrA" />
@@ -132,11 +132,11 @@ export default function Footer() {
 
         {/* RIGHT */}
         <div className="w-full md:w-auto md:pl-2 md:mt-14 flex flex-col items-center md:items-start gap-8">
-          <div className="w-full max-w-xs md:max-w-none">
+          <div className="w-full max-w-xs md:max-w-none" data-cursor="none">
             <p className="text-xs tracking-[0.2em] mb-3 text-center md:text-left">Email</p>
             <HoverLink label="antarikshathe@gmail.com" maskLabel="Drop us a line →" small href="mailto:antarikshathe@gmail.com" />
           </div>
-          <div className="w-full max-w-xs md:max-w-none">
+          <div className="w-full max-w-xs md:max-w-none" data-cursor="none">
             <p className="text-xs tracking-[0.2em] mb-3 text-center md:text-left">Phone</p>
             <HoverLink label="+91 97352 81411" maskLabel="Give us a ring →" small href="tel:+919735281411" />
           </div>

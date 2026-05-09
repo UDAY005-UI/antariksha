@@ -21,6 +21,9 @@ function SlideText({ label }: { label: string }) {
         position: "relative",
         lineHeight: 1.2,
         verticalAlign: "bottom",
+        WebkitTouchCallout: "none",
+        WebkitUserSelect: "none",
+        userSelect: "none",
       }}
     >
       <span
@@ -73,6 +76,9 @@ function SlideToggleText({ textA, textB, active }: { textA: string; textB: strin
         verticalAlign: "bottom",
         width: "3.5ch",
         flexShrink: 0,
+        WebkitTouchCallout: "none",
+        WebkitUserSelect: "none",
+        userSelect: "none",
       }}
     >
       <span
@@ -108,6 +114,9 @@ function SoundToggle() {
         border: "none",
         padding: 0,
         cursor: "pointer",
+        WebkitTouchCallout: "none",
+        WebkitUserSelect: "none",
+        userSelect: "none",
       }}
       className="text-sm font-bold tracking-wide"
     >
@@ -122,14 +131,18 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const links = [
-    { label: "About",   path: "/about"   },
-    { label: "Team",    path: "/team"    },
-    { label: "Work",    path: "/work"    },
-    { label: "Contact", path: "/contact" },
+    { label: "Home",   path: "/"   },
+    { label: "About",  path: "/about"   },
+    { label: "Team",   path: "/team"    },
+    { label: "Work",   path: "/work"    },
+    { label: "Contact",path: "/contact" },
   ];
 
   return (
-    <nav className="fixed inset-0 w-full min-h-dvh flex items-start justify-between p-4 sm:p-6 md:p-8 lg:p-12 z-50 pointer-events-none overflow-hidden">
+    <nav
+      className="fixed inset-0 w-full min-h-dvh flex items-start justify-between p-4 sm:p-6 md:p-8 lg:p-12 z-40 pointer-events-none overflow-hidden select-none"
+      style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
+    >
 
       {/* LEFT */}
       <div className="flex flex-col justify-between h-full pointer-events-auto">
@@ -151,6 +164,7 @@ export default function Navbar() {
               className={`font-bold cursor-pointer text-xs sm:text-sm lg:text-base transition-colors duration-300 ${
                 pathname === path ? "text-[#847353]" : ""
               }`}
+              style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
               onClick={() => router.push(path)}
             >
               <SlideText label={label} />

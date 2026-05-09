@@ -49,9 +49,13 @@ export default function StackScroll({
     return () => ctx.revert()
   }, [])
 
-  return (
-    <div ref={containerRef} className="relative h-screen">
-      {children}
-    </div>
-  )
+return (
+<div 
+  ref={containerRef} 
+  className="relative overflow-hidden bg-black"
+  style={{ height: '100dvh', willChange: 'transform', transform: 'translateZ(0)' }}
+>
+  {children}
+</div>
+)
 }

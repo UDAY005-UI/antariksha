@@ -8,6 +8,7 @@ export default function Cursor() {
   const velocity = useRef({ x: 0, y: 0 })
   const size = useRef(0)
   const variantRef = useRef<"default" | "expand" | "expand-sm" | "none">("default")
+  const hasEntered = useRef(false)
 
   useEffect(() => {
     const isFinePointer = window.matchMedia("(pointer: fine)").matches
@@ -17,6 +18,7 @@ export default function Cursor() {
     const handleMove = (e: MouseEvent) => {
       mouse.current.x = e.clientX
       mouse.current.y = e.clientY
+      hasEntered.current = true
 
       const target = e.target as HTMLElement
       const el = target.closest('[data-cursor]') as HTMLElement | null
@@ -25,7 +27,23 @@ export default function Cursor() {
         variantRef.current = "default"
       } else {
         const type = el.getAttribute("data-cursor")
+        if (type === "expand") variantRef.current = "expand"
+        else if (type === "expand-sm") variantRef.current = "expand-sm"
+        else if (type === "none") variantRef.current = "none"
+        else variantRef.current = "default"
+      }
+    }
 
+    const handleScroll = () => {
+      if (cursorRef.current) cursorRef.current.style.display = 'none'
+      const el = document.elementFromPoint(mouse.current.x, mouse.current.y)
+      if (cursorRef.current) cursorRef.current.style.display = 'block'
+
+      const closest = el?.closest('[data-cursor]') as HTMLElement | null
+      if (!closest) {
+        variantRef.current = "default"
+      } else {
+        const type = closest.getAttribute("data-cursor")
         if (type === "expand") variantRef.current = "expand"
         else if (type === "expand-sm") variantRef.current = "expand-sm"
         else if (type === "none") variantRef.current = "none"
@@ -34,6 +52,7 @@ export default function Cursor() {
     }
 
     window.addEventListener("mousemove", handleMove)
+    window.addEventListener("scroll", handleScroll, { passive: true })
 
     let frameId: number
 
@@ -62,17 +81,14 @@ export default function Cursor() {
 
       if (cursorRef.current) {
         const isHidden = variantRef.current === "none"
+        const isExpand = variantRef.current === "expand"
 
-        cursorRef.current.style.opacity = isHidden ? "0" : "1"
+        cursorRef.current.style.opacity = !hasEntered.current || isHidden ? "0" : "1"
+        cursorRef.current.style.backgroundColor = isExpand ? "transparent" : "#f97316"
         cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
         cursorRef.current.style.width = `${s}px`
         cursorRef.current.style.height = `${s}px`
-
-        if (variantRef.current === "default") {
-          cursorRef.current.style.zIndex = "9999"
-        } else {
-          cursorRef.current.style.zIndex = "auto"
-        }
+        cursorRef.current.style.zIndex = "9999"
       }
 
       document.querySelectorAll<HTMLElement>("section").forEach((sec) => {
@@ -83,7 +99,6 @@ export default function Cursor() {
 
       document.querySelectorAll<HTMLElement>("section").forEach((sec) => {
         const rect = sec.getBoundingClientRect()
-
         if (
           x >= rect.left &&
           x <= rect.right &&
@@ -103,6 +118,7 @@ export default function Cursor() {
 
     return () => {
       window.removeEventListener("mousemove", handleMove)
+      window.removeEventListener("scroll", handleScroll)
       cancelAnimationFrame(frameId)
     }
   }, [])
@@ -110,12 +126,14 @@ export default function Cursor() {
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 rounded-full pointer-events-none bg-orange-500 hidden md:block"
+      className="fixed top-0 left-0 rounded-full pointer-events-none hidden md:block"
       style={{
         width: "20px",
         height: "20px",
+        backgroundColor: "#f97316",
         willChange: "transform, width, height, opacity",
         transition: "opacity 0.15s ease",
+        zIndex: 9999,
       }}
     />
   )
