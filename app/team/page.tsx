@@ -12,6 +12,8 @@ type RowItem = {
     maskSubtitle: string;
 };
 
+const isMouse = () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
 function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: RowItem & { align?: "left" | "right" }) {
     const [hovered, setHovered] = useState(false);
 
@@ -20,8 +22,8 @@ function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: 
     return (
         <div
             className="flex-1 flex items-center border-b border-neutral-800 relative overflow-hidden cursor-pointer"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
+            onMouseEnter={() => { if (isMouse()) setHovered(true); }}
+            onMouseLeave={() => { if (isMouse()) setHovered(false); }}
         >
             {/* Orange fill */}
             <div
@@ -142,7 +144,7 @@ export default function Team() {
                     <div className="relative z-10 flex h-full items-center justify-center text-center px-6">
                         <div data-cursor="expand">
                             <motion.h1
-                                className="text-base sm:text-lg font-semibold"
+                                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest"
                                 initial={{ y: 60, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
@@ -150,18 +152,15 @@ export default function Team() {
                                 The Crew
                             </motion.h1>
                             <motion.p
-                                className="mt-4 text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold opacity-80"
+                                className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
                                 initial={{ y: 40, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1], delay: 0.25 }}
                             >
                                 FACES
-                                <br />
-                                OF
-                                <br />
-                                THE
-                                <br />
-                                PROCESS
+                                <br />OF
+                                <br />THE
+                                <br />PROCESS
                             </motion.p>
                         </div>
                     </div>
@@ -170,88 +169,91 @@ export default function Team() {
                         className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
                     >
                         <div>
-                            <h1 className="text-base sm:text-lg font-semibold text-black">Our Team</h1>
-                            <p className="mt-4 text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-black">
+                            <h1 className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest">Our Team</h1>
+                            <p className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
                                 THE
-                                <br />
-                                CORE
-                                <br />
-                                OF
-                                <br />
-                                ANTARIKSHA
+                                <br />CORE
+                                <br />OF
+                                <br />ANTARIKSHA
                             </p>
                         </div>
                     </div>
                 </section>
 
                 {/* Tuhin */}
-                <section data-cursor="none" className="bg-[#141414] stack-panel absolute inset-0 h-screen w-full flex flex-col">
-                    <Image src="/tuhin.png" alt="Tuhin" width={500} height={500} className="absolute bottom-0 right-0 opacity-40 pointer-events-none" priority />
+                <section data-cursor="none" className="bg-[#141414] stack-panel absolute inset-0 h-screen w-full flex flex-col overflow-hidden">
+                    <Image src="/tuhin.png" alt="Tuhin" width={500} height={500} className="absolute bottom-0 right-0 opacity-40 pointer-events-none w-[70vw] sm:w-[50vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {tuhinRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
                 </section>
 
                 {/* Annyesha */}
-                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col">
-                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="absolute bottom-0 opacity-40 pointer-events-none" priority />
+                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
+                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="absolute bottom-0 opacity-40 pointer-events-none w-[60vw] sm:w-[40vw] lg:w-[400px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {annyeshaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
                 </section>
 
                 {/* Dipangshu */}
-                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col">
-                    <Image src="/dipangshu.png" alt="Dipangshu" width={400} height={400} className="absolute bottom-0 right-0 opacity-40 pointer-events-none" priority />
+                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
+                    <Image src="/dipangshu.png" alt="Dipangshu" width={400} height={400} className="absolute bottom-0 right-0 opacity-40 pointer-events-none w-[60vw] sm:w-[40vw] lg:w-[400px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {dipangshuRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
                 </section>
 
                 {/* Disha */}
-                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col">
-                    <Image src="/disha.png" alt="Disha" width={500} height={500} className="absolute bottom-0 opacity-40 pointer-events-none" priority />
+                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
+                    <Image src="/disha.png" alt="Disha" width={500} height={500} className="absolute bottom-0 opacity-40 pointer-events-none w-[70vw] sm:w-[50vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {dishaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
                 </section>
 
                 {/* Uday */}
-                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col">
-                    <Image src="/uday.png" alt="Uday" width={500} height={500} className="absolute bottom-0 right-0 opacity-40 pointer-events-none" priority />
+                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
+                    <Image src="/uday.png" alt="Uday" width={500} height={500} className="absolute bottom-0 right-0 opacity-40 pointer-events-none w-[70vw] sm:w-[50vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {udayRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
                 </section>
 
                 {/* CONTACT */}
-                <section className="z-30 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center justify-center">
-                    <div className="flex flex-col justify-center items-center p-6 sm:p-10 md:p-20 lg:p-60 text-center w-full">
-                        <div data-cursor="expand" className="font-bold text-lg sm:text-xl md:text-2xl mb-4">Ready to start your journey?</div>
-                        <div data-cursor="expand" className="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-5xl leading-tight mb-8">
+                <section className="z-30 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center">
+                    <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20">
+                        <h1 data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4">
+                            Ready to start your journey?
+                        </h1>
+                        <h1 data-cursor="expand" className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-snug font-semibold mb-8 max-w-[900px]">
                             We design and build digital experiences...
-                        </div>
-                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 text-sm uppercase tracking-wide items-center">
-                            <div data-cursor="expand" className="cursor-pointer hover:opacity-70">See our work →</div>
-                            <div data-cursor="expand" className="cursor-pointer hover:opacity-70">Contact us →</div>
+                        </h1>
+                        <div data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+                            <div className="cursor-pointer hover:opacity-70">See our work →</div>
+                            <div className="cursor-pointer hover:opacity-70">Contact us →</div>
                         </div>
                     </div>
-                    <section
+
+                    <div
                         ref={maskedContact}
-                        className="cursor-text-layer absolute inset-0 h-screen w-full bg-orange-500 flex items-center justify-center z-30"
+                        className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
                     >
-                        <div className="flex flex-col justify-center items-center p-6 sm:p-10 md:p-20 lg:p-60 text-center w-full">
-                            <div className="font-bold text-lg sm:text-xl md:text-2xl mb-4 text-black">Want something people watch?</div>
-                            <div className="font-semibold text-xl sm:text-2xl md:text-3xl lg:text-5xl leading-tight mb-8 text-black">
-                                We craft visuals that hit and don&apos;t fade out...
+                        <div className="text-black flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20">
+                            <div className="font-bold text-lg sm:text-2xl mb-4 text-[#0D0C0B]">
+                                Want something people watch?
                             </div>
-                            <div className="flex flex-col sm:flex-row gap-3 sm:gap-6 text-sm uppercase tracking-wide text-black items-center">
+                            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-snug font-semibold text-[#0D0C0B] mb-8 max-w-[900px]">
+                                We craft visuals that hit and don&apos;t fade out...
+                            </h1>
+                            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
                                 <div className="cursor-pointer hover:opacity-70">Explore work →</div>
                                 <div className="cursor-pointer hover:opacity-70">Get in touch →</div>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 </section>
+
             </StackScroll>
         </main>
     );

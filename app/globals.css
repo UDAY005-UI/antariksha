@@ -35,6 +35,10 @@ body {
   }
 }
 
+body.modal-open nav {
+  z-index: 0 !important;
+}
+
 .cursor-text-layer {
   cursor: default;
   pointer-events: none;
