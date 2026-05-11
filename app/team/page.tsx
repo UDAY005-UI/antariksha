@@ -214,7 +214,7 @@ export default function Team() {
                 </section>
 
                 {/* CONTACT */}
-                <section className="z-30 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center">
+                <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center">
                     <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20">
                         <h1 data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4">
                             Ready to start your journey?

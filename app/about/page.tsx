@@ -111,7 +111,7 @@ export default function Page() {
           </section>
 
           {/* CONTACT */}
-        <section className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center px-6">
+        <section className="z-10 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center px-6">
           <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
             <div data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4">
               Ready to start your journey?
