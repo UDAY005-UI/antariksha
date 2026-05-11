@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef, RefObject, useCallback } from "react";
+import { useLayoutEffect, useRef, RefObject } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -21,6 +21,7 @@ export default function StackScroll({
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const panels = gsap.utils.toArray<HTMLElement>(".stack-panel")
+      const isMobile = window.innerWidth < 768
 
       panels.forEach((panel, i) => {
         if (i !== 0) gsap.set(panel, { yPercent: 100 })
@@ -31,7 +32,7 @@ export default function StackScroll({
           trigger: containerRef.current,
           start: "top top",
           end: () => `+=${window.innerHeight * (panels.length - 1)}`,
-          scrub: 1,
+          scrub: isMobile ? 0.3 : 1,   // tighter scrub on mobile
           pin: true,
           anticipatePin: 1,
           onRefresh() {
@@ -49,13 +50,13 @@ export default function StackScroll({
     return () => ctx.revert()
   }, [])
 
-return (
-<div 
-  ref={containerRef} 
-  className="relative overflow-hidden bg-black"
-  style={{ height: '100dvh', willChange: 'transform', transform: 'translateZ(0)' }}
->
-  {children}
-</div>
-)
+  return (
+    <div
+      ref={containerRef}
+      className="relative overflow-hidden bg-black"
+      style={{ height: "100dvh", willChange: "transform", transform: "translateZ(0)" }}
+    >
+      {children}
+    </div>
+  )
 }

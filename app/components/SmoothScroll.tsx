@@ -9,12 +9,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll() {
   useEffect(() => {
-    const lenis = new Lenis();
+    const isMobile = window.innerWidth < 768
 
-    // ✅ Bridge Lenis scroll events into ScrollTrigger
+    const lenis = new Lenis({
+      lerp: isMobile ? 0.12 : 0.1,        // slightly snappier on mobile
+      smoothWheel: true,
+      touchMultiplier: isMobile ? 1.2 : 2, // less overscroll momentum on mobile
+      infinite: false,
+    });
+
     lenis.on("scroll", ScrollTrigger.update);
 
-    // ✅ Drive Lenis via GSAP ticker so they share the same frame loop
     gsap.ticker.add((time) => {
       lenis.raf(time * 1000);
     });
