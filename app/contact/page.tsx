@@ -34,53 +34,85 @@ export default function Page() {
       <SmoothScroll />
       <StackScroll>
 
-        {/* Hero */}
-        <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay muted loop playsInline preload="auto"
-          >
-            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
-          </video>
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="relative z-10 flex h-full items-center justify-center text-center px-6">
-            <div data-cursor="expand">
-              <motion.h1
-                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest"
-                initial={{ y: 60, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
-              >
-                Work With Us
-              </motion.h1>
-              <motion.p
-                className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1], delay: 0.25 }}
-              >
-                LET&apos;S
-                <br />MAKE
-                <br />SOMETHING
-                <br />REAL
-              </motion.p>
-            </div>
+{/* Hero */}
+<section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
+  <video
+    className="absolute inset-0 w-full h-full object-cover"
+    autoPlay muted loop playsInline preload="auto"
+  >
+    <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
+  </video>
+  <div className="absolute inset-0 bg-black/70" />
+
+  <div className="relative z-10 flex h-full items-center justify-center px-8 md:px-35">
+    <div data-cursor="expand" className="w-full flex flex-col items-start">
+
+      <motion.p
+        className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold opacity-60 mb-2"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 0.6, y: 0 }}
+        transition={{ duration: 1.0, delay: 0.1 }}
+      >
+        Antariksha Studio®
+      </motion.p>
+
+      <div className="flex w-full">
+        {"CONTACT".split("").map((l, i) => (
+          <div key={i} className="overflow-hidden">
+            <motion.span
+              className="block font-black leading-none"
+              style={{ fontSize: "clamp(4.5rem, 18vw, 22rem)", letterSpacing: "-0.03em" }}
+              initial={{ y: "110%" }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.7, ease: [0.25, 0.1, 0, 1], delay: 0.15 + i * 0.06 }}
+            >
+              {l}
+            </motion.span>
           </div>
-          <div
-            ref={maskedHero}
-            className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
+        ))}
+      </div>
+
+      <motion.p
+        className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold opacity-60 mt-2 self-end"
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 0.6, y: 0 }}
+        transition={{ duration: 1.0, delay: 1.0 }}
+      >
+        Reach Out · Work Together
+      </motion.p>
+
+    </div>
+  </div>
+
+  <div
+    ref={maskedHero}
+    className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center px-8 md:px-35"
+  >
+    <div className="w-full flex flex-col items-start">
+
+      <p className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold text-black opacity-70 mb-2">
+        Antariksha Studio®
+      </p>
+
+      <div className="flex w-full">
+        {"CONNECT".split("").map((l, i) => (
+          <span
+            key={i}
+            className="block font-black leading-none text-black"
+            style={{ fontSize: "clamp(4.5rem, 18vw, 22rem)", letterSpacing: "-0.03em" }}
           >
-            <div>
-              <h1 className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest">Join Us</h1>
-              <p className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
-                MAKE
-                <br />IT
-                <br />HAPPEN
-                <br />NOW
-              </p>
-            </div>
-          </div>
-        </section>
+            {l}
+          </span>
+        ))}
+      </div>
+
+      <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold text-black opacity-70 mt-2 self-end">
+        Let&apos;s Make It Real
+      </p>
+
+    </div>
+  </div>
+</section>
 
         {/* CONTACT */}
         <section className="z-10 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center overflow-hidden">

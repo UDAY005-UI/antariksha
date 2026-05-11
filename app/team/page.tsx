@@ -134,41 +134,58 @@ export default function Team() {
                         <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
                     </video>
                     <div className="absolute inset-0 bg-black/40" />
-                    <div className="relative z-10 flex h-full items-center justify-center text-center px-6">
-                        <div data-cursor="expand">
+
+                    <div className="relative z-10 flex h-full items-end justify-center px-6 sm:px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
+                        <div data-cursor="expand" className="inline-block max-w-full">
                             <motion.h1
-                                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest"
-                                initial={{ y: 60, opacity: 0 }}
+                                className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-4 sm:mb-3 md:mb-5 opacity-70 text-left"
+                                initial={{ y: 30, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
+                                transition={{ duration: 1.0, ease: [0.25, 0.1, 0, 1], delay: 0.1 }}
                             >
-                                The Crew
+                                The Core Of
                             </motion.h1>
-                            <motion.p
-                                className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
-                                initial={{ y: 40, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1], delay: 0.25 }}
-                            >
-                                FACES
-                                <br />OF
-                                <br />THE
-                                <br />PROCESS
-                            </motion.p>
+
+                            <div className="flex mb-8">
+                                {"ANTARIKSHA".split("").map((letter, i) => (
+                                    <div key={i} className="overflow-hidden">
+                                        <motion.span
+                                            className="block text-[11vw] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none opacity-80"
+                                            initial={{ y: "100%" }}
+                                            animate={{ y: 0 }}
+                                            transition={{
+                                                duration: 0.6,
+                                                ease: [0.25, 0.1, 0, 1],
+                                                delay: 0.2 + i * 0.06,
+                                            }}
+                                        >
+                                            {letter}
+                                        </motion.span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
+
+                    {/* Masked orange layer */}
                     <div
                         ref={maskedHero}
-                        className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
+                        className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end justify-center px-6 sm:px-8 md:px-35 pb-20 sm:pb-16 md:pb-14"
                     >
-                        <div>
-                            <h1 className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest">Our Team</h1>
-                            <p className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
-                                THE
-                                <br />CORE
-                                <br />OF
-                                <br />ANTARIKSHA
+                        <div className="inline-block max-w-full">
+                            <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-4 sm:mb-3 md:mb-5 text-black opacity-70 text-left">
+                                The Faces Behind
                             </p>
+
+                            <div className="flex mb-8">
+                                {"ANTARIKSHA".split("").map((letter, i) => (
+                                    <div key={i} className="overflow-hidden">
+                                        <span className="block text-[11vw] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none text-black">
+                                            {letter}
+                                        </span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -183,7 +200,7 @@ export default function Team() {
 
                 {/* Annyesha */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
-                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-40 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
+                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-80 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {annyeshaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
@@ -191,7 +208,7 @@ export default function Team() {
 
                 {/* Dipangshu */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
-                    <Image src="/dipangshu.png" alt="Dipangshu" width={400} height={400} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-40 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
+                    <Image src="/dipangshu.png" alt="Dipangshu" width={400} height={400} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {dipangshuRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
@@ -199,7 +216,7 @@ export default function Team() {
 
                 {/* Disha */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
-                    <Image src="/disha.png" alt="Disha" width={500} height={500} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-40 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
+                    <Image src="/disha.png" alt="Disha" width={500} height={500} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {dishaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
@@ -207,7 +224,7 @@ export default function Team() {
 
                 {/* Uday */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
-                    <Image src="/uday.png" alt="Uday" width={500} height={500} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-40 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
+                    <Image src="/uday.png" alt="Uday" width={500} height={500} className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-70 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {udayRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
@@ -223,8 +240,8 @@ export default function Team() {
                             We design and build digital experiences...
                         </h1>
                         <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                            <div onClick={() => router.push("/work")}  className="cursor-pointer hover:opacity-70">See our work →</div>
-                            <div onClick={() => router.push("/contact")}  className="cursor-pointer hover:opacity-70">Contact us →</div>
+                            <div onClick={() => router.push("/work")} className="cursor-pointer hover:opacity-70">See our work →</div>
+                            <div onClick={() => router.push("/contact")} className="cursor-pointer hover:opacity-70">Contact us →</div>
                         </div>
                     </div>
                     <div
@@ -239,7 +256,7 @@ export default function Team() {
                                 We craft visuals that hit and don&apos;t fade out...
                             </h1>
                             <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                                <div onClick={() => router.push("/work")}  className="cursor-pointer hover:opacity-70">Explore work →</div>
+                                <div onClick={() => router.push("/work")} className="cursor-pointer hover:opacity-70">Explore work →</div>
                                 <div onClick={() => router.push("/contact")} className="cursor-pointer hover:opacity-70">Get in touch →</div>
                             </div>
                         </div>

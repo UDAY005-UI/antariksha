@@ -21,58 +21,88 @@ export default function Page() {
         <SmoothScroll />
 
         <StackScroll stackRef={stackRef}>
+<section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
+  <video
+    className="absolute inset-0 w-full h-full object-cover"
+    autoPlay muted loop playsInline preload="auto"
+  >
+    <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
+  </video>
+  <div className="absolute inset-0 bg-black/40" />
 
-          {/* HERO — untouched */}
-          <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay muted loop playsInline preload="auto"
-            >
-              <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
-            </video>
-            <div className="absolute inset-0 bg-black/40" />
+  <div className="relative z-10 flex h-full items-end px-8 sm:px-6 md:px-35 pb-20 sm:pb-16 md:pb-14">
+    <div data-cursor="expand" className="w-full">
+      <motion.p
+        className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-2 sm:mb-3 md:mb-5 opacity-70 text-left"
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1.4, ease: [0.25, 0.1, 0, 1] }}
+      >
+        Our Foundation
+      </motion.p>
 
-            <div className="relative z-10 flex h-full items-center justify-center text-center px-6">
-              <div data-cursor="expand">
-                <motion.h1
-                  className="text-sm sm:text-base md:text-lg font-semibold tracking-widest"
-                  initial={{ y: 60, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
-                >
-                  Our Foundation
-                </motion.h1>
-                <motion.p
-                  className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
-                  initial={{ y: 40, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1], delay: 0.25 }}
-                >
-                  WHO
-                  <br />WE
-                  <br />ARE
-                  <br />NOW
-                </motion.p>
-              </div>
-            </div>
+      {/* Line 1 — left */}
+      <div className="overflow-hidden mb-4 sm:mb-1 md:mb-0">
+        <motion.p
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none opacity-80 text-left"
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.1 }}
+        >
+          WHO
+        </motion.p>
+      </div>
 
-            <div
-              ref={maskedHero}
-              className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
-            >
-              <div>
-                <h1 className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest">
-                  The Way We Work
-                </h1>
-                <p className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
-                  FROM
-                  <br />THOUGHT
-                  <br />TO
-                  <br />FRAME
-                </p>
-              </div>
-            </div>
-          </section>
+      {/* Line 2 — center */}
+      <div className="overflow-hidden mb-4 sm:mb-1 md:mb-0">
+        <motion.p
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none opacity-80 text-center"
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.22 }}
+        >
+          WE ARE
+        </motion.p>
+      </div>
+
+      {/* Line 3 — right */}
+      <div className="overflow-hidden">
+        <motion.p
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none opacity-80 text-right"
+          initial={{ y: "100%" }}
+          animate={{ y: 0 }}
+          transition={{ duration: 1.2, ease: [0.25, 0.1, 0, 1], delay: 0.34 }}
+        >
+          NOW
+        </motion.p>
+      </div>
+    </div>
+  </div>
+
+  {/* Masked orange layer — mirrors layout exactly */}
+  <div
+    ref={maskedHero}
+    className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end px-8 sm:px-6 md:px-35 pb-20 sm:pb-16 md:pb-14"
+  >
+    <div className="w-full">
+      <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-2 sm:mb-3 md:mb-5 text-black opacity-70 text-left">
+        The Way We Work
+      </p>
+
+      <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none text-black text-left mb-2 sm:mb-1 md:mb-0">
+        FROM
+      </p>
+
+      <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none text-black text-center mb-2 sm:mb-1 md:mb-0">
+        THOUGHT TO
+      </p>
+
+      <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none text-black text-right">
+        FRAME
+      </p>
+    </div>
+  </div>
+</section>
 
           {/* ABOUT */}
           <section className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center">
@@ -111,38 +141,38 @@ export default function Page() {
           </section>
 
           {/* CONTACT */}
-        <section className="z-10 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center px-6">
-          <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
-            <div data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4">
-              Ready to start your journey?
-            </div>
-            <div data-cursor="expand" className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
-              We design and build digital experiences that feel effortless,
-              intentional, and quietly powerful.
-            </div>
-            <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-              <div onClick={() => router.push("/work")}  className="hover:opacity-70 cursor-pointer">See our work →</div>
-              <div onClick={() => router.push("/contact")}  className="hover:opacity-70 cursor-pointer">Contact us →</div>
-            </div>
-          </div>
-
-          <div
-            ref={maskedContact}
-            className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
-          >
-            <div className="text-black flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
-              <div className="font-bold text-lg sm:text-2xl mb-4">Ready to start your journey?</div>
-              <div className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
+          <section className="z-10 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center px-6">
+            <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
+              <div data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4">
+                Ready to start your journey?
+              </div>
+              <div data-cursor="expand" className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
                 We design and build digital experiences that feel effortless,
                 intentional, and quietly powerful.
               </div>
-              <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                <div onClick={() => router.push("/work")} >See our work →</div>
-                <div onClick={() => router.push("/contact")} >Contact us →</div>
+              <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+                <div onClick={() => router.push("/work")} className="hover:opacity-70 cursor-pointer">See our work →</div>
+                <div onClick={() => router.push("/contact")} className="hover:opacity-70 cursor-pointer">Contact us →</div>
               </div>
             </div>
-          </div>
-        </section>
+
+            <div
+              ref={maskedContact}
+              className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
+            >
+              <div className="text-black flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
+                <div className="font-bold text-lg sm:text-2xl mb-4">Ready to start your journey?</div>
+                <div className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
+                  We design and build digital experiences that feel effortless,
+                  intentional, and quietly powerful.
+                </div>
+                <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+                  <div onClick={() => router.push("/work")} >See our work →</div>
+                  <div onClick={() => router.push("/contact")} >Contact us →</div>
+                </div>
+              </div>
+            </div>
+          </section>
 
         </StackScroll>
       </main>

@@ -222,7 +222,7 @@ export default function Page() {
   useEffect(() => {
     if (active) {
       document.body.style.overflow = "hidden"
-      setTimeout(() => modalVideoRef.current?.play().catch(() => {}), 100)
+      setTimeout(() => modalVideoRef.current?.play().catch(() => { }), 100)
     } else {
       document.body.style.overflow = ""
     }
@@ -246,46 +246,138 @@ export default function Page() {
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay muted loop playsInline preload="auto"
           >
-            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
+            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-black/40" />
-          <div className="relative z-10 flex h-full items-center justify-center text-center px-6">
-            <div data-cursor="expand">
+
+          <div className="relative z-10 flex h-full items-end px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
+            <div data-cursor="expand" className="w-full">
+
               <motion.h1
-                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest"
-                initial={{ y: 60, opacity: 0 }}
+                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-left mb-2 md:mb-4"
+                initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
+                transition={{ duration: 1.0, ease: [0.25, 0.1, 0, 1] }}
               >
                 Our Work
               </motion.h1>
-              <motion.p
-                className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
-                initial={{ y: 40, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1], delay: 0.25 }}
-              >
-                SHOT<br />IN<br />GOLDEN<br />HOUR
-              </motion.p>
+
+              {/* Line 1 — left, letters L→R */}
+              <div className="flex justify-start">
+                {"SHOT".split("").map((l, i) => (
+                  <div key={i} className="overflow-hidden">
+                    <motion.span
+                      className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.1 + i * 0.07 }}
+                    >
+                      {l}
+                    </motion.span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Line 2 — left, letters L→R, gap below on mobile */}
+              <div className="flex justify-start mb-3 md:mb-0">
+                {"IN".split("").map((l, i) => (
+                  <div key={i} className="overflow-hidden">
+                    <motion.span
+                      className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.38 + i * 0.07 }}
+                    >
+                      {l}
+                    </motion.span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Line 3 — right, letters R→L (reversed array, justify-end) */}
+              <div className="flex justify-end">
+                {"GOLDEN".split("").map((l, i, arr) => (
+                  <div key={i} className="overflow-hidden">
+                    <motion.span
+                      className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.55 + (arr.length - 1 - i) * 0.07 }}
+                    >
+                      {l}
+                    </motion.span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Line 4 — right, letters R→L */}
+              <div className="flex justify-end">
+                {"HOUR".split("").map((l, i, arr) => (
+                  <div key={i} className="overflow-hidden">
+                    <motion.span
+                      className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
+                      initial={{ y: "100%" }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.9 + (arr.length - 1 - i) * 0.07 }}
+                    >
+                      {l}
+                    </motion.span>
+                  </div>
+                ))}
+              </div>
+
             </div>
           </div>
+
+          {/* Masked orange layer — mirrors layout exactly, no animation needed */}
           <div
             ref={maskedHero}
-            className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
+            className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end px-8 md:px-35 pb-20 sm:pb-16 md:pb-14"
           >
-            <div>
-              <h1 className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest">The Craft</h1>
-              <p className="mt-4 text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
-                LIGHT<br />YEARS<br />IN<br />MAKING
-              </p>
+            <div className="w-full">
+              <h1 className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest text-left mb-2 md:mb-4">
+                The Craft
+              </h1>
+
+              <div className="flex justify-start">
+                {"LIGHT".split("").map((l, i) => (
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
+                    {l}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex justify-start mb-3 md:mb-0">
+                {"YEARS".split("").map((l, i) => (
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
+                    {l}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex justify-end">
+                {"IN".split("").map((l, i) => (
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
+                    {l}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex justify-end">
+                {"MAKING".split("").map((l, i) => (
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
+                    {l}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* ── WORK ────────────────────────────────────────────────── */}
         <section
-  className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col"
->
+          className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col"
+        >
           <div className="px-6 sm:px-10 md:px-16 xl:px-24 pt-24 pb-4">
             <p className="text-xs tracking-[0.3em] text-white/40 mb-1">PORTFOLIO</p>
             <p className="text-white/50 text-sm tabular-nums">
@@ -368,8 +460,8 @@ export default function Page() {
               intentional, and quietly powerful.
             </div>
             <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-              <div onClick={() => router.push("/work")}  className="hover:opacity-70 cursor-pointer">See our work →</div>
-              <div onClick={() => router.push("/contact")}  className="hover:opacity-70 cursor-pointer">Contact us →</div>
+              <div onClick={() => router.push("/work")} className="hover:opacity-70 cursor-pointer">See our work →</div>
+              <div onClick={() => router.push("/contact")} className="hover:opacity-70 cursor-pointer">Contact us →</div>
             </div>
           </div>
           <div
