@@ -2,34 +2,36 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,          // was 0.5 — way too short, barely noticeable
+      duration: 1.8,
       easing: (t: number) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
-      smoothTouch: true,      // ← this is what you're missing
-      wheelMultiplier: 0.3,
-      touchMultiplier: 0.4,   // lower = more drag/resistance on touch
+      smoothTouch: true,
+      wheelMultiplier: 0.8,
+      touchMultiplier: 1.2,
+      infinite: false,
     } as ConstructorParameters<typeof Lenis>[0]);
 
     lenis.on("scroll", ScrollTrigger.update);
 
+    // ✅ Use requestAnimationFrame directly — most reliable on mobile
+    let rafId: number;
     const raf = (time: number) => {
-      lenis.raf(time * 1000);
+      lenis.raf(time); // rAF already gives ms, no * 1000 needed
+      rafId = requestAnimationFrame(raf);
     };
-
-    gsap.ticker.add(raf);
-    gsap.ticker.lagSmoothing(0);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
-      gsap.ticker.remove(raf);
     };
   }, []);
 
