@@ -17,10 +17,10 @@ export default function Page() {
     setStatus("sending");
     try {
       await emailjs.sendForm(
-        "service_mi9d474",    // replace with your EmailJS service ID
-        "template_86jbs1k",    // replace with your EmailJS template ID
+        "service_mi9d474",   
+        "template_86jbs1k",    
         formRef.current,
-        "suTIWHtyyTr-YDBWs"      // replace with your EmailJS public key
+        "suTIWHtyyTr-YDBWs"      
       );
       setStatus("sent");
       formRef.current.reset();
@@ -34,87 +34,85 @@ export default function Page() {
       <SmoothScroll />
       <StackScroll>
 
-{/* Hero */}
-<section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-  <video
-    className="absolute inset-0 w-full h-full object-cover"
-    autoPlay muted loop playsInline preload="auto"
-  >
-    <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
-  </video>
-  <div className="absolute inset-0 bg-black/70" />
-
-  <div className="relative z-10 flex h-full items-center justify-center px-4 md:px-35">
-    <div data-cursor="expand" className="w-full flex flex-col">
-
-      <motion.p
-        className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold opacity-60 mb-1 sm:mb-2 text-left"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 0.6, y: 0 }}
-        transition={{ duration: 1.0, delay: 0.1 }}
-      >
-        Antariksha Studio®
-      </motion.p>
-
-      <div className="flex justify-center w-full">
-        {"CONTACT".split("").map((l, i) => (
-          <div key={i} className="overflow-hidden">
-            <motion.span
-              className="block font-black leading-none"
-              style={{ fontSize: "clamp(2.8rem, 13vw, 22rem)", letterSpacing: "-0.03em" }}
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.7, ease: [0.25, 0.1, 0, 1], delay: 0.15 + i * 0.06 }}
-            >
-              {l}
-            </motion.span>
-          </div>
-        ))}
-      </div>
-
-      <motion.p
-        className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold opacity-60 mt-1 sm:mt-2 text-right"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 0.6, y: 0 }}
-        transition={{ duration: 1.0, delay: 1.0 }}
-      >
-        Reach Out · Work Together
-      </motion.p>
-
-    </div>
-  </div>
-
-  <div
-    ref={maskedHero}
-    className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center px-4 md:px-35"
-  >
-    <div className="w-full flex flex-col">
-
-      <p className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold text-black opacity-70 mb-1 sm:mb-2 text-left">
-        Antariksha Studio®
-      </p>
-
-      <div className="flex justify-center w-full">
-        {"CONNECT".split("").map((l, i) => (
-          <span
-            key={i}
-            className="block font-black leading-none text-black"
-            style={{ fontSize: "clamp(2.8rem, 13vw, 22rem)", letterSpacing: "-0.03em" }}
+        <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay muted loop playsInline preload="auto"
           >
-            {l}
-          </span>
-        ))}
-      </div>
+            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/70" />
 
-      <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold text-black opacity-70 mt-1 sm:mt-2 text-right">
-        Let&apos;s Make It Real
-      </p>
+          <div className="relative z-10 flex h-full items-center justify-center px-4 md:px-35">
+            <div data-cursor="expand" className="w-full flex flex-col">
 
-    </div>
-  </div>
-</section>
+              <motion.p
+                className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold opacity-60 mb-1 sm:mb-2 text-left"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 0.6, y: 0 }}
+                transition={{ duration: 1.0, delay: 0.1 }}
+              >
+                Antariksha Studio
+              </motion.p>
 
-        {/* CONTACT */}
+              <div className="flex justify-center w-full">
+                {"CONTACT".split("").map((l, i) => (
+                  <div key={i} className="overflow-hidden">
+                    <motion.span
+                      className="block font-black leading-none"
+                      style={{ fontSize: "clamp(2.8rem, 13vw, 22rem)", letterSpacing: "-0.03em" }}
+                      initial={{ y: "110%" }}
+                      animate={{ y: 0 }}
+                      transition={{ duration: 0.7, ease: [0.25, 0.1, 0, 1], delay: 0.15 + i * 0.06 }}
+                    >
+                      {l}
+                    </motion.span>
+                  </div>
+                ))}
+              </div>
+
+              <motion.p
+                className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold opacity-60 mt-1 sm:mt-2 text-right"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 0.6, y: 0 }}
+                transition={{ duration: 1.0, delay: 1.0 }}
+              >
+                Reach Out · Work Together
+              </motion.p>
+
+            </div>
+          </div>
+
+          <div
+            ref={maskedHero}
+            className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center px-4 md:px-35"
+          >
+            <div className="w-full flex flex-col">
+
+              <p className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold text-black opacity-70 mb-1 sm:mb-2 text-left">
+                Antariksha Studio
+              </p>
+
+              <div className="flex justify-center w-full">
+                {"CONNECT".split("").map((l, i) => (
+                  <span
+                    key={i}
+                    className="block font-black leading-none text-black"
+                    style={{ fontSize: "clamp(2.8rem, 13vw, 22rem)", letterSpacing: "-0.03em" }}
+                  >
+                    {l}
+                  </span>
+                ))}
+              </div>
+
+              <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold text-black opacity-70 mt-1 sm:mt-2 text-right">
+                Let&apos;s Make It Real
+              </p>
+
+            </div>
+          </div>
+        </section>
+
         <section className="z-10 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center overflow-hidden">
           <div className="w-full px-6 sm:px-10 md:px-16 xl:px-40 pt-16 sm:pt-20 flex flex-col md:flex-row gap-8 md:gap-16">
 
@@ -135,7 +133,6 @@ export default function Page() {
               </p>
             </div>
 
-            {/* RIGHT FORM */}
             <div data-cursor="none" className="flex-1">
               <form ref={formRef} onSubmit={handleSubmit} className="bg-[#1a1a1a] rounded-2xl p-6 md:p-8">
                 <div className="grid grid-cols-2 gap-4 mb-4">

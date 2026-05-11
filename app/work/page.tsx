@@ -240,7 +240,6 @@ export default function Page() {
       <SmoothScroll />
       <StackScroll stackRef={stackRef}>
 
-        {/* ── HERO ────────────────────────────────────────────────── */}
         <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full object-cover"
@@ -251,10 +250,10 @@ export default function Page() {
           <div className="absolute inset-0 bg-black/40" />
 
           <div className="relative z-10 flex h-full items-end px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
-            <div data-cursor="expand" className="w-full">
+            <div className="w-full">
 
-              <motion.h1
-                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-left mb-2 md:mb-4"
+              <motion.h1 data-cursor="expand"
+                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-left mb-2 md:mb-4 w-fit"
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1.0, ease: [0.25, 0.1, 0, 1] }}
@@ -262,11 +261,10 @@ export default function Page() {
                 Our Work
               </motion.h1>
 
-              {/* Line 1 — left, letters L→R */}
               <div className="flex justify-start">
                 {"SHOT".split("").map((l, i) => (
                   <div key={i} className="overflow-hidden">
-                    <motion.span
+                    <motion.span data-cursor="expand"
                       className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
                       initial={{ y: "100%" }}
                       animate={{ y: 0 }}
@@ -278,11 +276,10 @@ export default function Page() {
                 ))}
               </div>
 
-              {/* Line 2 — left, letters L→R, gap below on mobile */}
               <div className="flex justify-start mb-3 md:mb-0">
                 {"IN".split("").map((l, i) => (
                   <div key={i} className="overflow-hidden">
-                    <motion.span
+                    <motion.span data-cursor="expand"
                       className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
                       initial={{ y: "100%" }}
                       animate={{ y: 0 }}
@@ -294,11 +291,10 @@ export default function Page() {
                 ))}
               </div>
 
-              {/* Line 3 — right, letters R→L (reversed array, justify-end) */}
               <div className="flex justify-end">
                 {"GOLDEN".split("").map((l, i, arr) => (
                   <div key={i} className="overflow-hidden">
-                    <motion.span
+                    <motion.span data-cursor="expand"
                       className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
                       initial={{ y: "100%" }}
                       animate={{ y: 0 }}
@@ -310,11 +306,10 @@ export default function Page() {
                 ))}
               </div>
 
-              {/* Line 4 — right, letters R→L */}
               <div className="flex justify-end">
                 {"HOUR".split("").map((l, i, arr) => (
                   <div key={i} className="overflow-hidden">
-                    <motion.span
+                    <motion.span data-cursor="expand"
                       className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
                       initial={{ y: "100%" }}
                       animate={{ y: 0 }}
@@ -329,7 +324,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Masked orange layer — mirrors layout exactly, no animation needed */}
           <div
             ref={maskedHero}
             className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end px-8 md:px-35 pb-20 sm:pb-16 md:pb-14"
@@ -374,7 +368,6 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ── WORK ────────────────────────────────────────────────── */}
         <section
           className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col"
         >
@@ -449,7 +442,6 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ── CONTACT ─────────────────────────────────────────────── */}
         <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center px-6">
           <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
             <div data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4">
@@ -469,14 +461,14 @@ export default function Page() {
             className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
           >
             <div className="text-black flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
-              <div className="font-bold text-lg sm:text-2xl mb-4">Ready to start your journey?</div>
+              <div className="font-bold text-lg sm:text-2xl mb-4">Crafted for modern brands.</div>
               <div className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
-                We design and build digital experiences that feel effortless,
-                intentional, and quietly powerful.
+                Every project is shaped through strategy,
+                design, and execution that speaks with clarity.
               </div>
               <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                <div onClick={() => router.push("/work")} >See our work →</div>
-                <div onClick={() => router.push("/contact")} >Contact us →</div>
+                <div onClick={() => router.push("/work")} >Explore work →</div>
+                <div onClick={() => router.push("/contact")} >Get in touch →</div>
               </div>
             </div>
           </div>
@@ -484,7 +476,6 @@ export default function Page() {
 
       </StackScroll>
 
-      {/* ── MODAL — outside StackScroll to escape its stacking context ── */}
       {active && (
         <div
           data-cursor="none"

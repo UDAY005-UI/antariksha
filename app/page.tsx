@@ -23,7 +23,6 @@ export default function Page() {
 
       <StackScroll stackRef={stackRef}>
 
-        {/* HERO */}
         <section className="z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
           <video
             className="absolute inset-0 w-full h-full object-cover z-10"
@@ -34,7 +33,6 @@ export default function Page() {
 
           <div className="absolute inset-0 bg-black/40" />
 
-          {/* Base layer — matches about page hero structure exactly */}
           <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
             <div data-cursor="expand">
               <motion.h1
@@ -62,7 +60,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Masked layer */}
           <div
             ref={maskedHero}
             className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
@@ -84,9 +81,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* ABOUT */}
-        <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#1a1a1a] flex items-center">
-          {/* Base layer — padding + font scale matches about page exactly */}
+        <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center">
           <div className="relative z-10 px-6 sm:px-10 md:px-16 xl:px-40 pt-16 sm:pt-20 w-full">
             <p
               data-cursor="expand"
@@ -105,7 +100,6 @@ export default function Page() {
             </h1>
           </div>
 
-          {/* Masked layer */}
           <div
             ref={maskedAbout}
             className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
@@ -121,8 +115,7 @@ export default function Page() {
           </div>
         </section>
 
-        {/* CONTACT */}
-        <section className="z-30 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center overflow-hidden">
+        <section className="z-30 stack-panel absolute inset-0 h-screen w-full bg-[#1a1a1a] flex items-center overflow-hidden">
           {/* Base layer — matches about page contact structure */}
           <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20">
             <p
@@ -148,7 +141,6 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Masked layer */}
           <div
             ref={maskedContact}
             className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
