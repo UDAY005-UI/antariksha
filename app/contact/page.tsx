@@ -44,11 +44,11 @@ export default function Page() {
   </video>
   <div className="absolute inset-0 bg-black/70" />
 
-  <div className="relative z-10 flex h-full items-center justify-center px-8 md:px-35">
-    <div data-cursor="expand" className="w-full flex flex-col items-start">
+  <div className="relative z-10 flex h-full items-center justify-center px-4 md:px-35">
+    <div data-cursor="expand" className="w-full flex flex-col">
 
       <motion.p
-        className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold opacity-60 mb-2"
+        className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold opacity-60 mb-1 sm:mb-2 text-left"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 0.6, y: 0 }}
         transition={{ duration: 1.0, delay: 0.1 }}
@@ -56,12 +56,12 @@ export default function Page() {
         Antariksha Studio®
       </motion.p>
 
-      <div className="flex w-full">
+      <div className="flex justify-center w-full">
         {"CONTACT".split("").map((l, i) => (
           <div key={i} className="overflow-hidden">
             <motion.span
               className="block font-black leading-none"
-              style={{ fontSize: "clamp(4.5rem, 18vw, 22rem)", letterSpacing: "-0.03em" }}
+              style={{ fontSize: "clamp(2.8rem, 13vw, 22rem)", letterSpacing: "-0.03em" }}
               initial={{ y: "110%" }}
               animate={{ y: 0 }}
               transition={{ duration: 0.7, ease: [0.25, 0.1, 0, 1], delay: 0.15 + i * 0.06 }}
@@ -73,7 +73,7 @@ export default function Page() {
       </div>
 
       <motion.p
-        className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold opacity-60 mt-2 self-end"
+        className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold opacity-60 mt-1 sm:mt-2 text-right"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 0.6, y: 0 }}
         transition={{ duration: 1.0, delay: 1.0 }}
@@ -86,27 +86,27 @@ export default function Page() {
 
   <div
     ref={maskedHero}
-    className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center px-8 md:px-35"
+    className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center px-4 md:px-35"
   >
-    <div className="w-full flex flex-col items-start">
+    <div className="w-full flex flex-col">
 
-      <p className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold text-black opacity-70 mb-2">
+      <p className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold text-black opacity-70 mb-1 sm:mb-2 text-left">
         Antariksha Studio®
       </p>
 
-      <div className="flex w-full">
+      <div className="flex justify-center w-full">
         {"CONNECT".split("").map((l, i) => (
           <span
             key={i}
             className="block font-black leading-none text-black"
-            style={{ fontSize: "clamp(4.5rem, 18vw, 22rem)", letterSpacing: "-0.03em" }}
+            style={{ fontSize: "clamp(2.8rem, 13vw, 22rem)", letterSpacing: "-0.03em" }}
           >
             {l}
           </span>
         ))}
       </div>
 
-      <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold text-black opacity-70 mt-2 self-end">
+      <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold text-black opacity-70 mt-1 sm:mt-2 text-right">
         Let&apos;s Make It Real
       </p>
 
