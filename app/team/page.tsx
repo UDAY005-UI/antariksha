@@ -138,7 +138,7 @@ export default function Team() {
                         className="absolute inset-0 w-full h-full object-cover"
                         autoPlay muted loop playsInline preload="auto"
                     >
-                        <source src="/videos/enhanced.mp4" type="video/mp4" />
+                        <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
                     </video>
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="relative z-10 flex h-full items-center justify-center text-center px-6">

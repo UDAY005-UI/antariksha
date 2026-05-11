@@ -17,32 +17,32 @@ const works: WorkItem[] = [
   {
     id: 1,
     title: "COZY CRUMBS",
-    type: "BRAND REEL — 2025",
-    video: "/videos/cozy1.mp4",
+    type: "BRAND REEL — 2026",
+    video: "https://res.cloudinary.com/dthpzuhja/video/upload/v1778489915/cozy1_dohodp.mp4",
     description:
       "A rapid-cut brand reel for Cozy Crumbs — a homegrown cake and dessert studio based out of Lake Market, Kolkata. Fast edits locked to rhythm, warm tones, close-up textures. Built to sell the feeling before the product.",
   },
   {
     id: 2,
     title: "COZY CRUMBS",
-    type: "VOICEOVER REEL — 2025",
-    video: "/videos/cozy2.mp4",
+    type: "VOICEOVER REEL — 2026",
+    video: "https://res.cloudinary.com/dthpzuhja/video/upload/v1778489944/cozy2_avnonw.mp4",
     description:
       "A voiceover-led brand film for Cozy Crumbs — a homegrown cake and dessert studio based out of Lake Market, Kolkata. Slow, deliberate cuts paired with a narrative voice. Built to tell the story behind every bake.",
   },
   {
     id: 3,
     title: "THE WAFFLE HOUSE",
-    type: "BRAND REEL — 2025",
-    video: "/videos/waffle.mp4",
+    type: "BRAND REEL — 2026",
+    video: "https://res.cloudinary.com/dthpzuhja/video/upload/v1778489906/waffle_hu9qkh.mp4",
     description:
       "A rapid-cut brand reel for The Waffle House — a dessert spot serving freshly made waffles with bold toppings and honest flavour. Quick edits, warm textures, and an appetite for the unapologetically indulgent.",
   },
   {
     id: 4,
     title: "TANDOOR HOUSE",
-    type: "VOICEOVER REEL — 2025",
-    video: "/videos/tandoor.mp4",
+    type: "VOICEOVER REEL — 2026",
+    video: "https://res.cloudinary.com/dthpzuhja/video/upload/v1778489939/tandoor_wpqqvu.mp4",
     description:
       "A voiceover-led brand film for Tandoor House — a Kolkata institution at Lake Market, Kalighat. Smoky, loud, and unapologetically real.",
   },
@@ -244,7 +244,7 @@ export default function Page() {
             className="absolute inset-0 w-full h-full object-cover"
             autoPlay muted loop playsInline preload="auto"
           >
-            <source src="/videos/enhanced.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
           </video>
           <div className="absolute inset-0 bg-black/40" />
           <div className="relative z-10 flex h-full items-center justify-center text-center px-6">

@@ -28,7 +28,7 @@ export default function Page() {
             className="absolute inset-0 w-full h-full object-cover z-10"
             autoPlay muted loop playsInline preload="auto"
           >
-            <source src="/videos/enhanced.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
           </video>
 
           <div className="absolute inset-0 bg-black/40" />
