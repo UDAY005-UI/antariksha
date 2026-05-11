@@ -31,7 +31,7 @@ function HoverLink({ label, maskLabel, href, small = false }: LinkItem) {
 
   const textCls = small ? "text-sm" : "text-2xl md:text-3xl lg:text-4xl";
   const dotCls = small ? "w-1.5 h-1.5" : "w-2 h-2";
-  const justifyCls = small ? "justify-start" : "justify-center md:justify-start";
+  const justifyCls = small ? "justify-center md:justify-start" : "justify-center md:justify-start";
 
   return (
     <a
