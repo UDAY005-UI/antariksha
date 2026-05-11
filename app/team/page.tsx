@@ -94,10 +94,30 @@ const annyeshaRows: RowItem[] = [
 ];
 
 const dipangshuRows: RowItem[] = [
-    { title: "Video Editing", subtitle: "Protonn Media", maskTitle: "Precision in Post", maskSubtitle: "Frame by Frame" },
-    { title: "Cinematography", subtitle: "Creative Work", maskTitle: "Motion with Meaning", maskSubtitle: "Intentional Every Shot" },
-    { title: "Visual Storytelling", subtitle: "Freelance", maskTitle: "Narrative Through", maskSubtitle: "Color and Composition" },
-    { title: "Content Creation", subtitle: "Social Media", maskTitle: "Built to Engage", maskSubtitle: "Designed to Convert" },
+    {
+        title: "Social Media Managing",
+        subtitle: "Content Strategy",
+        maskTitle: "Growth Through Strategy",
+        maskSubtitle: "Consistent Branding"
+    },
+    {
+        title: "Videography",
+        subtitle: "Visual Storytelling",
+        maskTitle: "Frames with Purpose",
+        maskSubtitle: "Capture Emotion"
+    },
+    {
+        title: "Poster Making",
+        subtitle: "Graphic Design",
+        maskTitle: "Design Beyond Aesthetics",
+        maskSubtitle: "Strong Visual Impact"
+    },
+    {
+        title: "Editing",
+        subtitle: "Post Production",
+        maskTitle: "Cuts with Precision",
+        maskSubtitle: "Enhanced Narratives"
+    }
 ];
 
 const dishaRows: RowItem[] = [
@@ -108,10 +128,30 @@ const dishaRows: RowItem[] = [
 ];
 
 const udayRows: RowItem[] = [
-    { title: "Video Editing", subtitle: "Protonn Media", maskTitle: "Sharper Cuts", maskSubtitle: "Stronger Impact" },
-    { title: "Cinematography", subtitle: "Creative Work", maskTitle: "Chasing Golden Hour", maskSubtitle: "Every Single Day" },
-    { title: "Visual Storytelling", subtitle: "Freelance", maskTitle: "The Quiet Details", maskSubtitle: "Make the Loudest Noise" },
-    { title: "Content Creation", subtitle: "Social Media", maskTitle: "Consistent. Bold.", maskSubtitle: "Unmistakably Original" },
+    {
+        title: "Modern Web Experiences",
+        subtitle: "Interactive Digital Presence",
+        maskTitle: "Experiences that Engage",
+        maskSubtitle: "Built for Modern Brands"
+    },
+    {
+        title: "Web Development",
+        subtitle: "Full Stack Solutions",
+        maskTitle: "Code with Purpose",
+        maskSubtitle: "Scalable and Reliable Systems"
+    },
+    {
+        title: "UI/UX Design",
+        subtitle: "User-Centered Interfaces",
+        maskTitle: "Design that Connects",
+        maskSubtitle: "Clean and Intuitive Experiences"
+    },
+    {
+        title: "Digital Branding",
+        subtitle: "Visual Identity Systems",
+        maskTitle: "Brands with Presence",
+        maskSubtitle: "Built to Stand Out"
+    }
 ];
 
 export default function Team() {
@@ -125,7 +165,7 @@ export default function Team() {
             <SmoothScroll />
 
             <StackScroll>
-                {/* Hero */}
+
                 <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
                     <video
                         className="absolute inset-0 w-full h-full object-cover"
@@ -135,62 +175,64 @@ export default function Team() {
                     </video>
                     <div className="absolute inset-0 bg-black/40" />
 
-                    <div className="relative z-10 flex h-full items-end justify-center px-6 sm:px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
-                        <div data-cursor="expand" className="inline-block max-w-full">
-                            <motion.h1
-                                className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-4 sm:mb-3 md:mb-5 opacity-70 text-left"
-                                initial={{ y: 30, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ duration: 1.0, ease: [0.25, 0.1, 0, 1], delay: 0.1 }}
+                    <div className="relative z-10 flex h-full items-end justify-center px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
+                        <div data-cursor="expand" className="inline-flex flex-col">
+
+                            <motion.p
+                                className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold opacity-60 mb-1 sm:mb-2 text-left"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 0.6, y: 0 }}
+                                transition={{ duration: 1.0, delay: 0.1 }}
                             >
                                 The Core Of
-                            </motion.h1>
+                            </motion.p>
 
-                            <div className="flex mb-8">
+                            <div className="flex">
                                 {"ANTARIKSHA".split("").map((letter, i) => (
                                     <div key={i} className="overflow-hidden">
                                         <motion.span
-                                            className="block text-[11vw] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none opacity-80"
-                                            initial={{ y: "100%" }}
-                                            animate={{ y: 0 }}
-                                            transition={{
-                                                duration: 0.6,
-                                                ease: [0.25, 0.1, 0, 1],
-                                                delay: 0.2 + i * 0.06,
-                                            }}
+                                            className="block font-black leading-none opacity-80"
+                                            style={{ fontSize: "clamp(2rem, 9.5vw, 15rem)", letterSpacing: "0.05em", transformOrigin: "bottom" }}
+                                            initial={{ scaleY: 0 }}
+                                            animate={{ scaleY: 1 }}
+                                            transition={{ duration: 1, ease: [0.25, 0.1, 0, 1], delay: 0 }}
                                         >
                                             {letter}
                                         </motion.span>
                                     </div>
                                 ))}
                             </div>
+
                         </div>
                     </div>
 
-                    {/* Masked orange layer */}
                     <div
                         ref={maskedHero}
-                        className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end justify-center px-6 sm:px-8 md:px-35 pb-20 sm:pb-16 md:pb-14"
+                        className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end justify-center px-8 md:px-35 pb-20 sm:pb-16 md:pb-14"
                     >
-                        <div className="inline-block max-w-full">
-                            <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-4 sm:mb-3 md:mb-5 text-black opacity-70 text-left">
+                        <div className="inline-flex flex-col">
+
+                            <p className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-semibold text-black opacity-70 mb-1 sm:mb-2 text-left">
                                 The Faces Behind
                             </p>
 
-                            <div className="flex mb-8">
+                            <div className="flex">
                                 {"ANTARIKSHA".split("").map((letter, i) => (
                                     <div key={i} className="overflow-hidden">
-                                        <span className="block text-[11vw] sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none text-black">
+                                        <span
+                                            className="block font-black leading-none text-black"
+                                            style={{ fontSize: "clamp(2rem, 9.5vw, 15rem)", letterSpacing: "0.05em" }}
+                                        >
                                             {letter}
                                         </span>
                                     </div>
                                 ))}
                             </div>
+
                         </div>
                     </div>
                 </section>
 
-                {/* Tuhin */}
                 <section data-cursor="none" className="bg-[#141414] stack-panel absolute inset-0 h-screen w-full flex flex-col overflow-hidden">
                     <Image src="/tuhin.png" alt="Tuhin" width={500} height={500} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-40 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
@@ -198,15 +240,13 @@ export default function Team() {
                     </div>
                 </section>
 
-                {/* Annyesha */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
-                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-80 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
+                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-80 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {annyeshaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
                 </section>
 
-                {/* Dipangshu */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
                     <Image src="/dipangshu.png" alt="Dipangshu" width={400} height={400} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
@@ -214,7 +254,6 @@ export default function Team() {
                     </div>
                 </section>
 
-                {/* Disha */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
                     <Image src="/disha.png" alt="Disha" width={500} height={500} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
@@ -222,7 +261,6 @@ export default function Team() {
                     </div>
                 </section>
 
-                {/* Uday */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
                     <Image src="/uday.png" alt="Uday" width={500} height={500} className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-70 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
@@ -230,7 +268,6 @@ export default function Team() {
                     </div>
                 </section>
 
-                {/* CONTACT */}
                 <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center">
                     <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20">
                         <h1 data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4">
