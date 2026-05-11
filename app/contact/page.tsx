@@ -83,7 +83,7 @@ export default function Page() {
         </section>
 
         {/* CONTACT */}
-        <section className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center overflow-hidden">
+        <section className="z-10 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center overflow-hidden">
           <div className="w-full px-6 sm:px-10 md:px-16 xl:px-40 pt-16 sm:pt-20 flex flex-col md:flex-row gap-8 md:gap-16">
 
             {/* LEFT */}
