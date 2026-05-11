@@ -497,13 +497,13 @@ export default function Page() {
               className="absolute top-4 right-4 z-20 text-white/60 hover:text-white text-xl w-8 h-8 flex items-center justify-center transition-colors"
             >✕</button>
 
-            <div className="w-full md:w-[55%] h-[220px] sm:h-[280px] md:h-auto flex-shrink-0 bg-black">
+            <div className="w-full md:w-[55%] flex-shrink-0 bg-black flex items-center justify-center">
               <video
                 ref={modalVideoRef}
                 key={active.id}
                 src={active.video}
                 autoPlay muted loop playsInline controls
-                className="w-full h-full object-cover"
+                className="w-full h-auto max-h-[88vh] object-contain"
               />
             </div>
 
