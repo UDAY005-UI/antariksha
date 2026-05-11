@@ -33,7 +33,7 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
       if (isPlaying) {
         audio.pause()
       } else {
-        await audio.play() // important (browser policy)
+        await audio.play()
       }
 
       setIsPlaying(!isPlaying)

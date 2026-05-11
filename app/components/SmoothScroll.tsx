@@ -21,10 +21,9 @@ export default function SmoothScroll() {
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    // ✅ Use requestAnimationFrame directly — most reliable on mobile
     let rafId: number;
     const raf = (time: number) => {
-      lenis.raf(time); // rAF already gives ms, no * 1000 needed
+      lenis.raf(time);
       rafId = requestAnimationFrame(raf);
     };
     rafId = requestAnimationFrame(raf);

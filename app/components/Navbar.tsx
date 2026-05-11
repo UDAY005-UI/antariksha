@@ -144,7 +144,6 @@ export default function Navbar() {
       style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
     >
 
-      {/* LEFT */}
       <div className="flex flex-col justify-between h-full pointer-events-auto w-18 md:w-fit lg:w-fit">
         <div data-cursor="none" onClick={() => router.push("/")} className="scale-75 origin-top-left md:scale-100">
           <Logo />
@@ -155,7 +154,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* RIGHT */}
       <div className="flex flex-col justify-between h-full text-right pointer-events-auto">
         <div className="flex flex-col gap-1 lg:gap-2">
           {links.map(({ label, path }) => (

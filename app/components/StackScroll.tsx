@@ -32,7 +32,7 @@ export default function StackScroll({
             trigger: containerRef.current,
             start: "top top",
             end: `+=${totalScroll}`,
-            scrub: 0.6,          // ← small damping value prevents snap-jitter
+            scrub: 0.6,
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,

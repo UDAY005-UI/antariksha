@@ -111,7 +111,6 @@ export default function Footer() {
     <footer className="w-full bg-[#0b0b0b] px-10 py-16 md:px-20 md:py-24 lg:px-60 lg:py-32">
       <div className="flex flex-col items-center md:items-start md:flex-row w-full gap-12 md:gap-0">
 
-        {/* LEFT */}
         <div className="w-full md:flex-1 flex flex-col items-center md:items-start text-center md:text-left">
           <p className="text-xs tracking-[0.3em] mb-10" data-cursor="none">CONNECT</p>
           <p className="text-sm text-neutral-400 leading-relaxed max-w-sm" data-cursor="none">
@@ -121,7 +120,6 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* MIDDLE */}
         <div className="w-full md:flex-1 md:pl-2 md:mt-14 flex flex-col items-center md:items-start">
           <div className="w-full max-w-xs md:max-w-none space-y-6" data-cursor="none">
             <HoverLink label="Instagram" maskLabel="Follow along →" href="https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA==" />
@@ -129,7 +127,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* RIGHT */}
         <div className="w-full md:w-auto md:pl-2 md:mt-14 flex flex-col items-center md:items-start gap-8">
           <div className="w-full max-w-xs md:max-w-none" data-cursor="none">
             <p className="text-xs tracking-[0.2em] mb-3 text-center md:text-left">Email</p>
