@@ -42,7 +42,7 @@ export default function RootLayout({
           <AudioProvider>
             <Navbar />
           {children}
-          <div style={{ marginTop: '-2px', position: 'relative', zIndex: 50 }}>
+          <div style={{ marginTop: '-2px', position: 'relative', zIndex: 30 }}>
   <Footer />
 </div>
           </AudioProvider>
