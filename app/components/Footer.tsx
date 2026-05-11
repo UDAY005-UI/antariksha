@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type LinkItem = {
   label: string;
@@ -31,6 +31,7 @@ function HoverLink({ label, maskLabel, href, small = false }: LinkItem) {
 
   const textCls = small ? "text-sm" : "text-2xl md:text-3xl lg:text-4xl";
   const dotCls = small ? "w-1.5 h-1.5" : "w-2 h-2";
+  const justifyCls = small ? "justify-start" : "justify-center md:justify-start";
 
   return (
     <a
@@ -56,7 +57,7 @@ function HoverLink({ label, maskLabel, href, small = false }: LinkItem) {
 
       <div
         aria-hidden="true"
-        className={`opacity-0 select-none pointer-events-none flex items-center justify-center md:justify-start gap-3 font-semibold px-2 py-1 ${textCls}`}
+        className={`opacity-0 select-none pointer-events-none flex items-center ${justifyCls} gap-3 font-semibold px-2 py-1 ${textCls}`}
       >
         <span className={`${dotCls} rotate-45 shrink-0`} />
         {label}
@@ -71,10 +72,9 @@ function HoverLink({ label, maskLabel, href, small = false }: LinkItem) {
           transition: "opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
           pointerEvents: "none",
         }}
-        className="md:justify-start"
+        className={justifyCls}
       >
         <div className={`flex items-center gap-3 font-semibold px-2 ${textCls}`}>
           <span className={`${dotCls} bg-orange-500 rotate-45 shrink-0`} />
@@ -92,10 +92,9 @@ function HoverLink({ label, maskLabel, href, small = false }: LinkItem) {
           transition: "transform 1s cubic-bezier(0.16, 1, 0.3, 1)",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
           pointerEvents: "none",
         }}
-        className="md:justify-start"
+        className={justifyCls}
       >
         <div className={`flex items-center gap-3 font-semibold text-black px-2 ${textCls}`}>
           <span className={`${dotCls} bg-black rotate-45 shrink-0`} />
@@ -106,6 +105,43 @@ function HoverLink({ label, maskLabel, href, small = false }: LinkItem) {
   );
 }
 
+function SpotlightText({ children }: { children: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  const handleMouseLeave = () => setPos(null);
+
+  return (
+    <div
+      className="relative cursor-default select-none"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      data-cursor="none"
+    >
+      <p ref={ref} className="text-sm text-neutral-400 leading-relaxed max-w-sm">
+        {children}
+      </p>
+      {pos && (
+        <p
+          className="absolute inset-0 text-sm text-orange-500 leading-relaxed max-w-sm pointer-events-none"
+          style={{
+            WebkitMaskImage: `radial-gradient(circle 80px at ${pos.x}px ${pos.y}px, black 0%, transparent 100%)`,
+            maskImage: `radial-gradient(circle 80px at ${pos.x}px ${pos.y}px, black 0%, transparent 100%)`,
+          }}
+        >
+          {children}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function Footer() {
   return (
     <footer className="w-full bg-[#0b0b0b] px-10 py-16 md:px-20 md:py-24 lg:px-60 lg:py-32">
@@ -113,11 +149,9 @@ export default function Footer() {
 
         <div className="w-full md:flex-1 flex flex-col items-center md:items-start text-center md:text-left">
           <p className="text-xs tracking-[0.3em] mb-10" data-cursor="none">CONNECT</p>
-          <p className="text-sm text-neutral-400 leading-relaxed max-w-sm" data-cursor="none">
-            Antariksha is a creative content studio focused on crafting visuals that
-            feel intentional and refined. From concept to final cut, we prioritize
-            clarity, consistency, and storytelling that actually resonates.
-          </p>
+          <SpotlightText>
+            Antariksha is a creative content studio focused on crafting visuals that feel intentional and refined. From concept to final cut, we prioritize clarity, consistency, and storytelling that actually resonates.
+          </SpotlightText>
         </div>
 
         <div className="w-full md:flex-1 md:pl-2 md:mt-14 flex flex-col items-center md:items-start">
