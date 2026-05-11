@@ -21,18 +21,23 @@ export default function StackScroll({
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const panels = gsap.utils.toArray<HTMLElement>(".stack-panel")
-      const isMobile = window.innerWidth < 768
+      const isMobile = window.innerWidth < 640
 
       panels.forEach((panel, i) => {
         if (i !== 0) gsap.set(panel, { yPercent: 100 })
       })
 
+      // on mobile, panels can be auto height — sum them up
+      const totalScroll = isMobile
+        ? panels.slice(1).reduce((sum, p) => sum + p.offsetHeight, 0)
+        : window.innerHeight * (panels.length - 1)
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: () => `+=${window.innerHeight * (panels.length - 1)}`,
-          scrub: isMobile ? 0.3 : 1,   // tighter scrub on mobile
+          end: `+=${totalScroll}`,
+          scrub: isMobile ? 0.3 : 1,
           pin: true,
           anticipatePin: 1,
           onRefresh() {

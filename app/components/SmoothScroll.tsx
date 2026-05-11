@@ -9,26 +9,26 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function SmoothScroll() {
   useEffect(() => {
-    const isMobile = window.innerWidth < 768
-
     const lenis = new Lenis({
-      lerp: isMobile ? 0.12 : 0.1,        // slightly snappier on mobile
+      duration: 2.2,
+      easing: (t) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
-      touchMultiplier: isMobile ? 1.2 : 2, // less overscroll momentum on mobile
-      infinite: false,
+      wheelMultiplier: 0.6,
+      touchMultiplier: 1.2,
     });
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
+    const tickerFn = (time: number) => {
       lenis.raf(time * 1000);
-    });
+    };
 
+    gsap.ticker.add(tickerFn);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      gsap.ticker.remove(tickerFn);
     };
   }, []);
 
