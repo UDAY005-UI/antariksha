@@ -131,11 +131,11 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const links = [
-    { label: "Home",   path: "/"   },
-    { label: "About",  path: "/about"   },
-    { label: "Team",   path: "/team"    },
-    { label: "Work",   path: "/work"    },
-    { label: "Contact",path: "/contact" },
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Team", path: "/team" },
+    { label: "Work", path: "/work" },
+    { label: "Contact", path: "/contact" },
   ];
 
   return (
@@ -145,12 +145,13 @@ export default function Navbar() {
     >
 
       {/* LEFT */}
-      <div className="flex flex-col justify-between h-full pointer-events-auto">
-        <div data-cursor="none" onClick={() => router.push("/")}><Logo /></div>
-        <div data-cursor="none" className="flex flex-col gap-2 lg:gap-4">
-          <Link href="https://youtube.com/@theantariksha_in?si=ygBEwLMzszPamYrA"><YouTubeIcon /></Link>
-          <FacebookIcon />
-          <Link href="https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA=="><InstagramIcon /></Link>
+      <div className="flex flex-col justify-between h-full pointer-events-auto w-18 md:w-fit lg:w-fit">
+        <div data-cursor="none" onClick={() => router.push("/")} className="scale-75 origin-top-left md:scale-100">
+          <Logo />
+        </div>
+        <div data-cursor="none" className="flex flex-col gap-2 lg:gap-4 w-fit">
+          <Link href="https://youtube.com/@theantariksha_in?si=ygBEwLMzszPamYrA" className="w-fit"><YouTubeIcon /></Link>
+          <Link href="https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA==" className="w-fit"><InstagramIcon /></Link>
         </div>
       </div>
 
@@ -161,9 +162,8 @@ export default function Navbar() {
             <div
               key={label}
               data-cursor="none"
-              className={`font-bold cursor-pointer text-xs sm:text-sm lg:text-base transition-colors duration-300 ${
-                pathname === path ? "text-[#847353]" : ""
-              }`}
+              className={`font-bold cursor-pointer text-xs sm:text-sm lg:text-base transition-colors duration-300 ${pathname === path ? "text-[#847353]" : ""
+                }`}
               style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
               onClick={() => router.push(path)}
             >

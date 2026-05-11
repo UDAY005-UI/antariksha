@@ -125,7 +125,6 @@ export default function Footer() {
         <div className="w-full md:flex-1 md:pl-2 md:mt-14 flex flex-col items-center md:items-start">
           <div className="w-full max-w-xs md:max-w-none space-y-6" data-cursor="none">
             <HoverLink label="Instagram" maskLabel="Follow along →" href="https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA==" />
-            <HoverLink label="Facebook" maskLabel="Join the page →" href="" />
             <HoverLink label="Youtube" maskLabel="Watch our work →" href="https://youtube.com/@theantariksha_in?si=ygBEwLMzszPamYrA" />
           </div>
         </div>
