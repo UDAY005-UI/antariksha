@@ -5,6 +5,7 @@ import SmoothScroll from "../components/SmoothScroll"
 import StackScroll from "../components/StackScroll"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useRouter } from "next/navigation"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,7 +14,7 @@ export default function Page() {
   const maskedAbout = useRef<HTMLDivElement>(null)
   const maskedContact = useRef<HTMLDivElement>(null)
   const stackRef = useRef<HTMLDivElement>(null)
-
+  const router = useRouter();
   return (
     <>
       <main className="h-[300vh]">
@@ -119,9 +120,9 @@ export default function Page() {
               We design and build digital experiences that feel effortless,
               intentional, and quietly powerful.
             </div>
-            <div data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-              <div className="hover:opacity-70 cursor-pointer">See our work →</div>
-              <div className="hover:opacity-70 cursor-pointer">Contact us →</div>
+            <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+              <div onClick={() => router.push("/work")}  className="hover:opacity-70 cursor-pointer">See our work →</div>
+              <div onClick={() => router.push("/contact")}  className="hover:opacity-70 cursor-pointer">Contact us →</div>
             </div>
           </div>
 
@@ -135,9 +136,9 @@ export default function Page() {
                 We design and build digital experiences that feel effortless,
                 intentional, and quietly powerful.
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                <div>See our work →</div>
-                <div>Contact us →</div>
+              <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+                <div onClick={() => router.push("/work")} >See our work →</div>
+                <div onClick={() => router.push("/contact")} >Contact us →</div>
               </div>
             </div>
           </div>

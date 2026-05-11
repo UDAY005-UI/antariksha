@@ -6,7 +6,7 @@ import StackScroll from "./components/StackScroll"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { motion } from "framer-motion"
-import Footer from "./components/Footer"
+import { useRouter } from "next/navigation"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -15,6 +15,7 @@ export default function Page() {
   const maskedAbout = useRef<HTMLDivElement>(null)
   const maskedContact = useRef<HTMLDivElement>(null)
   const stackRef = useRef<HTMLDivElement>(null)
+  const router = useRouter();
 
   return (
     <main>
@@ -139,10 +140,11 @@ export default function Page() {
             </h1>
             <div
               data-cursor="expand"
+              style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
               className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide"
             >
-              <div className="hover:opacity-70 cursor-pointer">See our work →</div>
-              <div className="hover:opacity-70 cursor-pointer">Contact us →</div>
+              <div onClick={() => router.push("/work")}  className="hover:opacity-70 cursor-pointer">See our work →</div>
+              <div onClick={() => router.push("/contact")}  className="hover:opacity-70 cursor-pointer">Contact us →</div>
             </div>
           </div>
 
@@ -159,9 +161,9 @@ export default function Page() {
                 We craft visuals that hit and don&apos;t fade out — sharp,
                 intentional work that people remember.
               </h1>
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                <div className="hover:opacity-70 cursor-pointer">Explore work →</div>
-                <div className="hover:opacity-70 cursor-pointer">Get in touch →</div>
+              <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+                <div onClick={() => router.push("/work")}  className="hover:opacity-70 cursor-pointer">Explore work →</div>
+                <div onClick={() => router.push("/contact")}  className="hover:opacity-70 cursor-pointer">Get in touch →</div>
               </div>
             </div>
           </div>

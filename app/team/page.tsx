@@ -4,6 +4,7 @@ import SmoothScroll from "../components/SmoothScroll";
 import StackScroll from "../components/StackScroll";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation"
 
 type RowItem = {
     title: string;
@@ -15,6 +16,7 @@ type RowItem = {
 const isMouse = () => typeof window !== "undefined" && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
 function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: RowItem & { align?: "left" | "right" }) {
+
     const [hovered, setHovered] = useState(false);
 
     const textClass = `w-full ${align === "right" ? "lg:pr-60 lg:pl-[40%] pr-6 pl-6 text-end" : "px-6 lg:px-60"}`;
@@ -25,7 +27,6 @@ function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: 
             onMouseEnter={() => { if (isMouse()) setHovered(true); }}
             onMouseLeave={() => { if (isMouse()) setHovered(false); }}
         >
-            {/* Orange fill */}
             <div
                 style={{
                     position: "absolute",
@@ -37,18 +38,10 @@ function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: 
                     zIndex: 0,
                 }}
             />
-
-            {/* Ghost div — holds row height */}
             <div className={`relative ${textClass}`}>
-                <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold opacity-0 pointer-events-none select-none">
-                    {title}
-                </div>
-                <div className="text-xs sm:text-sm opacity-0 pointer-events-none select-none">
-                    {subtitle}
-                </div>
+                <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold opacity-0 pointer-events-none select-none">{title}</div>
+                <div className="text-xs sm:text-sm opacity-0 pointer-events-none select-none">{subtitle}</div>
             </div>
-
-            {/* Base text */}
             <div
                 style={{
                     position: "absolute",
@@ -65,8 +58,6 @@ function HoverRow({ title, subtitle, maskTitle, maskSubtitle, align = "left" }: 
                     <div className="text-xs sm:text-sm">{subtitle}</div>
                 </div>
             </div>
-
-            {/* Masked text */}
             <div
                 style={{
                     position: "absolute",
@@ -127,6 +118,8 @@ export default function Team() {
     const maskedHero = useRef<HTMLDivElement>(null);
     const maskedContact = useRef<HTMLDivElement>(null);
 
+    const router = useRouter()
+
     return (
         <main>
             <SmoothScroll />
@@ -138,7 +131,7 @@ export default function Team() {
                         className="absolute inset-0 w-full h-full object-cover"
                         autoPlay muted loop playsInline preload="auto"
                     >
-                        <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4"/>
+                        <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
                     </video>
                     <div className="absolute inset-0 bg-black/40" />
                     <div className="relative z-10 flex h-full items-center justify-center text-center px-6">
@@ -182,7 +175,7 @@ export default function Team() {
 
                 {/* Tuhin */}
                 <section data-cursor="none" className="bg-[#141414] stack-panel absolute inset-0 h-screen w-full flex flex-col overflow-hidden">
-                    <Image src="/tuhin.png" alt="Tuhin" width={500} height={500} className="absolute bottom-0 right-0 opacity-40 pointer-events-none w-[70vw] sm:w-[50vw] lg:w-[500px] h-auto" priority />
+                    <Image src="/tuhin.png" alt="Tuhin" width={500} height={500} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-40 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {tuhinRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
@@ -190,7 +183,7 @@ export default function Team() {
 
                 {/* Annyesha */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
-                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="absolute bottom-0 opacity-40 pointer-events-none w-[60vw] sm:w-[40vw] lg:w-[400px] h-auto" priority />
+                    <Image src="/annyesha.png" alt="Annyesha" width={400} height={400} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-40 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {annyeshaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
@@ -198,7 +191,7 @@ export default function Team() {
 
                 {/* Dipangshu */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
-                    <Image src="/dipangshu.png" alt="Dipangshu" width={400} height={400} className="absolute bottom-0 right-0 opacity-40 pointer-events-none w-[60vw] sm:w-[40vw] lg:w-[400px] h-auto" priority />
+                    <Image src="/dipangshu.png" alt="Dipangshu" width={400} height={400} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-40 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {dipangshuRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
@@ -206,7 +199,7 @@ export default function Team() {
 
                 {/* Disha */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
-                    <Image src="/disha.png" alt="Disha" width={500} height={500} className="absolute bottom-0 opacity-40 pointer-events-none w-[70vw] sm:w-[50vw] lg:w-[500px] h-auto" priority />
+                    <Image src="/disha.png" alt="Disha" width={500} height={500} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-40 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {dishaRows.map((row) => (<HoverRow key={row.title} {...row} align="right" />))}
                     </div>
@@ -214,7 +207,7 @@ export default function Team() {
 
                 {/* Uday */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
-                    <Image src="/uday.png" alt="Uday" width={500} height={500} className="absolute bottom-0 right-0 opacity-40 pointer-events-none w-[70vw] sm:w-[50vw] lg:w-[500px] h-auto" priority />
+                    <Image src="/uday.png" alt="Uday" width={500} height={500} className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-40 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto" priority />
                     <div className="w-full h-full flex flex-col">
                         {udayRows.map((row) => (<HoverRow key={row.title} {...row} align="left" />))}
                     </div>
@@ -229,12 +222,11 @@ export default function Team() {
                         <h1 data-cursor="expand" className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-snug font-semibold mb-8 max-w-[900px]">
                             We design and build digital experiences...
                         </h1>
-                        <div data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                            <div className="cursor-pointer hover:opacity-70">See our work →</div>
-                            <div className="cursor-pointer hover:opacity-70">Contact us →</div>
+                        <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+                            <div onClick={() => router.push("/work")}  className="cursor-pointer hover:opacity-70">See our work →</div>
+                            <div onClick={() => router.push("/contact")}  className="cursor-pointer hover:opacity-70">Contact us →</div>
                         </div>
                     </div>
-
                     <div
                         ref={maskedContact}
                         className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
@@ -246,9 +238,9 @@ export default function Team() {
                             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-snug font-semibold text-[#0D0C0B] mb-8 max-w-[900px]">
                                 We craft visuals that hit and don&apos;t fade out...
                             </h1>
-                            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                                <div className="cursor-pointer hover:opacity-70">Explore work →</div>
-                                <div className="cursor-pointer hover:opacity-70">Get in touch →</div>
+                            <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+                                <div onClick={() => router.push("/work")}  className="cursor-pointer hover:opacity-70">Explore work →</div>
+                                <div onClick={() => router.push("/contact")} className="cursor-pointer hover:opacity-70">Get in touch →</div>
                             </div>
                         </div>
                     </div>

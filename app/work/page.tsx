@@ -4,6 +4,7 @@ import { motion, AnimatePresence, type Variants, type Transition } from "framer-
 import { useState, useEffect, useRef } from "react"
 import StackScroll from "../components/StackScroll"
 import SmoothScroll from "../components/SmoothScroll"
+import { useRouter } from "next/navigation"
 
 type WorkItem = {
   id: number
@@ -178,6 +179,7 @@ export default function Page() {
   const maskedContact = useRef<HTMLDivElement>(null)
   const stackRef = useRef<HTMLDivElement>(null)
 
+  const router = useRouter();
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState<Dir>(1)
 
@@ -366,9 +368,9 @@ export default function Page() {
               We design and build digital experiences that feel effortless,
               intentional, and quietly powerful.
             </div>
-            <div data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-              <div className="hover:opacity-70 cursor-pointer">See our work →</div>
-              <div className="hover:opacity-70 cursor-pointer">Contact us →</div>
+            <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+              <div onClick={() => router.push("/work")}  className="hover:opacity-70 cursor-pointer">See our work →</div>
+              <div onClick={() => router.push("/contact")}  className="hover:opacity-70 cursor-pointer">Contact us →</div>
             </div>
           </div>
           <div
@@ -381,9 +383,9 @@ export default function Page() {
                 We design and build digital experiences that feel effortless,
                 intentional, and quietly powerful.
               </div>
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                <div>See our work →</div>
-                <div>Contact us →</div>
+              <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+                <div onClick={() => router.push("/work")} >See our work →</div>
+                <div onClick={() => router.push("/contact")} >Contact us →</div>
               </div>
             </div>
           </div>
