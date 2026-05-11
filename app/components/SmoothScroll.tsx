@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -10,25 +10,25 @@ gsap.registerPlugin(ScrollTrigger);
 export default function SmoothScroll() {
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 2.2,
-      easing: (t) => 1 - Math.pow(1 - t, 4),
+      duration: 0.5,
+      easing: (t: number) => 1 - Math.pow(1 - t, 4),
       smoothWheel: true,
-      wheelMultiplier: 0.6,
-      touchMultiplier: 1.2,
-    });
+      wheelMultiplier: 0.3,
+      touchMultiplier: 0.6,
+    } as ConstructorParameters<typeof Lenis>[0]);
 
     lenis.on("scroll", ScrollTrigger.update);
 
-    const tickerFn = (time: number) => {
+    const raf = (time: number) => {
       lenis.raf(time * 1000);
     };
 
-    gsap.ticker.add(tickerFn);
+    gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove(tickerFn);
+      gsap.ticker.remove(raf);
     };
   }, []);
 

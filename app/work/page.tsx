@@ -284,9 +284,8 @@ export default function Page() {
 
         {/* ── WORK ────────────────────────────────────────────────── */}
         <section
-          className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col"
-          data-lenis-prevent
-        >
+  className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col"
+>
           <div className="px-6 sm:px-10 md:px-16 xl:px-24 pt-24 pb-4">
             <p className="text-xs tracking-[0.3em] text-white/40 mb-1">PORTFOLIO</p>
             <p className="text-white/50 text-sm tabular-nums">

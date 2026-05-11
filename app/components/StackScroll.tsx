@@ -1,9 +1,7 @@
 "use client";
-
 import { useLayoutEffect, useRef, RefObject } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 gsap.registerPlugin(ScrollTrigger);
 
 export default function StackScroll({
@@ -11,57 +9,63 @@ export default function StackScroll({
   stackRef,
   onScrollTriggerReady,
 }: {
-  children: React.ReactNode
-  stackRef?: RefObject<HTMLDivElement | null>
-  onScrollTriggerReady?: () => void
+  children: React.ReactNode;
+  stackRef?: RefObject<HTMLDivElement | null>;
+  onScrollTriggerReady?: () => void;
 }) {
-  const internalRef = useRef<HTMLDivElement | null>(null)
-  const containerRef = (stackRef ?? internalRef) as RefObject<HTMLDivElement>
+  const internalRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = (stackRef ?? internalRef) as RefObject<HTMLDivElement>;
 
   useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const panels = gsap.utils.toArray<HTMLElement>(".stack-panel")
-      const isMobile = window.innerWidth < 640
+    const timer = setTimeout(() => {
+      const ctx = gsap.context(() => {
+        const panels = gsap.utils.toArray<HTMLElement>(".stack-panel");
 
-      panels.forEach((panel, i) => {
-        if (i !== 0) gsap.set(panel, { yPercent: 100 })
-      })
+        panels.forEach((panel, i) => {
+          if (i !== 0) gsap.set(panel, { yPercent: 100 });
+        });
 
-      // on mobile, panels can be auto height — sum them up
-      const totalScroll = isMobile
-        ? panels.slice(1).reduce((sum, p) => sum + p.offsetHeight, 0)
-        : window.innerHeight * (panels.length - 1)
+        const totalScroll = window.innerHeight * (panels.length - 1);
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top top",
-          end: `+=${totalScroll}`,
-          scrub: isMobile ? 0.3 : 1,
-          pin: true,
-          anticipatePin: 1,
-          onRefresh() {
-            onScrollTriggerReady?.()
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top",
+            end: `+=${totalScroll}`,
+            scrub: 0.6,          // ← small damping value prevents snap-jitter
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            fastScrollEnd: true,
+            preventOverlaps: true,
+            invalidateOnRefresh: true,
+            onRefresh() {
+              onScrollTriggerReady?.();
+            },
           },
-        },
-      })
+        });
 
-      panels.forEach((panel, i) => {
-        if (i === 0) return
-        tl.to(panel, { yPercent: 0, ease: "none" })
-      })
-    }, containerRef)
+        panels.forEach((panel, i) => {
+          if (i === 0) return;
+          tl.to(panel, { yPercent: 0, ease: "none" });
+        });
 
-    return () => ctx.revert()
-  }, [])
+        ScrollTrigger.refresh();
+      }, containerRef);
+
+      return () => ctx.revert();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div
       ref={containerRef}
       className="relative overflow-hidden bg-black"
-      style={{ height: "100dvh", willChange: "transform", transform: "translateZ(0)" }}
+      style={{ height: "100dvh" }}
     >
       {children}
     </div>
-  )
+  );
 }
