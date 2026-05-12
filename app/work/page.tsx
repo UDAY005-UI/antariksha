@@ -136,12 +136,12 @@ function CarouselCard({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ delay: 0.22, duration: 0.35, ease: "easeOut" }}
-            className="absolute bottom-6 left-6 z-20"
+            className="absolute bottom-6 left-0 right-0 px-6 z-20"
           >
-            <p className="text-[10px] tracking-widest uppercase text-white/50 mb-1">
+            <p className="text-[10px] tracking-widest uppercase text-white/50 mb-1 text-center">
               {item.type}
             </p>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white text-center">
               {item.title}
             </h2>
           </motion.div>
@@ -487,7 +487,7 @@ export default function Page() {
             className="relative w-full flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl"
             style={{
               maxWidth: "1000px",
-              maxHeight: "88vh",
+              maxHeight: "92vh",
               backgroundColor: "#0f0f0f",
               animation: "scaleIn 0.3s ease",
             }}
@@ -497,19 +497,21 @@ export default function Page() {
               className="absolute top-4 right-4 z-20 text-white/60 hover:text-white text-xl w-8 h-8 flex items-center justify-center transition-colors"
             >✕</button>
 
-            <div className="w-full md:w-[55%] flex-shrink-0 bg-black flex items-center justify-center">
+            {/* Video — uniform fixed height on mobile, natural on desktop */}
+            <div className="w-full md:w-[55%] flex-shrink-0 bg-black flex items-center justify-center overflow-hidden video-modal-pane">
               <video
                 ref={modalVideoRef}
                 key={active.id}
                 src={active.video}
                 autoPlay muted loop playsInline controls
-                className="w-full h-auto max-h-[88vh] object-contain"
+                className="w-full h-full object-contain block"
               />
             </div>
 
+            {/* Text panel — scrollable on mobile */}
             <div
               className="w-full md:w-[45%] flex flex-col p-6 sm:p-8 overflow-y-auto"
-              style={{ scrollbarWidth: "none" }}
+              style={{ scrollbarWidth: "none", maxHeight: "56vh" }}
             >
               <p className="text-xs mb-3 tracking-[0.25em] uppercase text-white/50">{active.type}</p>
               <h2 className="text-2xl sm:text-3xl font-semibold mb-6">{active.title}</h2>
@@ -523,11 +525,20 @@ export default function Page() {
           </div>
 
           <style>{`
-            @keyframes scaleIn {
-              from { opacity: 0; transform: scale(0.96); }
-              to   { opacity: 1; transform: scale(1); }
-            }
-          `}</style>
+      @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.96); }
+        to   { opacity: 1; transform: scale(1); }
+      }
+      .video-modal-pane {
+        height: 220px;
+      }
+      @media (min-width: 768px) {
+        .video-modal-pane {
+          height: auto;
+          max-height: 88vh;
+        }
+      }
+    `}</style>
         </div>
       )}
     </main>
