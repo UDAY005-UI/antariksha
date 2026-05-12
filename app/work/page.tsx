@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import StackScroll from "../components/StackScroll"
 import SmoothScroll from "../components/SmoothScroll"
 import { useRouter } from "next/navigation"
+import gsap from "gsap"
 
 type WorkItem = {
   id: number
@@ -179,9 +180,67 @@ export default function Page() {
   const maskedContact = useRef<HTMLDivElement>(null)
   const stackRef = useRef<HTMLDivElement>(null)
 
-  const router = useRouter();
+  const router = useRouter()
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState<Dir>(1)
+
+  const portfolioFired  = useRef(false)
+  const portfolioAccent = useRef<HTMLDivElement>(null)
+  const portfolioTag    = useRef<HTMLParagraphElement>(null)
+  const portfolioCount  = useRef<HTMLParagraphElement>(null)
+
+  // contact refs
+  const contactFired   = useRef(false)
+  const contactAccent  = useRef<HTMLDivElement>(null)
+  const contactTag     = useRef<HTMLDivElement>(null)
+  const contactHeading = useRef<HTMLDivElement>(null)
+  const contactLinks   = useRef<HTMLDivElement>(null)
+
+  function animatePortfolio() {
+    if (portfolioFired.current) return
+    portfolioFired.current = true
+
+    gsap.fromTo(portfolioAccent.current,
+      { scaleX: 0 },
+      { scaleX: 1, duration: 1.2, ease: "expo.out", transformOrigin: "left center" }
+    )
+    gsap.fromTo(portfolioTag.current,
+      { y: 28, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.25 }
+    )
+    gsap.fromTo(portfolioCount.current,
+      { y: 28, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.4 }
+    )
+  }
+
+  function animateContact() {
+    if (contactFired.current) return
+    contactFired.current = true
+
+    gsap.fromTo(contactAccent.current,
+      { scaleX: 0 },
+      { scaleX: 1, duration: 1.2, ease: "expo.out", transformOrigin: "left center" }
+    )
+    gsap.fromTo(contactTag.current,
+      { y: 28, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.25 }
+    )
+    gsap.fromTo(contactHeading.current,
+      { y: 60, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.4, ease: "power4.out", delay: 0.45 }
+    )
+    gsap.fromTo(contactLinks.current,
+      { y: 24, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1.0, ease: "power3.out", delay: 0.8 }
+    )
+  }
+
+  function handleScrollProgress(progress: number) {
+    const step = 1 / 2
+    if (progress >= step * 1.0) animatePortfolio()
+    if (progress >= step * 1.95) animateContact()
+  }
 
   const handleNext = () => {
     if (index >= TOTAL - 1) return
@@ -235,10 +294,12 @@ export default function Page() {
     isActive: offset === 0,
   }))
 
+  const contactInnerCls = "relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20"
+
   return (
     <main className="bg-[#0b0b0b]">
       <SmoothScroll />
-      <StackScroll stackRef={stackRef}>
+      <StackScroll stackRef={stackRef} onScrollProgress={handleScrollProgress}>
 
         <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
           <video
@@ -251,7 +312,6 @@ export default function Page() {
 
           <div className="relative z-10 flex h-full items-end px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
             <div className="w-full">
-
               <motion.h1 data-cursor="expand"
                 className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-left mb-2 md:mb-4 w-fit"
                 initial={{ y: 30, opacity: 0 }}
@@ -320,7 +380,6 @@ export default function Page() {
                   </div>
                 ))}
               </div>
-
             </div>
           </div>
 
@@ -332,48 +391,50 @@ export default function Page() {
               <h1 className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest text-left mb-2 md:mb-4">
                 The Craft
               </h1>
-
               <div className="flex justify-start">
                 {"LIGHT".split("").map((l, i) => (
-                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
-                    {l}
-                  </span>
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
                 ))}
               </div>
-
               <div className="flex justify-start mb-3 md:mb-0">
                 {"YEARS".split("").map((l, i) => (
-                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
-                    {l}
-                  </span>
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
                 ))}
               </div>
-
               <div className="flex justify-end">
                 {"IN".split("").map((l, i) => (
-                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
-                    {l}
-                  </span>
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
                 ))}
               </div>
-
               <div className="flex justify-end">
                 {"MAKING".split("").map((l, i) => (
-                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">
-                    {l}
-                  </span>
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section
-          className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col"
-        >
-          <div className="px-6 sm:px-10 md:px-16 xl:px-24 pt-24 pb-4">
-            <p className="text-xs tracking-[0.3em] text-white/40 mb-1">PORTFOLIO</p>
-            <p className="text-white/50 text-sm tabular-nums">
+        <section className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col">
+
+          <div className="flex flex-col items-center pt-24 pb-4">
+            <div
+              ref={portfolioAccent}
+              className="w-12 h-[2px] bg-orange-500 mb-4"
+              style={{ transformOrigin: "left center", transform: "scaleX(0)" }}
+            />
+            <p
+              ref={portfolioTag}
+              className="text-xs tracking-[0.3em] mb-1"
+              style={{ opacity: 0, transform: "translateY(28px)" }}
+            >
+              PORTFOLIO
+            </p>
+            <p
+              ref={portfolioCount}
+              className="text-sm tabular-nums"
+              style={{ opacity: 0, transform: "translateY(28px)" }}
+            >
               {String(index + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
             </p>
           </div>
@@ -443,32 +504,61 @@ export default function Page() {
         </section>
 
         <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center px-6">
-          <div className="relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
-            <div data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4">
+
+          {/* Base layer */}
+          <div className={contactInnerCls}>
+            <div
+              ref={contactAccent}
+              className="w-10 h-[2px] bg-orange-500 mb-6"
+              style={{ transformOrigin: "left center", transform: "scaleX(0)" }}
+            />
+            <div
+              ref={contactTag}
+              data-cursor="expand"
+              className="font-bold text-lg sm:text-2xl mb-4"
+              style={{ opacity: 0, transform: "translateY(28px)" }}
+            >
               Ready to start your journey?
             </div>
-            <div data-cursor="expand" className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
+            <div
+              ref={contactHeading}
+              data-cursor="expand"
+              className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]"
+              style={{ opacity: 0, transform: "translateY(60px)" }}
+            >
               We design and build digital experiences that feel effortless,
               intentional, and quietly powerful.
             </div>
-            <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} data-cursor="expand" className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
+            <div
+              ref={contactLinks}
+              data-cursor="expand"
+              style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none", opacity: 0, transform: "translateY(24px)" }}
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide"
+            >
               <div onClick={() => router.push("/work")} className="hover:opacity-70 cursor-pointer">See our work →</div>
               <div onClick={() => router.push("/contact")} className="hover:opacity-70 cursor-pointer">Contact us →</div>
             </div>
           </div>
+
           <div
             ref={maskedContact}
             className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
           >
-            <div className="text-black flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20">
-              <div className="font-bold text-lg sm:text-2xl mb-4">Crafted for modern brands.</div>
-              <div className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]">
+            <div className={contactInnerCls}>
+              <div className="w-10 h-[2px] bg-[#141414] mb-6" />
+              <div className="font-bold text-lg sm:text-2xl mb-4 text-black">
+                Crafted for modern brands.
+              </div>
+              <div className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px] text-black">
                 Every project is shaped through strategy,
                 design, and execution that speaks with clarity.
               </div>
-              <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide">
-                <div onClick={() => router.push("/work")} >Explore work →</div>
-                <div onClick={() => router.push("/contact")} >Get in touch →</div>
+              <div
+                style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide text-black"
+              >
+                <div onClick={() => router.push("/work")}>Explore work →</div>
+                <div onClick={() => router.push("/contact")}>Get in touch →</div>
               </div>
             </div>
           </div>
@@ -497,7 +587,6 @@ export default function Page() {
               className="absolute top-4 right-4 z-20 text-white/60 hover:text-white text-xl w-8 h-8 flex items-center justify-center transition-colors"
             >✕</button>
 
-            {/* Video — uniform fixed height on mobile, natural on desktop */}
             <div className="w-full md:w-[55%] flex-shrink-0 bg-black flex items-center justify-center overflow-hidden video-modal-pane">
               <video
                 ref={modalVideoRef}
@@ -508,7 +597,6 @@ export default function Page() {
               />
             </div>
 
-            {/* Text panel — scrollable on mobile */}
             <div
               className="w-full md:w-[45%] flex flex-col p-6 sm:p-8 overflow-y-auto"
               style={{ scrollbarWidth: "none", maxHeight: "56vh" }}

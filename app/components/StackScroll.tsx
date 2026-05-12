@@ -8,10 +8,12 @@ export default function StackScroll({
   children,
   stackRef,
   onScrollTriggerReady,
+  onScrollProgress,
 }: {
   children: React.ReactNode;
   stackRef?: RefObject<HTMLDivElement | null>;
   onScrollTriggerReady?: () => void;
+  onScrollProgress?: (progress: number) => void;
 }) {
   const internalRef = useRef<HTMLDivElement | null>(null);
   const containerRef = (stackRef ?? internalRef) as RefObject<HTMLDivElement>;
@@ -41,6 +43,9 @@ export default function StackScroll({
             invalidateOnRefresh: true,
             onRefresh() {
               onScrollTriggerReady?.();
+            },
+            onUpdate(self) {
+              onScrollProgress?.(self.progress);
             },
           },
         });
