@@ -19,6 +19,12 @@
   }
 }
 
+@layer base {
+  * {
+    @apply cursor-pointer;
+  }
+}
+
 html {
   overflow-x: hidden;
 }

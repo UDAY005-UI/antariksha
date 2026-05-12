@@ -11,23 +11,23 @@ import { useRouter } from "next/navigation"
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Page() {
-  const maskedHero    = useRef<HTMLDivElement>(null)
-  const maskedAbout   = useRef<HTMLDivElement>(null)
+  const maskedHero = useRef<HTMLDivElement>(null)
+  const maskedAbout = useRef<HTMLDivElement>(null)
   const maskedContact = useRef<HTMLDivElement>(null)
-  const stackRef      = useRef<HTMLDivElement>(null)
-  const router        = useRouter()
+  const stackRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
-  const aboutFired   = useRef(false)
+  const aboutFired = useRef(false)
   const contactFired = useRef(false)
 
-  const aboutAccent  = useRef<HTMLDivElement>(null)
-  const aboutTag     = useRef<HTMLParagraphElement>(null)
+  const aboutAccent = useRef<HTMLDivElement>(null)
+  const aboutTag = useRef<HTMLParagraphElement>(null)
   const aboutHeading = useRef<HTMLHeadingElement>(null)
 
-  const contactAccent  = useRef<HTMLDivElement>(null)
-  const contactTag     = useRef<HTMLParagraphElement>(null)
+  const contactAccent = useRef<HTMLDivElement>(null)
+  const contactTag = useRef<HTMLParagraphElement>(null)
   const contactHeading = useRef<HTMLHeadingElement>(null)
-  const contactLinks   = useRef<HTMLDivElement>(null)
+  const contactLinks = useRef<HTMLDivElement>(null)
 
   function animateAbout() {
     if (aboutFired.current) return
@@ -88,90 +88,90 @@ export default function Page() {
       <StackScroll stackRef={stackRef} onScrollProgress={handleScrollProgress}>
 
         <section className="z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-  <video
-    className="absolute inset-0 w-full h-full object-cover z-10"
-    autoPlay muted loop playsInline preload="auto"
-  >
-    <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
-  </video>
+          <video
+            className="absolute inset-0 w-full h-full object-cover z-10"
+            autoPlay muted loop playsInline preload="auto"
+          >
+            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
+          </video>
 
-  <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/40" />
 
-  <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
-    <div data-cursor="expand">
-      <motion.h1
-        className="text-sm sm:text-base md:text-lg font-semibold tracking-widest"
-        initial={{ y: 60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
-      >
-        ANTARIKSHA
-      </motion.h1>
-      <div className="mt-4 leading-none">
-        {["DESIGN", "THAT", "ACTUALLY", "WORKS"].map((word, wi) => (
-          <div key={word} className="flex justify-center">
-            {word.split("").map((letter, li) => (
-              <div key={li} className="overflow-hidden">
-                <motion.span
-                  className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80"
-                  style={{ transformOrigin: "bottom" }}
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  animate={{ scaleY: 1, opacity: 1 }}
-                  transition={{
-                    duration: 0.6,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: 0.1 + wi * 0.12 + li * 0.04,
-                  }}
-                >
-                  {letter}
-                </motion.span>
+          <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
+            <div data-cursor="expand">
+              <motion.h1
+                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest"
+                initial={{ y: 60, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
+              >
+                ANTARIKSHA
+              </motion.h1>
+              <div className="mt-4 leading-none">
+                {["DESIGN", "THAT", "ACTUALLY", "WORKS"].map((word, wi) => (
+                  <div key={word} className="flex justify-center">
+                    {word.split("").map((letter, li) => (
+                      <div key={li} className="overflow-hidden">
+                        <motion.span
+                          className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80"
+                          style={{ transformOrigin: "bottom" }}
+                          initial={{ scaleY: 0, opacity: 0 }}
+                          animate={{ scaleY: 1, opacity: 1 }}
+                          transition={{
+                            duration: 0.6,
+                            ease: [0.16, 1, 0.3, 1],
+                            delay: 0.1 + wi * 0.12 + li * 0.04,
+                          }}
+                        >
+                          {letter}
+                        </motion.span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
 
-  <div
-    ref={maskedHero}
-    className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
-  >
-    <div>
-      <motion.h1
-        className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest"
-        initial={{ y: 60, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
-      >
-        ANTARIKSHA
-      </motion.h1>
-      <div className="mt-4 leading-none">
-        {["NO", "BULLSHIT", "JUST", "RESULTS"].map((word, wi) => (
-          <div key={word} className="flex justify-center">
-            {word.split("").map((letter, li) => (
-              <div key={li} className="overflow-hidden">
-                <motion.span
-                  className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black"
-                  style={{ transformOrigin: "bottom" }}
-                  initial={{ scaleY: 0, opacity: 0 }}
-                  animate={{ scaleY: 1, opacity: 1 }}
-                  transition={{
-                    duration: 0.6,
-                    ease: [0.16, 1, 0.3, 1],
-                    delay: 0.1 + wi * 0.12 + li * 0.04,
-                  }}
-                >
-                  {letter}
-                </motion.span>
+          <div
+            ref={maskedHero}
+            className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center justify-center text-center px-6"
+          >
+            <div>
+              <motion.h1
+                className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest"
+                initial={{ y: 60, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
+              >
+                ANTARIKSHA
+              </motion.h1>
+              <div className="mt-4 leading-none">
+                {["NO", "BULLSHIT", "JUST", "RESULTS"].map((word, wi) => (
+                  <div key={word} className="flex justify-center">
+                    {word.split("").map((letter, li) => (
+                      <div key={li} className="overflow-hidden">
+                        <motion.span
+                          className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black"
+                          style={{ transformOrigin: "bottom" }}
+                          initial={{ scaleY: 0, opacity: 0 }}
+                          animate={{ scaleY: 1, opacity: 1 }}
+                          transition={{
+                            duration: 0.6,
+                            ease: [0.16, 1, 0.3, 1],
+                            delay: 0.1 + wi * 0.12 + li * 0.04,
+                          }}
+                        >
+                          {letter}
+                        </motion.span>
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
+        </section>
 
         <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center">
 
@@ -251,19 +251,17 @@ export default function Page() {
             >
               <div
                 onClick={() => router.push("/work")}
-                className="cta-link group relative cursor-pointer overflow-hidden"
+                className="cta-link cursor-pointer hover:opacity-70 transition-opacity duration-300"
                 style={{ opacity: 0, transform: "translateY(24px)" }}
               >
-                <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">See our work →</span>
-                <span className="absolute inset-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-orange-500">See our work →</span>
+                See our work →
               </div>
               <div
                 onClick={() => router.push("/contact")}
-                className="cta-link group relative cursor-pointer overflow-hidden"
+                className="cta-link cursor-pointer hover:opacity-70 transition-opacity duration-300"
                 style={{ opacity: 0, transform: "translateY(24px)" }}
               >
-                <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">Contact us →</span>
-                <span className="absolute inset-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-orange-500">Contact us →</span>
+                Contact us →
               </div>
             </div>
           </div>

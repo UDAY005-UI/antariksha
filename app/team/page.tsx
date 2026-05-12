@@ -309,7 +309,7 @@ export default function Team() {
                     <Image
                         ref={tuhinImgRef}
                         src="/tuhin.png" alt="Tuhin" width={500} height={500}
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-90 lg:w-[500px] h-auto"
                         style={{ opacity: 0 }}
                         priority
                     />
@@ -326,7 +326,7 @@ export default function Team() {
                     <Image
                         ref={annyeshaImgRef}
                         src="/annyesha.png" alt="Annyesha" width={400} height={400}
-                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto"
+                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
                         style={{ opacity: 0 }}
                         priority
                     />
@@ -343,7 +343,7 @@ export default function Team() {
                     <Image
                         ref={dipangshuImgRef}
                         src="/dipangshu.png" alt="Dipangshu" width={400} height={400}
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-full sm:w-[55vw] lg:w-[400px] h-auto"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-90 lg:w-100 h-auto"
                         style={{ opacity: 0 }}
                         priority
                     />
@@ -377,7 +377,7 @@ export default function Team() {
                     <Image
                         ref={udayImgRef}
                         src="/uday.png" alt="Uday" width={500} height={500}
-                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto"
+                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-160 h-auto"
                         style={{ opacity: 0 }}
                         priority
                     />
@@ -423,19 +423,17 @@ export default function Team() {
                         >
                             <div
                                 onClick={() => router.push("/work")}
-                                className="cta-link group relative cursor-pointer overflow-hidden"
+                                className="cta-link cursor-pointer hover:opacity-70 transition-opacity duration-300"
                                 style={{ opacity: 0, transform: "translateY(24px)" }}
                             >
-                                <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">See our work →</span>
-                                <span className="absolute inset-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-orange-500">See our work →</span>
+                                See our work →
                             </div>
                             <div
                                 onClick={() => router.push("/contact")}
-                                className="cta-link group relative cursor-pointer overflow-hidden"
+                                className="cta-link cursor-pointer hover:opacity-70 transition-opacity duration-300"
                                 style={{ opacity: 0, transform: "translateY(24px)" }}
                             >
-                                <span className="inline-block transition-transform duration-300 group-hover:-translate-y-full">Contact us →</span>
-                                <span className="absolute inset-0 inline-block translate-y-full transition-transform duration-300 group-hover:translate-y-0 text-orange-500">Contact us →</span>
+                                Contact us →
                             </div>
                         </div>
                     </div>
