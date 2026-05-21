@@ -90,7 +90,7 @@ function HoverRow({
 }
 
 const tuhinRows: RowItem[] = [
-    { title: "Tuhin Adhikary", subtitle: "Frames that feel like feelings.", maskTitle: "The Eye", maskSubtitle: "Motion. Emotion. Story." },
+    { title: "Tuhin Adhikary", subtitle: "Founder", maskTitle: "The Eye", maskSubtitle: "Visionary behind" },
     { title: "Video Editing", subtitle: "Protonn Media", maskTitle: "Cutting Frames,", maskSubtitle: "Crafting Stories" },
     { title: "Cinematography", subtitle: "Creative Work", maskTitle: "Eyes Behind the Lens", maskSubtitle: "Light, Shadow, Motion" },
     { title: "Visual Storytelling", subtitle: "Freelance", maskTitle: "Every Frame Speaks", maskSubtitle: "Without a Word" },
@@ -98,31 +98,23 @@ const tuhinRows: RowItem[] = [
 ];
 
 const annyeshaRows: RowItem[] = [
-    { title: "Annyesha Saha", subtitle: "Vision without a ceiling.", maskTitle: "The Visionary", maskSubtitle: "Light. Depth. Truth." },
-    { title: "Video Editing", subtitle: "Protonn Media", maskTitle: "Rhythm in the Cut", maskSubtitle: "Flow Over Perfection" },
-    { title: "Cinematography", subtitle: "Creative Work", maskTitle: "Framing the Unseen", maskSubtitle: "Vision Without Limits" },
-    { title: "Visual Storytelling", subtitle: "Freelance", maskTitle: "Stories That Linger", maskSubtitle: "Long After the Screen" },
-    { title: "Content Creation", subtitle: "Social Media", maskTitle: "Raw. Real. Resonant.", maskSubtitle: "Audiences Remember" },
+    { title: "Annyesha Saha", subtitle: "Founding member", maskTitle: "The Voice", maskSubtitle: "Core member" },
+    { title: "Agency representative", subtitle: "Representing the agency with professionalism and clarity.", maskTitle: "Brand representation", maskSubtitle: "Reflecting the agency’s identity and vision" },
+    { title: "Public relations", subtitle: "Building strong public image and meaningful connections", maskTitle: "Media relations", maskSubtitle: "Building image and audience trust" },
+    { title: "Communication and outreach lead", subtitle: "Leading engagement, collaborations, and audience outreach", maskTitle: "Engagement and outreach", maskSubtitle: "Creating connections and expanding reach" },
+    { title: "Coordination and planning", subtitle: "Managing schedules, workflows, and seamless execution", maskTitle: "Strategic coordination", maskSubtitle: "Managing flow, timelines, and execution" },
 ];
 
 const dipangshuRows: RowItem[] = [
-    { title: "Dipangshu", subtitle: "Strategy meets creative instinct.", maskTitle: "The Strategist", maskSubtitle: "Growth. Design. Impact." },
+    { title: "Dipangshu Dey", subtitle: "Founding member", maskTitle: "The Strategist", maskSubtitle: "Core member" },
     { title: "Social Media Managing", subtitle: "Content Strategy", maskTitle: "Growth Through Strategy", maskSubtitle: "Consistent Branding" },
     { title: "Videography", subtitle: "Visual Storytelling", maskTitle: "Frames with Purpose", maskSubtitle: "Capture Emotion" },
     { title: "Poster Making", subtitle: "Graphic Design", maskTitle: "Design Beyond Aesthetics", maskSubtitle: "Strong Visual Impact" },
     { title: "Editing", subtitle: "Post Production", maskTitle: "Cuts with Precision", maskSubtitle: "Enhanced Narratives" },
 ];
 
-const dishaRows: RowItem[] = [
-    { title: "Disha Dutta", subtitle: "Moods captured, worlds created.", maskTitle: "The Storyteller", maskSubtitle: "Feel. Frame. Forever." },
-    { title: "Video Editing", subtitle: "Protonn Media", maskTitle: "Time Well Spent", maskSubtitle: "In Every Second" },
-    { title: "Cinematography", subtitle: "Creative Work", maskTitle: "Mood Over Method", maskSubtitle: "Feel It First" },
-    { title: "Visual Storytelling", subtitle: "Freelance", maskTitle: "Worlds Built", maskSubtitle: "From a Single Frame" },
-    { title: "Content Creation", subtitle: "Social Media", maskTitle: "Authentic Always", maskSubtitle: "No Filter Needed" },
-];
-
 const udayRows: RowItem[] = [
-    { title: "Uday Senapati", subtitle: "Building the web, one pixel at a time.", maskTitle: "The Architect", maskSubtitle: "Code. Design. Ship." },
+    { title: "Uday Senapati", subtitle: "Founding member", maskTitle: "The Architect", maskSubtitle: "Core member" },
     { title: "Modern Web Experiences", subtitle: "Interactive Digital Presence", maskTitle: "Experiences that Engage", maskSubtitle: "Built for Modern Brands" },
     { title: "Web Development", subtitle: "Full Stack Solutions", maskTitle: "Code with Purpose", maskSubtitle: "Scalable and Reliable Systems" },
     { title: "UI/UX Design", subtitle: "User-Centered Interfaces", maskTitle: "Design that Connects", maskSubtitle: "Clean and Intuitive Experiences" },
@@ -356,39 +348,22 @@ export default function Team() {
                     </div>
                 </section>
 
-                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
-                    <Image
-                        ref={dishaImgRef}
-                        src="/disha.png" alt="Disha" width={500} height={500}
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-[500px] h-auto"
-                        style={{ opacity: 0 }}
-                        priority
-                    />
-                    <div ref={dishaRowsRef} className="w-full h-full flex flex-col">
-                        {dishaRows.map((row) => (
-                            <div key={row.title} className="panel-row flex-1 flex flex-col" style={{ opacity: 0 }}>
-                                <HoverRow {...row} align="right" />
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
-                    <Image
-                        ref={udayImgRef}
-                        src="/uday.png" alt="Uday" width={500} height={500}
-                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-160 h-auto"
-                        style={{ opacity: 0 }}
-                        priority
-                    />
-                    <div ref={udayRowsRef} className="w-full h-full flex flex-col">
-                        {udayRows.map((row) => (
-                            <div key={row.title} className="panel-row flex-1 flex flex-col" style={{ opacity: 0 }}>
-                                <HoverRow {...row} align="left" />
-                            </div>
-                        ))}
-                    </div>
-                </section>
+<section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
+    <Image
+        ref={udayImgRef}
+        src="/uday.png" alt="Uday" width={500} height={500}
+        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-160 h-auto"
+        style={{ opacity: 0 }}
+        priority
+    />
+    <div ref={udayRowsRef} className="w-full h-full flex flex-col">
+        {udayRows.map((row) => (
+            <div key={row.title} className="panel-row flex-1 flex flex-col" style={{ opacity: 0 }}>
+                <HoverRow {...row} align="right" />
+            </div>
+        ))}
+    </div>
+</section>
 
                 <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center overflow-hidden">
 
