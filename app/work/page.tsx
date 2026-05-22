@@ -7,6 +7,7 @@ import SmoothScroll from "../components/SmoothScroll"
 import { useRouter } from "next/navigation"
 import gsap from "gsap"
 import Image from "next/image"
+import { useNavigate } from "../components/UseNavigate"
 
 type WorkItem = {
   id: number
@@ -296,7 +297,8 @@ export default function Page() {
   }))
 
   const contactInnerCls = "relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20"
-
+  const navigate = useNavigate();
+  
   return (
     <main className="bg-[#0b0b0b]">
       <SmoothScroll />
@@ -557,8 +559,8 @@ export default function Page() {
               style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none", opacity: 0, transform: "translateY(24px)" }}
               className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide"
             >
-              <div onClick={() => router.push("/work")} className="hover:opacity-70 cursor-pointer">See our work →</div>
-              <div onClick={() => router.push("/contact")} className="hover:opacity-70 cursor-pointer">Contact us →</div>
+              <div onClick={() => navigate("/work")} className="hover:opacity-70 cursor-pointer">See our work →</div>
+              <div onClick={() => navigate("/contact")} className="hover:opacity-70 cursor-pointer">Contact us →</div>
             </div>
           </div>
 
@@ -579,8 +581,8 @@ export default function Page() {
                 style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
                 className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide text-black"
               >
-                <div onClick={() => router.push("/work")}>Explore work →</div>
-                <div onClick={() => router.push("/contact")}>Get in touch →</div>
+                <div onClick={() => navigate("/work")}>Explore work →</div>
+                <div onClick={() => navigate("/contact")}>Get in touch →</div>
               </div>
             </div>
           </div>

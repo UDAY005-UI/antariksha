@@ -7,6 +7,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation"
+import { useNavigate } from "./components/UseNavigate"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -80,7 +81,8 @@ export default function Page() {
 
   const aboutInnerCls = "relative z-10 px-6 sm:px-10 md:px-16 xl:px-40 pt-16 sm:pt-20 w-full"
   const contactInnerCls = "relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20"
-
+  const navigate = useNavigate();
+  
   return (
     <main>
       <SmoothScroll />
@@ -250,14 +252,14 @@ export default function Page() {
               className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm uppercase tracking-widest"
             >
               <div
-                onClick={() => router.push("/work")}
+                onClick={() => navigate("/work")}
                 className="cta-link cursor-pointer hover:opacity-70 transition-opacity duration-300"
                 style={{ opacity: 0, transform: "translateY(24px)" }}
               >
                 See our work →
               </div>
               <div
-                onClick={() => router.push("/contact")}
+                onClick={() => navigate("/contact")}
                 className="cta-link cursor-pointer hover:opacity-70 transition-opacity duration-300"
                 style={{ opacity: 0, transform: "translateY(24px)" }}
               >
@@ -283,8 +285,8 @@ export default function Page() {
                 style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
                 className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm uppercase tracking-widest"
               >
-                <div onClick={() => router.push("/work")} className="cursor-pointer hover:opacity-70 text-black">Explore work →</div>
-                <div onClick={() => router.push("/contact")} className="cursor-pointer hover:opacity-70 text-black">Get in touch →</div>
+                <div onClick={() => navigate("/work")} className="cursor-pointer hover:opacity-70 text-black">Explore work →</div>
+                <div onClick={() => navigate("/contact")} className="cursor-pointer hover:opacity-70 text-black">Get in touch →</div>
               </div>
             </div>
           </div>

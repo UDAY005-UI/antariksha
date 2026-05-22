@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useNavigate } from "../components/UseNavigate";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,10 +92,10 @@ const HoverRow = memo(function HoverRow({
 
 const tuhinRows: RowItem[] = [
     { title: "Tuhin Adhikary", subtitle: "Founder", maskTitle: "The Eye", maskSubtitle: "Visionary behind" },
-    { title: "Video Editing", subtitle: "Protonn Media", maskTitle: "Cutting Frames,", maskSubtitle: "Crafting Stories" },
-    { title: "Cinematography", subtitle: "Creative Work", maskTitle: "Eyes Behind the Lens", maskSubtitle: "Light, Shadow, Motion" },
-    { title: "Visual Storytelling", subtitle: "Freelance", maskTitle: "Every Frame Speaks", maskSubtitle: "Without a Word" },
-    { title: "Content Creation", subtitle: "Social Media", maskTitle: "Scroll-Stopping Work", maskSubtitle: "Made to Be Felt" },
+    { title: "Video Editing", subtitle: "Crafting seamless visual flow", maskTitle: "Visual Rhythm", maskSubtitle: "Balancing pacing, emotion, and impact" },
+    { title: "Cinematography", subtitle: "Capturing stories through visuals", maskTitle: "Visual Direction", maskSubtitle: "Shaping mood with light and framing" },
+    { title: "Visual Storytelling", subtitle: "Building narratives through imagery", maskTitle: "Narrative Design", maskSubtitle: "Turning moments into cinematic expression" },
+    { title: "Content Creation", subtitle: "Designing engaging digital content", maskTitle: "Digital Storycraft", maskSubtitle: "Creating visuals meant to connect and perform" },
 ];
 
 const annyeshaRows: RowItem[] = [
@@ -106,19 +107,69 @@ const annyeshaRows: RowItem[] = [
 ];
 
 const dipangshuRows: RowItem[] = [
-    { title: "Dipangshu Dey", subtitle: "Founding member", maskTitle: "The Strategist", maskSubtitle: "Core member" },
-    { title: "Social Media Managing", subtitle: "Content Strategy", maskTitle: "Growth Through Strategy", maskSubtitle: "Consistent Branding" },
-    { title: "Videography", subtitle: "Visual Storytelling", maskTitle: "Frames with Purpose", maskSubtitle: "Capture Emotion" },
-    { title: "Poster Making", subtitle: "Graphic Design", maskTitle: "Design Beyond Aesthetics", maskSubtitle: "Strong Visual Impact" },
-    { title: "Editing", subtitle: "Post Production", maskTitle: "Cuts with Precision", maskSubtitle: "Enhanced Narratives" },
+  {
+    title: "Dipangshu Dey",
+    subtitle: "Founding member",
+    maskTitle: "The Strategist",
+    maskSubtitle: "Core member"
+  },
+  {
+    title: "Social Media Managing",
+    subtitle: "Building audience engagement",
+    maskTitle: "Growth Through Strategy",
+    maskSubtitle: "Shaping consistency across every platform"
+  },
+  {
+    title: "Videography",
+    subtitle: "Capturing stories through motion",
+    maskTitle: "Frames with Purpose",
+    maskSubtitle: "Turning visuals into lasting impressions"
+  },
+  {
+    title: "Poster Making",
+    subtitle: "Designing impactful visuals",
+    maskTitle: "Design Beyond Aesthetics",
+    maskSubtitle: "Creating graphics that communicate instantly"
+  },
+  {
+    title: "Editing",
+    subtitle: "Refining visual narratives",
+    maskTitle: "Cuts with Precision",
+    maskSubtitle: "Enhancing rhythm, clarity, and emotion"
+  },
 ];
 
 const udayRows: RowItem[] = [
-    { title: "Uday Senapati", subtitle: "Founding member", maskTitle: "The Architect", maskSubtitle: "Core member" },
-    { title: "Modern Web Experiences", subtitle: "Interactive Digital Presence", maskTitle: "Experiences that Engage", maskSubtitle: "Built for Modern Brands" },
-    { title: "Web Development", subtitle: "Full Stack Solutions", maskTitle: "Code with Purpose", maskSubtitle: "Scalable and Reliable Systems" },
-    { title: "UI/UX Design", subtitle: "User-Centered Interfaces", maskTitle: "Design that Connects", maskSubtitle: "Clean and Intuitive Experiences" },
-    { title: "Digital Branding", subtitle: "Visual Identity Systems", maskTitle: "Brands with Presence", maskSubtitle: "Built to Stand Out" },
+  {
+    title: "Uday Senapati",
+    subtitle: "Founding member",
+    maskTitle: "The Architect",
+    maskSubtitle: "Core member"
+  },
+  {
+    title: "Modern Web Experiences",
+    subtitle: "Creating immersive digital interaction",
+    maskTitle: "Experiences that Engage",
+    maskSubtitle: "Blending motion, design, and functionality"
+  },
+  {
+    title: "Web Development",
+    subtitle: "Building scalable web systems",
+    maskTitle: "Code with Purpose",
+    maskSubtitle: "Engineered for performance and reliability"
+  },
+  {
+    title: "UI/UX Design",
+    subtitle: "Designing intuitive user journeys",
+    maskTitle: "Design that Connects",
+    maskSubtitle: "Interfaces shaped around human interaction"
+  },
+  {
+    title: "Digital Branding",
+    subtitle: "Crafting modern brand identity",
+    maskTitle: "Brands with Presence",
+    maskSubtitle: "Visual systems built to leave impact"
+  },
 ];
 
 export default function Team() {
@@ -231,7 +282,8 @@ export default function Team() {
     }
 
     const contactInnerCls = "relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20";
-
+    const navigate = useNavigate();
+    
     return (
         <main>
             <SmoothScroll />
@@ -416,14 +468,14 @@ export default function Team() {
                             className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm uppercase tracking-widest"
                         >
                             <div
-                                onClick={() => router.push("/work")}
+                                onClick={() => navigate("/work")}
                                 className="cta-link cursor-pointer hover:opacity-70 transition-opacity duration-300"
                                 style={{ opacity: 0, transform: "translateY(24px)" }}
                             >
                                 See our work →
                             </div>
                             <div
-                                onClick={() => router.push("/contact")}
+                                onClick={() => navigate("/contact")}
                                 className="cta-link cursor-pointer hover:opacity-70 transition-opacity duration-300"
                                 style={{ opacity: 0, transform: "translateY(24px)" }}
                             >
@@ -449,8 +501,8 @@ export default function Team() {
                                 style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
                                 className="flex flex-col sm:flex-row gap-4 sm:gap-8 text-sm uppercase tracking-widest"
                             >
-                                <div onClick={() => router.push("/work")} className="cursor-pointer hover:opacity-70 text-black">Explore work →</div>
-                                <div onClick={() => router.push("/contact")} className="cursor-pointer hover:opacity-70 text-black">Get in touch →</div>
+                                <div onClick={() => navigate("/work")} className="cursor-pointer hover:opacity-70 text-black">Explore work →</div>
+                                <div onClick={() => navigate("/contact")} className="cursor-pointer hover:opacity-70 text-black">Get in touch →</div>
                             </div>
                         </div>
                     </div>
