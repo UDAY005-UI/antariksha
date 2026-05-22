@@ -4,6 +4,7 @@ import SmoothScroll from "../components/SmoothScroll";
 import StackScroll from "../components/StackScroll";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Image from "next/image";
 
 export default function Page() {
   const maskedHero = useRef<HTMLDivElement>(null);
@@ -35,12 +36,22 @@ export default function Page() {
       <StackScroll>
 
         <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay muted loop playsInline preload="auto"
-          >
-            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
-          </video>
+              <Image
+                  src="/team.png"
+                  alt="members"
+                  fill
+                  priority
+                  className="hidden md:block -z-10 object-cover object-[center_10%]"
+              />
+          
+              {/* Mobile Image */}
+              <Image
+                  src="/t.png"
+                  alt="member"
+                  fill
+                  priority
+                  className="block md:hidden -z-10 object-cover"
+              />
           <div className="absolute inset-0 bg-black/70" />
 
           <div className="relative z-10 flex h-full items-center justify-center px-4 md:px-35">

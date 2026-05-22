@@ -122,29 +122,29 @@ const udayRows: RowItem[] = [
 ];
 
 export default function Team() {
-    const maskedHero    = useRef<HTMLDivElement>(null);
+    const maskedHero = useRef<HTMLDivElement>(null);
     const maskedContact = useRef<HTMLDivElement>(null);
-    const stackRef      = useRef<HTMLDivElement>(null);
-    const router        = useRouter();
+    const stackRef = useRef<HTMLDivElement>(null);
+    const router = useRouter();
 
     const firedRef = useRef([false, false, false, false, false, false]);
 
-    const tuhinRowsRef     = useRef<HTMLDivElement>(null);
-    const annyeshaRowsRef  = useRef<HTMLDivElement>(null);
+    const tuhinRowsRef = useRef<HTMLDivElement>(null);
+    const annyeshaRowsRef = useRef<HTMLDivElement>(null);
     const dipangshuRowsRef = useRef<HTMLDivElement>(null);
-    const dishaRowsRef     = useRef<HTMLDivElement>(null);
-    const udayRowsRef      = useRef<HTMLDivElement>(null);
+    const dishaRowsRef = useRef<HTMLDivElement>(null);
+    const udayRowsRef = useRef<HTMLDivElement>(null);
 
-    const tuhinImgRef     = useRef<HTMLImageElement>(null);
-    const annyeshaImgRef  = useRef<HTMLImageElement>(null);
+    const tuhinImgRef = useRef<HTMLImageElement>(null);
+    const annyeshaImgRef = useRef<HTMLImageElement>(null);
     const dipangshuImgRef = useRef<HTMLImageElement>(null);
-    const dishaImgRef     = useRef<HTMLImageElement>(null);
-    const udayImgRef      = useRef<HTMLImageElement>(null);
+    const dishaImgRef = useRef<HTMLImageElement>(null);
+    const udayImgRef = useRef<HTMLImageElement>(null);
 
-    const contactAccent  = useRef<HTMLDivElement>(null);
-    const contactTag     = useRef<HTMLParagraphElement>(null);
+    const contactAccent = useRef<HTMLDivElement>(null);
+    const contactTag = useRef<HTMLParagraphElement>(null);
     const contactHeading = useRef<HTMLHeadingElement>(null);
-    const contactLinks   = useRef<HTMLDivElement>(null);
+    const contactLinks = useRef<HTMLDivElement>(null);
 
     function animatePanel(
         rowsEl: HTMLDivElement | null,
@@ -237,12 +237,23 @@ export default function Team() {
 
                 {/* ── HERO ── */}
                 <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-                    <video
-                        className="absolute inset-0 w-full h-full object-cover"
-                        autoPlay muted loop playsInline preload="auto"
-                    >
-                        <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
-                    </video>
+                    <Image
+                        src="/members.png"
+                        alt="members"
+                        fill
+                        priority
+                        className="hidden md:block -z-10 object-cover object-[center_30%]"
+                    />
+
+                    {/* Mobile Image */}
+                    <Image
+                        src="/member.png"
+                        alt="member"
+                        fill
+                        priority
+                        className="block md:hidden -z-10 object-cover"
+                    />
+
                     <div className="absolute inset-0 bg-black/40" />
 
                     <div className="relative z-10 flex h-full items-end justify-center px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
@@ -348,22 +359,22 @@ export default function Team() {
                     </div>
                 </section>
 
-<section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
-    <Image
-        ref={udayImgRef}
-        src="/uday.png" alt="Uday" width={500} height={500}
-        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[65vw] lg:w-160 h-auto"
-        style={{ opacity: 0 }}
-        priority
-    />
-    <div ref={udayRowsRef} className="w-full h-full flex flex-col">
-        {udayRows.map((row) => (
-            <div key={row.title} className="panel-row flex-1 flex flex-col" style={{ opacity: 0 }}>
-                <HoverRow {...row} align="right" />
-            </div>
-        ))}
-    </div>
-</section>
+                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
+                    <Image
+                        ref={udayImgRef}
+                        src="/uday.png" alt="Uday" width={400} height={400}
+                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
+                        style={{ opacity: 0 }}
+                        priority
+                    />
+                    <div ref={udayRowsRef} className="w-full h-full flex flex-col">
+                        {udayRows.map((row) => (
+                            <div key={row.title} className="panel-row flex-1 flex flex-col" style={{ opacity: 0 }}>
+                                <HoverRow {...row} align="right" />
+                            </div>
+                        ))}
+                    </div>
+                </section>
 
                 <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center overflow-hidden">
 

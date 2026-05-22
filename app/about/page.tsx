@@ -6,6 +6,7 @@ import StackScroll from "../components/StackScroll"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -85,12 +86,22 @@ export default function Page() {
         <StackScroll stackRef={stackRef} onScrollProgress={handleScrollProgress}>
 
           <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-            <video
-              className="absolute inset-0 w-full h-full object-cover"
-              autoPlay muted loop playsInline preload="auto"
-            >
-              <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
-            </video>
+            <Image
+                                    src="/about2.png"
+                                    alt="members"
+                                    fill
+                                    priority
+                                    className="hidden md:block -z-10 object-cover object-[center_20%]"
+                                />
+            
+                                {/* Mobile Image */}
+                                <Image
+                                    src="/about.png"
+                                    alt="member"
+                                    fill
+                                    priority
+                                    className="block md:hidden -z-10"
+                                />
             <div className="absolute inset-0 bg-black/40" />
 
             <div className="relative z-10 flex h-full items-end px-8 sm:px-6 md:px-35 pb-20 sm:pb-16 md:pb-14">

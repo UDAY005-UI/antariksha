@@ -6,6 +6,7 @@ import StackScroll from "../components/StackScroll"
 import SmoothScroll from "../components/SmoothScroll"
 import { useRouter } from "next/navigation"
 import gsap from "gsap"
+import Image from "next/image"
 
 type WorkItem = {
   id: number
@@ -184,17 +185,17 @@ export default function Page() {
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState<Dir>(1)
 
-  const portfolioFired  = useRef(false)
+  const portfolioFired = useRef(false)
   const portfolioAccent = useRef<HTMLDivElement>(null)
-  const portfolioTag    = useRef<HTMLParagraphElement>(null)
-  const portfolioCount  = useRef<HTMLParagraphElement>(null)
+  const portfolioTag = useRef<HTMLParagraphElement>(null)
+  const portfolioCount = useRef<HTMLParagraphElement>(null)
 
   // contact refs
-  const contactFired   = useRef(false)
-  const contactAccent  = useRef<HTMLDivElement>(null)
-  const contactTag     = useRef<HTMLDivElement>(null)
+  const contactFired = useRef(false)
+  const contactAccent = useRef<HTMLDivElement>(null)
+  const contactTag = useRef<HTMLDivElement>(null)
   const contactHeading = useRef<HTMLDivElement>(null)
-  const contactLinks   = useRef<HTMLDivElement>(null)
+  const contactLinks = useRef<HTMLDivElement>(null)
 
   function animatePortfolio() {
     if (portfolioFired.current) return
@@ -302,84 +303,105 @@ export default function Page() {
       <StackScroll stackRef={stackRef} onScrollProgress={handleScrollProgress}>
 
         <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-          <video
-            className="absolute inset-0 w-full h-full object-cover"
-            autoPlay muted loop playsInline preload="auto"
-          >
-            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1778490652/enhanced_mtigi5.mp4" type="video/mp4" />
-          </video>
+                              <Image
+                                  src="/work.png"
+                                  alt="members"
+                                  fill
+                                  priority
+                                  className="hidden md:block -z-10 object-cover object-[center_30%]"
+                              />
+          
+                              {/* Mobile Image */}
+                              <Image
+                                  src="/work2.png"
+                                  alt="member"
+                                  fill
+                                  priority
+                                  className="block md:hidden -z-10 object-cover"
+                              />
           <div className="absolute inset-0 bg-black/40" />
 
-          <div className="relative z-10 flex h-full items-end px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
-            <div className="w-full">
-              <motion.h1 data-cursor="expand"
-                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-left mb-2 md:mb-4 w-fit"
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1.0, ease: [0.25, 0.1, 0, 1] }}
-              >
-                Our Work
-              </motion.h1>
+          <div className="relative z-10 flex h-full px-8 md:px-35 pb-20 sm:pb-16 md:pb-14 items-end">
+            <div className="w-full h-full flex flex-col justify-between sm:flex-none sm:h-auto sm:justify-normal sm:block">
 
-              <div className="flex justify-start">
-                {"SHOT".split("").map((l, i) => (
-                  <div key={i} className="overflow-hidden">
-                    <motion.span data-cursor="expand"
-                      className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
-                      initial={{ y: "100%" }}
-                      animate={{ y: 0 }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.1 + i * 0.07 }}
-                    >
-                      {l}
-                    </motion.span>
-                  </div>
-                ))}
+              <div className="pt-24 sm:pt-0">
+                <motion.h1
+                  data-cursor="expand"
+                  className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-left mb-2 md:mb-4 w-fit"
+                  initial={{ y: 30, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 1.0, ease: [0.25, 0.1, 0, 1] }}
+                >
+                  Our Work
+                </motion.h1>
+
+                <div className="flex justify-start">
+                  {"SHOT".split("").map((l, i) => (
+                    <div key={i} className="overflow-hidden">
+                      <motion.span
+                        data-cursor="expand"
+                        className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
+                        initial={{ y: "100%" }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.1 + i * 0.07 }}
+                      >
+                        {l}
+                      </motion.span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex justify-start">
+                  {"IN".split("").map((l, i) => (
+                    <div key={i} className="overflow-hidden">
+                      <motion.span
+                        data-cursor="expand"
+                        className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
+                        initial={{ y: "100%" }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.38 + i * 0.07 }}
+                      >
+                        {l}
+                      </motion.span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex justify-start mb-3 md:mb-0">
-                {"IN".split("").map((l, i) => (
-                  <div key={i} className="overflow-hidden">
-                    <motion.span data-cursor="expand"
-                      className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
-                      initial={{ y: "100%" }}
-                      animate={{ y: 0 }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.38 + i * 0.07 }}
-                    >
-                      {l}
-                    </motion.span>
-                  </div>
-                ))}
+              <div className="pb-3 sm:pb-0 sm:mt-0">
+                <div className="flex justify-end">
+                  {"GOLDEN".split("").map((l, i, arr) => (
+                    <div key={i} className="overflow-hidden">
+                      <motion.span
+                        data-cursor="expand"
+                        className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
+                        initial={{ y: "100%" }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.55 + (arr.length - 1 - i) * 0.07 }}
+                      >
+                        {l}
+                      </motion.span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex justify-end">
+                  {"HOUR".split("").map((l, i, arr) => (
+                    <div key={i} className="overflow-hidden">
+                      <motion.span
+                        data-cursor="expand"
+                        className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
+                        initial={{ y: "100%" }}
+                        animate={{ y: 0 }}
+                        transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.9 + (arr.length - 1 - i) * 0.07 }}
+                      >
+                        {l}
+                      </motion.span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex justify-end">
-                {"GOLDEN".split("").map((l, i, arr) => (
-                  <div key={i} className="overflow-hidden">
-                    <motion.span data-cursor="expand"
-                      className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
-                      initial={{ y: "100%" }}
-                      animate={{ y: 0 }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.55 + (arr.length - 1 - i) * 0.07 }}
-                    >
-                      {l}
-                    </motion.span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex justify-end">
-                {"HOUR".split("").map((l, i, arr) => (
-                  <div key={i} className="overflow-hidden">
-                    <motion.span data-cursor="expand"
-                      className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold opacity-80 leading-none"
-                      initial={{ y: "100%" }}
-                      animate={{ y: 0 }}
-                      transition={{ duration: 0.6, ease: [0.25, 0.1, 0, 1], delay: 0.9 + (arr.length - 1 - i) * 0.07 }}
-                    >
-                      {l}
-                    </motion.span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
 
