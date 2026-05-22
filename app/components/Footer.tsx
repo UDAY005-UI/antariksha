@@ -144,7 +144,7 @@ function SpotlightText({ children }: { children: string }) {
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#0b0b0b] px-10 py-16 md:px-20 md:py-24 lg:px-60 lg:py-32">
+    <footer className="w-full bg-[#0b0b0b] px-10 py-8 md:px-20 md:py-12 lg:px-60 lg:py-18">
       <div className="flex flex-col items-center md:items-start md:flex-row w-full gap-12 md:gap-0">
 
         <div className="w-full md:flex-1 flex flex-col items-center md:items-start text-center md:text-left">
@@ -167,8 +167,25 @@ export default function Footer() {
             <HoverLink label="antarikshathe@gmail.com" maskLabel="Drop us a line →" small href="mailto:antarikshathe@gmail.com" />
           </div>
           <div className="w-full max-w-xs md:max-w-none" data-cursor="none">
-            <p className="text-xs tracking-[0.2em] mb-3 text-center md:text-left">Phone</p>
-            <HoverLink label="+91 97352 81411" maskLabel="Give us a ring →" small href="tel:+919735281411" />
+            <p className="text-xs tracking-[0.2em] mb-3 text-center md:text-left">
+              Phone
+            </p>
+
+            <div className="space-y-2">
+              <HoverLink
+                label="+91 97352 81411"
+                maskLabel="Give us a ring →"
+                small
+                href="tel:+919735281411"
+              />
+
+              <HoverLink
+                label="+91 74394 79293"
+                maskLabel="Let's talk →"
+                small
+                href="tel:+917439479293"
+              />
+            </div>
           </div>
         </div>
 
