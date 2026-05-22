@@ -4,7 +4,6 @@ import SmoothScroll from "../components/SmoothScroll";
 import StackScroll from "../components/StackScroll";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useNavigate } from "../components/UseNavigate";
@@ -107,76 +106,26 @@ const annyeshaRows: RowItem[] = [
 ];
 
 const dipangshuRows: RowItem[] = [
-  {
-    title: "Dipangshu Dey",
-    subtitle: "Founding member",
-    maskTitle: "The Strategist",
-    maskSubtitle: "Core member"
-  },
-  {
-    title: "Social Media Managing",
-    subtitle: "Building audience engagement",
-    maskTitle: "Growth Through Strategy",
-    maskSubtitle: "Shaping consistency across every platform"
-  },
-  {
-    title: "Videography",
-    subtitle: "Capturing stories through motion",
-    maskTitle: "Frames with Purpose",
-    maskSubtitle: "Turning visuals into lasting impressions"
-  },
-  {
-    title: "Poster Making",
-    subtitle: "Designing impactful visuals",
-    maskTitle: "Design Beyond Aesthetics",
-    maskSubtitle: "Creating graphics that communicate instantly"
-  },
-  {
-    title: "Editing",
-    subtitle: "Refining visual narratives",
-    maskTitle: "Cuts with Precision",
-    maskSubtitle: "Enhancing rhythm, clarity, and emotion"
-  },
+    { title: "Dipangshu Dey", subtitle: "Founding member", maskTitle: "The Strategist", maskSubtitle: "Core member" },
+    { title: "Social Media Managing", subtitle: "Building audience engagement", maskTitle: "Growth Through Strategy", maskSubtitle: "Shaping consistency across every platform" },
+    { title: "Videography", subtitle: "Capturing stories through motion", maskTitle: "Frames with Purpose", maskSubtitle: "Turning visuals into lasting impressions" },
+    { title: "Poster Making", subtitle: "Designing impactful visuals", maskTitle: "Design Beyond Aesthetics", maskSubtitle: "Creating graphics that communicate instantly" },
+    { title: "Editing", subtitle: "Refining visual narratives", maskTitle: "Cuts with Precision", maskSubtitle: "Enhancing rhythm, clarity, and emotion" },
 ];
 
 const udayRows: RowItem[] = [
-  {
-    title: "Uday Senapati",
-    subtitle: "Founding member",
-    maskTitle: "The Architect",
-    maskSubtitle: "Core member"
-  },
-  {
-    title: "Modern Web Experiences",
-    subtitle: "Creating immersive digital interaction",
-    maskTitle: "Experiences that Engage",
-    maskSubtitle: "Blending motion, design, and functionality"
-  },
-  {
-    title: "Web Development",
-    subtitle: "Building scalable web systems",
-    maskTitle: "Code with Purpose",
-    maskSubtitle: "Engineered for performance and reliability"
-  },
-  {
-    title: "UI/UX Design",
-    subtitle: "Designing intuitive user journeys",
-    maskTitle: "Design that Connects",
-    maskSubtitle: "Interfaces shaped around human interaction"
-  },
-  {
-    title: "Digital Branding",
-    subtitle: "Crafting modern brand identity",
-    maskTitle: "Brands with Presence",
-    maskSubtitle: "Visual systems built to leave impact"
-  },
+    { title: "Uday Senapati", subtitle: "Founding member", maskTitle: "The Architect", maskSubtitle: "Core member" },
+    { title: "Modern Web Experiences", subtitle: "Creating immersive digital interaction", maskTitle: "Experiences that Engage", maskSubtitle: "Blending motion, design, and functionality" },
+    { title: "Web Development", subtitle: "Building scalable web systems", maskTitle: "Code with Purpose", maskSubtitle: "Engineered for performance and reliability" },
+    { title: "UI/UX Design", subtitle: "Designing intuitive user journeys", maskTitle: "Design that Connects", maskSubtitle: "Interfaces shaped around human interaction" },
+    { title: "Digital Branding", subtitle: "Crafting modern brand identity", maskTitle: "Brands with Presence", maskSubtitle: "Visual systems built to leave impact" },
 ];
 
 export default function Team() {
     const maskedHero = useRef<HTMLDivElement>(null);
     const maskedContact = useRef<HTMLDivElement>(null);
     const stackRef = useRef<HTMLDivElement>(null);
-    const router = useRouter();
+    const navigate = useNavigate();
 
     const firedRef = useRef([false, false, false, false, false]);
 
@@ -216,7 +165,7 @@ export default function Team() {
             );
         }
 
-        rows.forEach(r => { (r as HTMLElement).style.willChange = "transform, opacity"; });
+        rows.forEach(r => { r.style.willChange = "transform, opacity"; });
 
         gsap.fromTo(rows,
             { y: 50, opacity: 0 },
@@ -227,7 +176,7 @@ export default function Team() {
                 ease: "power4.out",
                 stagger: { each: 0.22, from: "start" },
                 onComplete: () => {
-                    rows.forEach(r => { (r as HTMLElement).style.willChange = "auto"; });
+                    rows.forEach(r => { r.style.willChange = "auto"; });
                 },
             }
         );
@@ -282,8 +231,7 @@ export default function Team() {
     }
 
     const contactInnerCls = "relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-16 xl:px-40 text-center w-full pt-16 sm:pt-20";
-    const navigate = useNavigate();
-    
+
     return (
         <main>
             <SmoothScroll />
@@ -305,9 +253,7 @@ export default function Team() {
                         priority
                         className="block md:hidden -z-10 object-cover"
                     />
-
                     <div className="absolute inset-0 bg-black/40" />
-
                     <div className="relative z-10 flex h-full items-end justify-center px-8 md:px-35 pb-20 sm:pb-16 md:pb-14">
                         <div data-cursor="expand" className="inline-flex flex-col">
                             <motion.p
@@ -335,7 +281,6 @@ export default function Team() {
                             </div>
                         </div>
                     </div>
-
                     <div
                         ref={maskedHero}
                         className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end justify-center px-8 md:px-35 pb-20 sm:pb-16 md:pb-14"
@@ -387,6 +332,7 @@ export default function Team() {
                         alt="Annyesha"
                         width={400}
                         height={400}
+                        loading="lazy"
                         className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
                         style={{ opacity: 0 }}
                     />
@@ -406,6 +352,7 @@ export default function Team() {
                         alt="Dipangshu"
                         width={400}
                         height={400}
+                        loading="lazy"
                         className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 pointer-events-none w-90 lg:w-100 h-auto"
                         style={{ opacity: 0 }}
                     />
@@ -425,6 +372,7 @@ export default function Team() {
                         alt="Uday"
                         width={400}
                         height={400}
+                        loading="lazy"
                         className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
                         style={{ opacity: 0 }}
                     />
