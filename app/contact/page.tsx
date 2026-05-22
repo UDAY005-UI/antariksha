@@ -117,7 +117,7 @@ export default function Page() {
               </div>
 
               <p className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-semibold text-black opacity-70 mt-1 sm:mt-2 text-right">
-                Let&apos;s Make It Real
+                Reach Out · Build Something
               </p>
 
             </div>

@@ -100,7 +100,7 @@ export default function Page() {
           <div className="relative z-10 flex h-full items-center justify-center px-6 text-center">
             <div data-cursor="expand">
               <motion.h1
-                className="text-sm sm:text-base md:text-lg font-semibold tracking-widest"
+                className="text-[10px] sm:text-xs font-semibold tracking-widest"
                 initial={{ y: 60, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
@@ -139,7 +139,7 @@ export default function Page() {
           >
             <div>
               <motion.h1
-                className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest"
+                className="text-[10px] sm:text-xs font-semibold text-black tracking-widest"
                 initial={{ y: 60, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1.6, ease: [0.25, 0.1, 0, 1] }}
@@ -147,7 +147,7 @@ export default function Page() {
                 ANTARIKSHA
               </motion.h1>
               <div className="mt-4 leading-none">
-                {["NO", "BULLSHIT", "JUST", "RESULTS"].map((word, wi) => (
+                {["STORIES", "THAT", "SOUND", "HUMAN"].map((word, wi) => (
                   <div key={word} className="flex justify-center">
                     {word.split("").map((letter, li) => (
                       <div key={li} className="overflow-hidden">

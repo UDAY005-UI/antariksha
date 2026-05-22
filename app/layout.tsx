@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import Cursor from "./components/Cursor";
 import { AudioProvider } from "./components/Audio";
 import NextTopLoader from 'nextjs-toploader'
+import { TransitionProvider } from "./components/TransitionContext";
+import PageTransition from "./components/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,25 +30,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html
-        lang="en"
-        className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-      >
-        <body className="min-h-full flex flex-col">
-          <NextTopLoader
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <NextTopLoader
           color="#f97316"
           height={3}
           showSpinner={false}
         />
-          <Cursor />
-          <AudioProvider>
+        <Cursor />
+        <AudioProvider>
+          <TransitionProvider>
+            <PageTransition />
             <Navbar />
-          {children}
-          <div style={{ marginTop: '-2px', position: 'relative', zIndex: 30 }}>
-  <Footer />
-</div>
-          </AudioProvider>
-          </body>
-      </html>
+            {children}
+            <div style={{ marginTop: '-2px', position: 'relative', zIndex: 30 }}>
+              <Footer />
+            </div>
+          </TransitionProvider>
+        </AudioProvider>
+      </body>
+    </html>
   );
 }

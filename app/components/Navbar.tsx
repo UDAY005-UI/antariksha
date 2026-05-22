@@ -1,12 +1,12 @@
 'use client';
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { useState, useEffect, useRef } from "react"
 import Logo from "./Logo";
 import { YouTubeIcon } from "./Yt";
-import { FacebookIcon } from "./Fb";
 import { InstagramIcon } from "./Insta";
 import { useAudio } from "./Audio";
 import Link from "next/link";
+import { useNavigate } from "./UseNavigate";
 
 function SlideText({ label }: { label: string }) {
   const [hovered, setHovered] = useState(false);
@@ -127,8 +127,8 @@ function SoundToggle() {
 }
 
 export default function Navbar() {
-  const router = useRouter();
   const pathname = usePathname();
+  const navigate = useNavigate();
 
   const links = [
     { label: "Home", path: "/" },
@@ -145,7 +145,7 @@ export default function Navbar() {
     >
 
       <div className="flex flex-col justify-between h-full pointer-events-auto w-18 md:w-fit lg:w-fit">
-        <div data-cursor="none" onClick={() => router.push("/")} className="scale-75 origin-top-left md:scale-100">
+        <div data-cursor="none" onClick={() => navigate("/")} className="scale-75 origin-top-left md:scale-100">
           <Logo />
         </div>
         <div data-cursor="none" className="flex flex-col gap-2 lg:gap-4 w-fit">
@@ -160,10 +160,9 @@ export default function Navbar() {
             <div
               key={label}
               data-cursor="none"
-              className={`font-bold cursor-pointer text-xs sm:text-sm lg:text-base transition-colors duration-300 ${pathname === path ? "text-[#847353]" : ""
-                }`}
+              className={`font-bold cursor-pointer text-xs sm:text-sm lg:text-base transition-colors duration-300 ${pathname === path ? "text-[#847353]" : ""}`}
               style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
-              onClick={() => router.push(path)}
+              onClick={() => navigate(path)}
             >
               <SlideText label={label} />
             </div>

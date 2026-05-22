@@ -17,17 +17,17 @@ export default function Page() {
   const stackRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
 
-  const aboutFired   = useRef(false)
+  const aboutFired = useRef(false)
   const contactFired = useRef(false)
 
-  const aboutAccent  = useRef<HTMLDivElement>(null)
-  const aboutTag     = useRef<HTMLParagraphElement>(null)
+  const aboutAccent = useRef<HTMLDivElement>(null)
+  const aboutTag = useRef<HTMLParagraphElement>(null)
   const aboutHeading = useRef<HTMLHeadingElement>(null)
 
-  const contactAccent  = useRef<HTMLDivElement>(null)
-  const contactTag     = useRef<HTMLDivElement>(null)
+  const contactAccent = useRef<HTMLDivElement>(null)
+  const contactTag = useRef<HTMLDivElement>(null)
   const contactHeading = useRef<HTMLDivElement>(null)
-  const contactLinks   = useRef<HTMLDivElement>(null)
+  const contactLinks = useRef<HTMLDivElement>(null)
 
   function animateAbout() {
     if (aboutFired.current) return
@@ -87,27 +87,27 @@ export default function Page() {
 
           <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
             <Image
-                                    src="/about2.png"
-                                    alt="members"
-                                    fill
-                                    priority
-                                    className="hidden md:block -z-10 object-cover object-[center_20%]"
-                                />
-            
-                                {/* Mobile Image */}
-                                <Image
-                                    src="/about.png"
-                                    alt="member"
-                                    fill
-                                    priority
-                                    className="block md:hidden -z-10"
-                                />
+              src="/about2.png"
+              alt="members"
+              fill
+              priority
+              className="hidden md:block -z-10 object-cover object-[center_20%]"
+            />
+
+            {/* Mobile Image */}
+            <Image
+              src="/about.png"
+              alt="member"
+              fill
+              priority
+              className="block md:hidden -z-10"
+            />
             <div className="absolute inset-0 bg-black/40" />
 
             <div className="relative z-10 flex h-full items-end px-8 sm:px-6 md:px-35 pb-20 sm:pb-16 md:pb-14">
               <div className="w-full flex flex-col">
                 <motion.p data-cursor="expand"
-                  className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-2 sm:mb-3 md:mb-5 opacity-70 text-left w-fit"
+                  className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase mb-2 sm:mb-3 md:mb-5 opacity-70 text-left w-fit"
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 1.4, ease: [0.25, 0.1, 0, 1] }}
@@ -155,17 +155,17 @@ export default function Page() {
               className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end px-8 sm:px-6 md:px-35 pb-20 sm:pb-16 md:pb-14"
             >
               <div className="w-full">
-                <p className="text-[10px] sm:text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-2 sm:mb-3 md:mb-5 text-black opacity-70 text-left">
+                <p className="text-[10px] sm:text-xs font-semibold tracking-[0.2em] uppercase mb-2 sm:mb-3 md:mb-5 text-black opacity-70 text-left">
                   The Way We Work
                 </p>
                 <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none text-black text-left mb-2 sm:mb-1 md:mb-0">
-                  FROM
+                  WHY
                 </p>
                 <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none text-black text-center mb-2 sm:mb-1 md:mb-0">
-                  THOUGHT TO
+                  BRANDS
                 </p>
                 <p className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-none text-black text-right">
-                  FRAME
+                  STAY
                 </p>
               </div>
             </div>

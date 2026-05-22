@@ -327,7 +327,7 @@ export default function Page() {
               <div className="pt-24 sm:pt-0">
                 <motion.h1
                   data-cursor="expand"
-                  className="text-sm sm:text-base md:text-lg font-semibold tracking-widest text-left mb-2 md:mb-4 w-fit"
+                  className="text-[10px] sm:text-xs font-semibold tracking-widest text-left mb-2 md:mb-4 w-fit"
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ duration: 1.0, ease: [0.25, 0.1, 0, 1] }}
@@ -410,26 +410,26 @@ export default function Page() {
             className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-end px-8 md:px-35 pb-20 sm:pb-16 md:pb-14"
           >
             <div className="w-full">
-              <h1 className="text-sm sm:text-base md:text-lg font-semibold text-black tracking-widest text-left mb-2 md:mb-4">
+              <h1 className="text-[10px] sm:text-xs font-semibold text-black tracking-widest text-left mb-2 md:mb-4">
                 The Craft
               </h1>
               <div className="flex justify-start">
-                {"LIGHT".split("").map((l, i) => (
+                {"SEEN".split("").map((l, i) => (
                   <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
                 ))}
               </div>
               <div className="flex justify-start mb-3 md:mb-0">
-                {"YEARS".split("").map((l, i) => (
-                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
-                ))}
-              </div>
-              <div className="flex justify-end">
                 {"IN".split("").map((l, i) => (
                   <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
                 ))}
               </div>
               <div className="flex justify-end">
-                {"MAKING".split("").map((l, i) => (
+                {"MOTION".split("").map((l, i) => (
+                  <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
+                ))}
+              </div>
+              <div className="flex justify-end">
+                {"FIRST".split("").map((l, i) => (
                   <span key={i} className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-black leading-none">{l}</span>
                 ))}
               </div>

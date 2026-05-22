@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from "react";
+import { useRef, useState, memo } from "react";
 import SmoothScroll from "../components/SmoothScroll";
 import StackScroll from "../components/StackScroll";
 import Image from "next/image";
@@ -17,11 +17,11 @@ type RowItem = {
     maskSubtitle: string;
 };
 
-const isMouse = () =>
+const IS_MOUSE =
     typeof window !== "undefined" &&
     window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-function HoverRow({
+const HoverRow = memo(function HoverRow({
     title,
     subtitle,
     maskTitle,
@@ -34,8 +34,8 @@ function HoverRow({
     return (
         <div
             className="flex-1 flex items-center border-b border-neutral-800 relative overflow-hidden cursor-pointer"
-            onMouseEnter={() => { if (isMouse()) setHovered(true); }}
-            onMouseLeave={() => { if (isMouse()) setHovered(false); }}
+            onMouseEnter={() => { if (IS_MOUSE) setHovered(true); }}
+            onMouseLeave={() => { if (IS_MOUSE) setHovered(false); }}
         >
             <div
                 style={{
@@ -87,7 +87,7 @@ function HoverRow({
             </div>
         </div>
     );
-}
+});
 
 const tuhinRows: RowItem[] = [
     { title: "Tuhin Adhikary", subtitle: "Founder", maskTitle: "The Eye", maskSubtitle: "Visionary behind" },
@@ -99,7 +99,7 @@ const tuhinRows: RowItem[] = [
 
 const annyeshaRows: RowItem[] = [
     { title: "Annyesha Saha", subtitle: "Founding member", maskTitle: "The Voice", maskSubtitle: "Core member" },
-    { title: "Agency representative", subtitle: "Representing the agency with professionalism and clarity.", maskTitle: "Brand representation", maskSubtitle: "Reflecting the agency’s identity and vision" },
+    { title: "Agency representative", subtitle: "Representing the agency with professionalism and clarity.", maskTitle: "Brand representation", maskSubtitle: "Reflecting the agency's identity and vision" },
     { title: "Public relations", subtitle: "Building strong public image and meaningful connections", maskTitle: "Media relations", maskSubtitle: "Building image and audience trust" },
     { title: "Communication and outreach lead", subtitle: "Leading engagement, collaborations, and audience outreach", maskTitle: "Engagement and outreach", maskSubtitle: "Creating connections and expanding reach" },
     { title: "Coordination and planning", subtitle: "Managing schedules, workflows, and seamless execution", maskTitle: "Strategic coordination", maskSubtitle: "Managing flow, timelines, and execution" },
@@ -127,18 +127,16 @@ export default function Team() {
     const stackRef = useRef<HTMLDivElement>(null);
     const router = useRouter();
 
-    const firedRef = useRef([false, false, false, false, false, false]);
+    const firedRef = useRef([false, false, false, false, false]);
 
     const tuhinRowsRef = useRef<HTMLDivElement>(null);
     const annyeshaRowsRef = useRef<HTMLDivElement>(null);
     const dipangshuRowsRef = useRef<HTMLDivElement>(null);
-    const dishaRowsRef = useRef<HTMLDivElement>(null);
     const udayRowsRef = useRef<HTMLDivElement>(null);
 
     const tuhinImgRef = useRef<HTMLImageElement>(null);
     const annyeshaImgRef = useRef<HTMLImageElement>(null);
     const dipangshuImgRef = useRef<HTMLImageElement>(null);
-    const dishaImgRef = useRef<HTMLImageElement>(null);
     const udayImgRef = useRef<HTMLImageElement>(null);
 
     const contactAccent = useRef<HTMLDivElement>(null);
@@ -154,11 +152,20 @@ export default function Team() {
         const rows = rowsEl.querySelectorAll<HTMLElement>(".panel-row");
 
         if (imgEl) {
+            imgEl.style.willChange = "transform, opacity";
             gsap.fromTo(imgEl,
                 { y: 80, opacity: 0 },
-                { y: 0, opacity: 0.5, duration: 2.2, ease: "power3.out" }
+                {
+                    y: 0,
+                    opacity: 0.5,
+                    duration: 2.2,
+                    ease: "power3.out",
+                    onComplete: () => { imgEl.style.willChange = "auto"; },
+                }
             );
         }
+
+        rows.forEach(r => { (r as HTMLElement).style.willChange = "transform, opacity"; });
 
         gsap.fromTo(rows,
             { y: 50, opacity: 0 },
@@ -167,9 +174,9 @@ export default function Team() {
                 opacity: 1,
                 duration: 1.6,
                 ease: "power4.out",
-                stagger: {
-                    each: 0.22,
-                    from: "start",
+                stagger: { each: 0.22, from: "start" },
+                onComplete: () => {
+                    rows.forEach(r => { (r as HTMLElement).style.willChange = "auto"; });
                 },
             }
         );
@@ -198,7 +205,7 @@ export default function Team() {
     }
 
     function handleScrollProgress(progress: number) {
-        const step = 1 / 6;
+        const step = 1 / 5;
         const fired = firedRef.current;
 
         if (!fired[0] && progress >= step * 0.85) {
@@ -215,14 +222,10 @@ export default function Team() {
         }
         if (!fired[3] && progress >= step * 3.85) {
             fired[3] = true;
-            animatePanel(dishaRowsRef.current, dishaImgRef.current);
+            animatePanel(udayRowsRef.current, udayImgRef.current);
         }
         if (!fired[4] && progress >= step * 4.85) {
             fired[4] = true;
-            animatePanel(udayRowsRef.current, udayImgRef.current);
-        }
-        if (!fired[5] && progress >= step * 5.85) {
-            fired[5] = true;
             animateContact();
         }
     }
@@ -235,7 +238,6 @@ export default function Team() {
 
             <StackScroll stackRef={stackRef} onScrollProgress={handleScrollProgress}>
 
-                {/* ── HERO ── */}
                 <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
                     <Image
                         src="/members.png"
@@ -244,8 +246,6 @@ export default function Team() {
                         priority
                         className="hidden md:block -z-10 object-cover object-[center_30%]"
                     />
-
-                    {/* Mobile Image */}
                     <Image
                         src="/member.png"
                         alt="member"
@@ -311,10 +311,13 @@ export default function Team() {
                 <section data-cursor="none" className="bg-[#141414] stack-panel absolute inset-0 h-screen w-full flex flex-col overflow-hidden">
                     <Image
                         ref={tuhinImgRef}
-                        src="/tuhin.png" alt="Tuhin" width={500} height={500}
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-90 lg:w-[500px] h-auto"
-                        style={{ opacity: 0 }}
+                        src="/tuhin.png"
+                        alt="Tuhin"
+                        width={500}
+                        height={500}
                         priority
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 pointer-events-none w-90 lg:w-[500px] h-auto"
+                        style={{ opacity: 0 }}
                     />
                     <div ref={tuhinRowsRef} className="w-full h-full flex flex-col">
                         {tuhinRows.map((row) => (
@@ -328,10 +331,12 @@ export default function Team() {
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
                     <Image
                         ref={annyeshaImgRef}
-                        src="/annyesha.png" alt="Annyesha" width={400} height={400}
-                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
+                        src="/annyesha.png"
+                        alt="Annyesha"
+                        width={400}
+                        height={400}
+                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
                         style={{ opacity: 0 }}
-                        priority
                     />
                     <div ref={annyeshaRowsRef} className="w-full h-full flex flex-col">
                         {annyeshaRows.map((row) => (
@@ -345,10 +350,12 @@ export default function Team() {
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
                     <Image
                         ref={dipangshuImgRef}
-                        src="/dipangshu.png" alt="Dipangshu" width={400} height={400}
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 opacity-50 pointer-events-none w-90 lg:w-100 h-auto"
+                        src="/dipangshu.png"
+                        alt="Dipangshu"
+                        width={400}
+                        height={400}
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 pointer-events-none w-90 lg:w-100 h-auto"
                         style={{ opacity: 0 }}
-                        priority
                     />
                     <div ref={dipangshuRowsRef} className="w-full h-full flex flex-col">
                         {dipangshuRows.map((row) => (
@@ -362,10 +369,12 @@ export default function Team() {
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
                     <Image
                         ref={udayImgRef}
-                        src="/uday.png" alt="Uday" width={400} height={400}
-                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 opacity-50 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
+                        src="/uday.png"
+                        alt="Uday"
+                        width={400}
+                        height={400}
+                        className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
                         style={{ opacity: 0 }}
-                        priority
                     />
                     <div ref={udayRowsRef} className="w-full h-full flex flex-col">
                         {udayRows.map((row) => (
@@ -377,7 +386,6 @@ export default function Team() {
                 </section>
 
                 <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center overflow-hidden">
-
                     <div className={contactInnerCls}>
                         <div
                             ref={contactAccent}
