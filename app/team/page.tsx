@@ -29,7 +29,7 @@ const HoverRow = memo(function HoverRow({
     align = "left",
 }: RowItem & { align?: "left" | "right" }) {
     const [hovered, setHovered] = useState(false);
-    const textClass = `w-full ${align === "right" ? "lg:pr-60 lg:pl-[40%] pr-6 pl-6 text-end" : "px-6 lg:px-60"}`;
+    const textClass = `w-full ${align === "right" ? "lg:pr-60 lg:pl-[40%] pr-20 pl-6 text-end" : "pl-20 pr-6 lg:px-60"}`;
 
     return (
         <div

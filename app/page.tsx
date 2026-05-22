@@ -94,7 +94,7 @@ export default function Page() {
             className="absolute inset-0 w-full h-full object-cover z-10 rotate-"
             autoPlay muted loop playsInline preload="auto"
           >
-            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1779429724/Creative_air_fryer_recipes_that_are_packed_with_ideas_people_keep_saving_and_clicking_on_lately_for_ideas_worth_saving_right_now_ja6ty9.mp4" type="video/mp4" />
+            <source src="https://res.cloudinary.com/dthpzuhja/video/upload/v1779457224/Timeline_1_xf8b9p.mov" type="video/mp4" />
           </video>
 
           <div className="absolute inset-0 bg-black/40" />
