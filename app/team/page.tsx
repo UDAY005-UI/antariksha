@@ -113,6 +113,34 @@ const dipangshuRows: RowItem[] = [
     { title: "Editing", subtitle: "Refining visual narratives", maskTitle: "Cuts with Precision", maskSubtitle: "Enhancing rhythm, clarity, and emotion" },
 ];
 
+const dishaRows: RowItem[] = [
+    { title: "Disha Dutta", subtitle: "Founding member", maskTitle: "The Pulse", maskSubtitle: "Core member" },
+    {
+        title: "Video Editing",
+        subtitle: "Crafting polished and engaging visual sequences",
+        maskTitle: "Visual Flow",
+        maskSubtitle: "Refining pacing, transitions, and emotion"
+    },
+    {
+        title: "Team Collaboration",
+        subtitle: "Working effectively within creative environments",
+        maskTitle: "Creative Sync",
+        maskSubtitle: "Aligning ideas, workflow, and execution"
+    },
+    {
+        title: "Content Creation",
+        subtitle: "Producing engaging digital-first media",
+        maskTitle: "Media Craft",
+        maskSubtitle: "Building content designed to connect and perform"
+    },
+    {
+        title: "Creative Communication",
+        subtitle: "Presenting ideas with clarity and impact",
+        maskTitle: "Audience Connect",
+        maskSubtitle: "Translating vision into meaningful interaction"
+    },
+];
+
 const udayRows: RowItem[] = [
     { title: "Uday Senapati", subtitle: "Founding member", maskTitle: "The Architect", maskSubtitle: "Core member" },
     { title: "Modern Web Experiences", subtitle: "Creating immersive digital interaction", maskTitle: "Experiences that Engage", maskSubtitle: "Blending motion, design, and functionality" },
@@ -127,16 +155,18 @@ export default function Team() {
     const stackRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
 
-    const firedRef = useRef([false, false, false, false, false]);
+    const firedRef = useRef([false, false, false, false, false, false]);
 
     const tuhinRowsRef = useRef<HTMLDivElement>(null);
     const annyeshaRowsRef = useRef<HTMLDivElement>(null);
     const dipangshuRowsRef = useRef<HTMLDivElement>(null);
+    const dishaRowsRef = useRef<HTMLDivElement>(null);
     const udayRowsRef = useRef<HTMLDivElement>(null);
 
     const tuhinImgRef = useRef<HTMLImageElement>(null);
     const annyeshaImgRef = useRef<HTMLImageElement>(null);
     const dipangshuImgRef = useRef<HTMLImageElement>(null);
+    const dishaImgRef = useRef<HTMLImageElement>(null);
     const udayImgRef = useRef<HTMLImageElement>(null);
 
     const contactAccent = useRef<HTMLDivElement>(null);
@@ -205,7 +235,7 @@ export default function Team() {
     }
 
     function handleScrollProgress(progress: number) {
-        const step = 1 / 5;
+        const step = 1 / 6;
         const fired = firedRef.current;
 
         if (!fired[0] && progress >= step * 0.85) {
@@ -222,10 +252,14 @@ export default function Team() {
         }
         if (!fired[3] && progress >= step * 3.85) {
             fired[3] = true;
-            animatePanel(udayRowsRef.current, udayImgRef.current);
+            animatePanel(dishaRowsRef.current, dishaImgRef.current);
         }
         if (!fired[4] && progress >= step * 4.85) {
             fired[4] = true;
+            animatePanel(udayRowsRef.current, udayImgRef.current);
+        }
+        if (!fired[5] && progress >= step * 5.85) {
+            fired[5] = true;
             animateContact();
         }
     }
@@ -238,6 +272,7 @@ export default function Team() {
 
             <StackScroll stackRef={stackRef} onScrollProgress={handleScrollProgress}>
 
+                {/* Hero panel */}
                 <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
                     <Image
                         src="/members.png"
@@ -305,6 +340,7 @@ export default function Team() {
                     </div>
                 </section>
 
+                {/* Tuhin panel */}
                 <section data-cursor="none" className="bg-[#141414] stack-panel absolute inset-0 h-screen w-full flex flex-col overflow-hidden">
                     <Image
                         ref={tuhinImgRef}
@@ -325,6 +361,7 @@ export default function Team() {
                     </div>
                 </section>
 
+                {/* Annyesha panel */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
                     <Image
                         ref={annyeshaImgRef}
@@ -345,6 +382,7 @@ export default function Team() {
                     </div>
                 </section>
 
+                {/* Dipangshu panel */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
                     <Image
                         ref={dipangshuImgRef}
@@ -365,19 +403,20 @@ export default function Team() {
                     </div>
                 </section>
 
+                {/* Disha panel */}
                 <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#0f0f0f] flex flex-col overflow-hidden">
                     <Image
-                        ref={udayImgRef}
-                        src="/uday.png"
-                        alt="Uday"
+                        ref={dishaImgRef}
+                        src="/disha.png"
+                        alt="Disha"
                         width={400}
                         height={400}
                         loading="lazy"
                         className="grayscale absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-0 lg:translate-x-0 pointer-events-none w-full sm:w-[55vw] lg:w-140 h-auto"
                         style={{ opacity: 0 }}
                     />
-                    <div ref={udayRowsRef} className="w-full h-full flex flex-col">
-                        {udayRows.map((row) => (
+                    <div ref={dishaRowsRef} className="w-full h-full flex flex-col">
+                        {dishaRows.map((row) => (
                             <div key={row.title} className="panel-row flex-1 flex flex-col" style={{ opacity: 0 }}>
                                 <HoverRow {...row} align="right" />
                             </div>
@@ -385,6 +424,28 @@ export default function Team() {
                     </div>
                 </section>
 
+                {/* Uday panel */}
+                <section data-cursor="none" className="stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex flex-col overflow-hidden">
+                    <Image
+                        ref={udayImgRef}
+                        src="/uday.png"
+                        alt="Uday"
+                        width={400}
+                        height={400}
+                        loading="lazy"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 lg:left-auto lg:translate-x-0 lg:right-0 pointer-events-none w-100 lg:w-150 h-auto"
+                        style={{ opacity: 0 }}
+                    />
+                    <div ref={udayRowsRef} className="w-full h-full flex flex-col">
+                        {udayRows.map((row) => (
+                            <div key={row.title} className="panel-row flex-1 flex flex-col" style={{ opacity: 0 }}>
+                                <HoverRow {...row} align="left" />
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* Contact panel */}
                 <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#0D0C0B] flex items-center overflow-hidden">
                     <div className={contactInnerCls}>
                         <div
