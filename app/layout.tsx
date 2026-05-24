@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Antariksha",
-  description: "Agency beyond the universe",
+  description: "A Creative Media Agency",
 };
 
 export default function RootLayout({
