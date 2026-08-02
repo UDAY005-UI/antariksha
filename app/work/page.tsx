@@ -1,61 +1,17 @@
 "use client"
 
 import { motion, AnimatePresence, type Variants, type Transition } from "framer-motion"
-import { useState, useEffect, useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import StackScroll from "../components/StackScroll"
 import SmoothScroll from "../components/SmoothScroll"
-import { useRouter } from "next/navigation"
-import gsap from "gsap"
 import Image from "next/image"
+import gsap from "gsap"
 import { useNavigate } from "../components/UseNavigate"
+import { brands } from "./data/brand"
 
-type WorkItem = {
-  id: number
-  title: string
-  type: string
-  video: string
-  description: string
-}
-
-const works: WorkItem[] = [
-  {
-    id: 1,
-    title: "COZY CRUMBS",
-    type: "BRAND REEL — 2026",
-    video: "https://res.cloudinary.com/dthpzuhja/video/upload/v1778489915/cozy1_dohodp.mp4",
-    description:
-      "A rapid-cut brand reel for Cozy Crumbs — a homegrown cake and dessert studio based out of Lake Market, Kolkata. Fast edits locked to rhythm, warm tones, close-up textures. Built to sell the feeling before the product.",
-  },
-  {
-    id: 2,
-    title: "COZY CRUMBS",
-    type: "VOICEOVER REEL — 2026",
-    video: "https://res.cloudinary.com/dthpzuhja/video/upload/v1778489944/cozy2_avnonw.mp4",
-    description:
-      "A voiceover-led brand film for Cozy Crumbs — a homegrown cake and dessert studio based out of Lake Market, Kolkata. Slow, deliberate cuts paired with a narrative voice. Built to tell the story behind every bake.",
-  },
-  {
-    id: 3,
-    title: "THE WAFFLE HOUSE",
-    type: "BRAND REEL — 2026",
-    video: "https://res.cloudinary.com/dthpzuhja/video/upload/v1778489906/waffle_hu9qkh.mp4",
-    description:
-      "A rapid-cut brand reel for The Waffle House — a dessert spot serving freshly made waffles with bold toppings and honest flavour. Quick edits, warm textures, and an appetite for the unapologetically indulgent.",
-  },
-  {
-    id: 4,
-    title: "TANDOOR HOUSE",
-    type: "VOICEOVER REEL — 2026",
-    video: "https://res.cloudinary.com/dthpzuhja/video/upload/v1778489939/tandoor_wpqqvu.mp4",
-    description:
-      "A voiceover-led brand film for Tandoor House — a Kolkata institution at Lake Market, Kalighat. Smoky, loud, and unapologetically real.",
-  },
-]
-
-const TOTAL = works.length
 type Dir = 1 | -1
 
-const videoVariants: Variants = {
+const imageVariants: Variants = {
   enter: (dir: Dir) => ({
     x: dir > 0 ? "40%" : "-40%",
     opacity: 0,
@@ -73,27 +29,29 @@ const videoVariants: Variants = {
   }),
 }
 
-const videoEnterTransition: Transition = {
+const imageEnterTransition: Transition = {
   duration: 0.6,
   ease: [0.25, 0.1, 0, 1],
 }
 
-function CarouselCard({
-  item,
+function BrandCarouselCard({
+  brand,
   isActive,
   direction,
   onClick,
 }: {
-  item: WorkItem | null
+  brand: (typeof brands)[number] | null
   isActive: boolean
   direction: Dir
   onClick: () => void
 }) {
+  const [imgError, setImgError] = useState(false)
+
   return (
     <motion.div
       animate={{
         flexGrow: isActive ? 2.4 : 1,
-        opacity: item ? (isActive ? 1 : 0.5) : 0,
+        opacity: brand ? (isActive ? 1 : 0.5) : 0,
         scale: isActive ? 1 : 0.93,
       }}
       transition={{ duration: 0.55, ease: [0.25, 0.1, 0, 1] }}
@@ -101,60 +59,62 @@ function CarouselCard({
       onClick={onClick}
     >
       <AnimatePresence custom={direction} mode="popLayout">
-        {item && (
+        {brand && (
           <motion.div
-            key={item.id}
+            key={brand.id}
             custom={direction}
-            variants={videoVariants}
+            variants={imageVariants}
             initial="enter"
             animate="center"
             exit="exit"
-            transition={videoEnterTransition}
+            transition={imageEnterTransition}
             className="absolute inset-0"
             style={{ willChange: "transform, opacity" }}
           >
-            <video
-              src={item.video}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
+            {!imgError ? (
+              <Image
+                src={brand.coverImage}
+                alt=""
+                fill
+                onError={() => setImgError(true)}
+                className="object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-neutral-800 to-neutral-900 flex items-center justify-center">
+                <span className="text-4xl font-bold text-white/20">{brand.name.charAt(0)}</span>
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
 
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none z-10" />
-      {!isActive && (
-        <div className="absolute inset-0 bg-black/35 pointer-events-none z-10" />
-      )}
+      {!isActive && <div className="absolute inset-0 bg-black/35 pointer-events-none z-10" />}
 
       <AnimatePresence>
-        {isActive && item && (
+        {isActive && brand && (
           <motion.div
-            key={`label-${item.id}`}
+            key={`label-${brand.id}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ delay: 0.22, duration: 0.35, ease: "easeOut" }}
             className="absolute bottom-6 left-0 right-0 px-6 z-20"
           >
-            <p className="text-[10px] tracking-widest uppercase text-white/50 mb-1 text-center">
-              {item.type}
+            <p className="text-[10px] tracking-widest uppercase text-orange-400/80 mb-1 text-center">
+              {brand.works.length} {brand.works.length === 1 ? "Work" : "Works"}
             </p>
             <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white text-center">
-              {item.title}
+              {brand.name}
             </h2>
           </motion.div>
         )}
       </AnimatePresence>
 
       <AnimatePresence>
-        {isActive && item && (
+        {isActive && brand && (
           <motion.div
-            key={`tap-${item.id}`}
+            key={`tap-${brand.id}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -162,170 +122,109 @@ function CarouselCard({
             className="absolute top-5 right-5 z-20"
           >
             <span className="text-[9px] tracking-[0.2em] uppercase text-orange-400 font-medium">
-              Tap to watch
+              Tap to view
             </span>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {!item && (
-        <div className="absolute inset-0 rounded-2xl bg-white/[0.03]" />
-      )}
+      {!brand && <div className="absolute inset-0 rounded-2xl bg-white/[0.03]" />}
     </motion.div>
   )
 }
 
 export default function Page() {
-  const [active, setActive] = useState<WorkItem | null>(null)
-  const modalVideoRef = useRef<HTMLVideoElement>(null)
   const maskedHero = useRef<HTMLDivElement>(null)
   const maskedContact = useRef<HTMLDivElement>(null)
   const stackRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
 
-  const router = useRouter()
-  const [index, setIndex] = useState(0)
-  const [direction, setDirection] = useState<Dir>(1)
+  const gridFired = useRef(false)
+  const gridAccent = useRef<HTMLDivElement>(null)
+  const gridTag = useRef<HTMLParagraphElement>(null)
+  const gridCount = useRef<HTMLParagraphElement>(null)
 
-  const portfolioFired = useRef(false)
-  const portfolioAccent = useRef<HTMLDivElement>(null)
-  const portfolioTag = useRef<HTMLParagraphElement>(null)
-  const portfolioCount = useRef<HTMLParagraphElement>(null)
-
-  // contact refs
   const contactFired = useRef(false)
   const contactAccent = useRef<HTMLDivElement>(null)
   const contactTag = useRef<HTMLDivElement>(null)
   const contactHeading = useRef<HTMLDivElement>(null)
   const contactLinks = useRef<HTMLDivElement>(null)
 
-  function animatePortfolio() {
-    if (portfolioFired.current) return
-    portfolioFired.current = true
+  const TOTAL_BRANDS = brands.length
+  const [brandIndex, setBrandIndex] = useState(0)
+  const [brandDirection, setBrandDirection] = useState<Dir>(1)
 
-    gsap.fromTo(portfolioAccent.current,
-      { scaleX: 0 },
-      { scaleX: 1, duration: 1.2, ease: "expo.out", transformOrigin: "left center" }
-    )
-    gsap.fromTo(portfolioTag.current,
-      { y: 28, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.25 }
-    )
-    gsap.fromTo(portfolioCount.current,
-      { y: 28, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.4 }
-    )
+  const handleBrandNext = () => {
+    if (brandIndex >= TOTAL_BRANDS - 1) return
+    setBrandDirection(1)
+    setBrandIndex((i) => i + 1)
+  }
+
+  const handleBrandPrev = () => {
+    if (brandIndex <= 0) return
+    setBrandDirection(-1)
+    setBrandIndex((i) => i - 1)
+  }
+
+  const brandTouchStartX = useRef<number | null>(null)
+  const onBrandTouchStart = (e: React.TouchEvent) => {
+    brandTouchStartX.current = e.touches[0].clientX
+  }
+  const onBrandTouchEnd = (e: React.TouchEvent) => {
+    if (brandTouchStartX.current === null) return
+    const dx = e.changedTouches[0].clientX - brandTouchStartX.current
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) handleBrandNext()
+      else handleBrandPrev()
+    }
+    brandTouchStartX.current = null
+  }
+
+  const brandSlots = [-1, 0, 1].map((offset) => ({
+    offset,
+    brand: brands[brandIndex + offset] ?? null,
+    isActive: offset === 0,
+  }))
+
+  function animateGrid() {
+    if (gridFired.current) return
+    gridFired.current = true
+
+    gsap.fromTo(gridAccent.current, { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: "expo.out", transformOrigin: "left center" })
+    gsap.fromTo(gridTag.current, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.25 })
+    gsap.fromTo(gridCount.current, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.4 })
   }
 
   function animateContact() {
     if (contactFired.current) return
     contactFired.current = true
 
-    gsap.fromTo(contactAccent.current,
-      { scaleX: 0 },
-      { scaleX: 1, duration: 1.2, ease: "expo.out", transformOrigin: "left center" }
-    )
-    gsap.fromTo(contactTag.current,
-      { y: 28, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.25 }
-    )
-    gsap.fromTo(contactHeading.current,
-      { y: 60, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.4, ease: "power4.out", delay: 0.45 }
-    )
-    gsap.fromTo(contactLinks.current,
-      { y: 24, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1.0, ease: "power3.out", delay: 0.8 }
-    )
+    gsap.fromTo(contactAccent.current, { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: "expo.out", transformOrigin: "left center" })
+    gsap.fromTo(contactTag.current, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.25 })
+    gsap.fromTo(contactHeading.current, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1.4, ease: "power4.out", delay: 0.45 })
+    gsap.fromTo(contactLinks.current, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 1.0, ease: "power3.out", delay: 0.8 })
   }
 
   function handleScrollProgress(progress: number) {
     const step = 1 / 2
-    if (progress >= step * 1.0) animatePortfolio()
+    if (progress >= step * 1.0) animateGrid()
     if (progress >= step * 1.95) animateContact()
   }
 
-  const handleNext = () => {
-    if (index >= TOTAL - 1) return
-    setDirection(1)
-    setIndex((i) => i + 1)
-  }
+  const contactInnerCls =
+    "relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20"
 
-  const handlePrev = () => {
-    if (index <= 0) return
-    setDirection(-1)
-    setIndex((i) => i - 1)
-  }
-
-  const touchStartX = useRef<number | null>(null)
-  const onTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-  }
-  const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return
-    const dx = e.changedTouches[0].clientX - touchStartX.current
-    if (Math.abs(dx) > 50) {
-      if (dx < 0) handleNext()
-      else handlePrev()
-    }
-    touchStartX.current = null
-  }
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (active) { if (e.key === "Escape") setActive(null); return }
-      if (e.key === "ArrowRight") handleNext()
-      if (e.key === "ArrowLeft") handlePrev()
-    }
-    window.addEventListener("keydown", handler)
-    return () => window.removeEventListener("keydown", handler)
-  }, [index, active])
-
-  useEffect(() => {
-    if (active) {
-      document.body.style.overflow = "hidden"
-      setTimeout(() => modalVideoRef.current?.play().catch(() => { }), 100)
-    } else {
-      document.body.style.overflow = ""
-    }
-    return () => { document.body.style.overflow = "" }
-  }, [active])
-
-  const slots = [-1, 0, 1].map((offset) => ({
-    offset,
-    item: works[index + offset] ?? null,
-    isActive: offset === 0,
-  }))
-
-  const contactInnerCls = "relative z-10 flex flex-col justify-center items-center px-6 sm:px-10 md:px-20 xl:px-60 text-center w-full pt-16 sm:pt-20"
-  const navigate = useNavigate();
-  
   return (
     <main className="bg-[#0b0b0b]">
       <SmoothScroll />
       <StackScroll stackRef={stackRef} onScrollProgress={handleScrollProgress}>
-
         <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
-                              <Image
-                                  src="/work.png"
-                                  alt="members"
-                                  fill
-                                  priority
-                                  className="hidden md:block -z-10 object-cover object-[center_30%]"
-                              />
-          
-                              {/* Mobile Image */}
-                              <Image
-                                  src="/work2.png"
-                                  alt="member"
-                                  fill
-                                  priority
-                                  className="block md:hidden -z-10 object-cover"
-                              />
+          <Image src="/work.png" alt="members" fill priority className="hidden md:block -z-10 object-cover object-[center_30%]" />
+          <Image src="/work2.png" alt="member" fill priority className="block md:hidden -z-10 object-cover" />
           <div className="absolute inset-0 bg-black/40" />
 
           <div className="relative z-10 flex h-full px-8 md:px-35 pb-20 sm:pb-16 md:pb-14 items-end">
             <div className="w-full h-full flex flex-col justify-between sm:flex-none sm:h-auto sm:justify-normal sm:block">
-
               <div className="pt-24 sm:pt-0">
                 <motion.h1
                   data-cursor="expand"
@@ -403,7 +302,6 @@ export default function Page() {
                   ))}
                 </div>
               </div>
-
             </div>
           </div>
 
@@ -440,57 +338,45 @@ export default function Page() {
         </section>
 
         <section className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col">
-
-          <div className="flex flex-col items-center pt-24 pb-4">
-            <div
-              ref={portfolioAccent}
-              className="w-12 h-[2px] bg-orange-500 mb-4"
-              style={{ transformOrigin: "left center", transform: "scaleX(0)" }}
-            />
-            <p
-              ref={portfolioTag}
-              className="text-xs tracking-[0.3em] mb-1"
-              style={{ opacity: 0, transform: "translateY(28px)" }}
-            >
+          <div className="flex flex-col items-center pt-24 pb-4 flex-shrink-0">
+            <div ref={gridAccent} className="w-12 h-[2px] bg-orange-500 mb-4" style={{ transformOrigin: "left center", transform: "scaleX(0)" }} />
+            <p ref={gridTag} className="text-xs tracking-[0.3em] mb-1" style={{ opacity: 0, transform: "translateY(28px)" }}>
               PORTFOLIO
             </p>
-            <p
-              ref={portfolioCount}
-              className="text-sm tabular-nums"
-              style={{ opacity: 0, transform: "translateY(28px)" }}
-            >
-              {String(index + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
+            <p ref={gridCount} className="text-sm tabular-nums" style={{ opacity: 0, transform: "translateY(28px)" }}>
+              {String(brands.length).padStart(2, "0")} BRANDS
             </p>
           </div>
 
           <div
-            className="flex-1 flex items-stretch gap-3 px-4 sm:px-6 md:px-10 xl:px-16 pb-4 overflow-hidden"
-            onTouchStart={onTouchStart}
-            onTouchEnd={onTouchEnd}
+            className="flex-1 min-h-0 flex items-stretch gap-3 px-4 sm:px-6 md:px-10 xl:px-16 pb-4 overflow-hidden"
+            onTouchStart={onBrandTouchStart}
+            onTouchEnd={onBrandTouchEnd}
           >
-            {slots.map(({ offset, item, isActive }) => (
-              <CarouselCard
+            {brandSlots.map(({ offset, brand, isActive }) => (
+              <BrandCarouselCard
                 key={offset}
-                item={item}
+                brand={brand}
                 isActive={isActive}
-                direction={direction}
+                direction={brandDirection}
                 onClick={() => {
-                  if (!item) return
+                  if (!brand) return
                   if (isActive) {
-                    setActive(item)
+                    navigate(`/work/${brand.slug}`)
                   } else {
-                    setDirection(offset as Dir)
-                    setIndex((i) => i + offset)
+                    setBrandDirection(offset as Dir)
+                    setBrandIndex((i) => i + offset)
                   }
                 }}
               />
             ))}
           </div>
 
-          <div className="flex items-center justify-center gap-4 py-5">
-            <button data-cursor="none"
-              onClick={handlePrev}
-              disabled={index === 0}
+          <div className="flex items-center justify-center gap-4 py-5 flex-shrink-0">
+            <button
+              data-cursor="none"
+              onClick={handleBrandPrev}
+              disabled={brandIndex === 0}
               aria-label="Previous"
               className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
             >
@@ -500,23 +386,27 @@ export default function Page() {
             </button>
 
             <div data-cursor="none" className="flex gap-2">
-              {works.map((_, i) => (
+              {brands.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => { setDirection(i > index ? 1 : -1); setIndex(i) }}
+                  onClick={() => {
+                    setBrandDirection(i > brandIndex ? 1 : -1)
+                    setBrandIndex(i)
+                  }}
                   className="rounded-full transition-all duration-300"
                   style={{
-                    width: i === index ? "22px" : "6px",
+                    width: i === brandIndex ? "22px" : "6px",
                     height: "6px",
-                    backgroundColor: i === index ? "rgb(249,115,22)" : "rgba(255,255,255,0.2)",
+                    backgroundColor: i === brandIndex ? "rgb(249,115,22)" : "rgba(255,255,255,0.2)",
                   }}
                 />
               ))}
             </div>
 
-            <button data-cursor="none"
-              onClick={handleNext}
-              disabled={index === TOTAL - 1}
+            <button
+              data-cursor="none"
+              onClick={handleBrandNext}
+              disabled={brandIndex === TOTAL_BRANDS - 1}
               aria-label="Next"
               className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
             >
@@ -528,30 +418,13 @@ export default function Page() {
         </section>
 
         <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center px-6">
-
-          {/* Base layer */}
           <div className={contactInnerCls}>
-            <div
-              ref={contactAccent}
-              className="w-10 h-[2px] bg-orange-500 mb-6"
-              style={{ transformOrigin: "left center", transform: "scaleX(0)" }}
-            />
-            <div
-              ref={contactTag}
-              data-cursor="expand"
-              className="font-bold text-lg sm:text-2xl mb-4"
-              style={{ opacity: 0, transform: "translateY(28px)" }}
-            >
+            <div ref={contactAccent} className="w-10 h-[2px] bg-orange-500 mb-6" style={{ transformOrigin: "left center", transform: "scaleX(0)" }} />
+            <div ref={contactTag} data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4" style={{ opacity: 0, transform: "translateY(28px)" }}>
               Ready to start your journey?
             </div>
-            <div
-              ref={contactHeading}
-              data-cursor="expand"
-              className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]"
-              style={{ opacity: 0, transform: "translateY(60px)" }}
-            >
-              We design and build digital experiences that feel effortless,
-              intentional, and quietly powerful.
+            <div ref={contactHeading} data-cursor="expand" className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]" style={{ opacity: 0, transform: "translateY(60px)" }}>
+              We design and build digital experiences that feel effortless, intentional, and quietly powerful.
             </div>
             <div
               ref={contactLinks}
@@ -564,95 +437,21 @@ export default function Page() {
             </div>
           </div>
 
-          <div
-            ref={maskedContact}
-            className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center"
-          >
+          <div ref={maskedContact} className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex items-center">
             <div className={contactInnerCls}>
               <div className="w-10 h-[2px] bg-[#141414] mb-6" />
-              <div className="font-bold text-lg sm:text-2xl mb-4 text-black">
-                Crafted for modern brands.
-              </div>
+              <div className="font-bold text-lg sm:text-2xl mb-4 text-black">Crafted for modern brands.</div>
               <div className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px] text-black">
-                Every project is shaped through strategy,
-                design, and execution that speaks with clarity.
+                Every project is shaped through strategy, design, and execution that speaks with clarity.
               </div>
-              <div
-                style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
-                className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide text-black"
-              >
+              <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide text-black">
                 <div onClick={() => navigate("/work")}>Explore work →</div>
                 <div onClick={() => navigate("/contact")}>Get in touch →</div>
               </div>
             </div>
           </div>
         </section>
-
       </StackScroll>
-
-      {active && (
-        <div
-          data-cursor="none"
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
-          style={{ backgroundColor: "rgba(0,0,0,0.8)" }}
-          onClick={(e) => { if (e.target === e.currentTarget) setActive(null) }}
-        >
-          <div
-            className="relative w-full flex flex-col md:flex-row overflow-hidden rounded-2xl shadow-2xl"
-            style={{
-              maxWidth: "1000px",
-              maxHeight: "92vh",
-              backgroundColor: "#0f0f0f",
-              animation: "scaleIn 0.3s ease",
-            }}
-          >
-            <button
-              onClick={() => setActive(null)}
-              className="absolute top-4 right-4 z-20 text-white/60 hover:text-white text-xl w-8 h-8 flex items-center justify-center transition-colors"
-            >✕</button>
-
-            <div className="w-full md:w-[55%] flex-shrink-0 bg-black flex items-center justify-center overflow-hidden video-modal-pane">
-              <video
-                ref={modalVideoRef}
-                key={active.id}
-                src={active.video}
-                autoPlay muted loop playsInline controls
-                className="w-full h-full object-contain block"
-              />
-            </div>
-
-            <div
-              className="w-full md:w-[45%] flex flex-col p-6 sm:p-8 overflow-y-auto"
-              style={{ scrollbarWidth: "none", maxHeight: "56vh" }}
-            >
-              <p className="text-xs mb-3 tracking-[0.25em] uppercase text-white/50">{active.type}</p>
-              <h2 className="text-2xl sm:text-3xl font-semibold mb-6">{active.title}</h2>
-              <div className="flex gap-4">
-                <div className="flex-shrink-0 w-px rounded-full bg-orange-500/70" />
-                <p className="text-sm sm:text-[15px] leading-[1.9] italic text-white/80">
-                  {active.description}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <style>{`
-      @keyframes scaleIn {
-        from { opacity: 0; transform: scale(0.96); }
-        to   { opacity: 1; transform: scale(1); }
-      }
-      .video-modal-pane {
-        height: 220px;
-      }
-      @media (min-width: 768px) {
-        .video-modal-pane {
-          height: auto;
-          max-height: 88vh;
-        }
-      }
-    `}</style>
-        </div>
-      )}
     </main>
   )
 }
