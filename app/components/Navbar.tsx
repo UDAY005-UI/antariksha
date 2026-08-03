@@ -144,18 +144,18 @@ export default function Navbar() {
       style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
     >
 
-      <div className="flex flex-col justify-between h-full pointer-events-auto w-18 md:w-fit lg:w-fit">
-        <div data-cursor="none" onClick={() => navigate("/")} className="scale-75 origin-top-left md:scale-100">
+      <div className="flex flex-col justify-between h-full w-18 md:w-fit lg:w-fit">
+        <div data-cursor="none" onClick={() => navigate("/")} className="scale-75 origin-top-left md:scale-100 pointer-events-auto w-fit">
           <Logo />
         </div>
-        <div data-cursor="none" className="flex flex-col gap-2 lg:gap-4 w-fit">
+        <div data-cursor="none" className="flex flex-col gap-2 lg:gap-4 w-fit pointer-events-auto">
           <Link href="https://youtube.com/@theantariksha_in?si=ygBEwLMzszPamYrA" className="w-fit"><YouTubeIcon /></Link>
           <Link href="https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA==" className="w-fit"><InstagramIcon /></Link>
         </div>
       </div>
 
-      <div className="flex flex-col justify-between h-full text-right pointer-events-auto">
-        <div className="flex flex-col gap-1 lg:gap-2">
+      <div className="flex flex-col justify-between h-full text-right">
+        <div className="flex flex-col gap-1 lg:gap-2 pointer-events-auto">
           {links.map(({ label, path }) => (
             <div
               key={label}
@@ -169,7 +169,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div data-cursor="none" className="-rotate-90 origin-right -translate-y-18">
+        <div data-cursor="none" className="-rotate-90 origin-right -translate-y-18 pointer-events-auto w-fit ml-auto">
           <SoundToggle />
         </div>
       </div>

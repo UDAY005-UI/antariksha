@@ -43,7 +43,8 @@ function CarouselCard({
   return (
     <motion.div
       animate={{
-        flexGrow: isActive ? 2.4 : 1,
+        flexGrow: item ? (isActive ? 2.4 : 1) : 0,
+        flexShrink: item ? 1 : 0,
         opacity: item ? (isActive ? 1 : 0.5) : 0,
         scale: isActive ? 1 : 0.93,
       }}
@@ -197,7 +198,7 @@ export default function BrandGallery({
   return (
     <div className="w-full h-full flex flex-col">
       {/* ── Header — real animated layer + masked cursor-reveal layer ── */}
-      <div className="relative flex flex-col items-center pt-24 pb-4">
+      <div className="relative flex flex-col items-center px-4 sm:px-6 md:px-10 xl:px-16 pt-24 pb-4 text-center">
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -211,7 +212,7 @@ export default function BrandGallery({
           initial={{ y: 28, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
-          className="text-xs tracking-[0.3em] mb-1"
+          className="text-xs tracking-[0.3em] mb-1 text-center"
         >
           {brandName}
         </motion.p>
@@ -220,18 +221,18 @@ export default function BrandGallery({
           initial={{ y: 28, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
-          className="text-sm tabular-nums"
+          className="text-sm tabular-nums text-center"
         >
           {String(index + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
         </motion.p>
 
         <div
           ref={maskedHeader}
-          className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex flex-col items-center pt-24 pb-4"
+          className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex flex-col items-center px-4 sm:px-6 md:px-10 xl:px-16 pt-24 pb-4 text-center"
         >
           <div className="w-12 h-[2px] bg-black mb-4" />
-          <p className="text-xs tracking-[0.3em] mb-1 text-black">{brandName}</p>
-          <p className="text-sm tabular-nums text-black">
+          <p className="text-xs tracking-[0.3em] mb-1 text-black text-center">{brandName}</p>
+          <p className="text-sm tabular-nums text-black text-center">
             {String(index + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
           </p>
         </div>
