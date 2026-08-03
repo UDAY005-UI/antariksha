@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence, type Variants, type Transition } from "framer-motion"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState } from "react"
 import StackScroll from "../components/StackScroll"
 import SmoothScroll from "../components/SmoothScroll"
 import Image from "next/image"
@@ -91,25 +91,25 @@ function BrandCarouselCard({
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent pointer-events-none z-10" />
       {!isActive && <div className="absolute inset-0 bg-black/35 pointer-events-none z-10" />}
 
-      <AnimatePresence>
-        {isActive && brand && (
-          <motion.div
-            key={`label-${brand.id}`}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 6 }}
-            transition={{ delay: 0.22, duration: 0.35, ease: "easeOut" }}
-            className="absolute bottom-6 left-0 right-0 px-6 z-20"
-          >
-            <p className="text-[10px] tracking-widest uppercase text-orange-400/80 mb-1 text-center">
-              {brand.works.length} {brand.works.length === 1 ? "Work" : "Works"}
-            </p>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white text-center">
-              {brand.name}
-            </h2>
-          </motion.div>
-        )}
-      </AnimatePresence>
+<AnimatePresence>
+  {isActive && brand && (
+    <motion.div
+      key={`label-${brand.id}`}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 6 }}
+      transition={{ delay: 0.22, duration: 0.35, ease: "easeOut" }}
+      className="absolute bottom-5 left-1/2 -translate-x-1/2 w-fit flex flex-col items-center z-20"
+    >
+      <p className="text-[10px] tracking-widest uppercase text-orange-400/80 mb-1 text-center" data-cursor="none">
+        {brand.works.length} {brand.works.length === 1 ? "Work" : "Works"}
+      </p>
+      <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white text-center" data-cursor="none"> 
+        {brand.name}
+      </h2>
+    </motion.div>
+  )}
+</AnimatePresence>
 
       <AnimatePresence>
         {isActive && brand && (
@@ -119,9 +119,9 @@ function BrandCarouselCard({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ delay: 0.28, duration: 0.3 }}
-            className="absolute top-5 right-5 z-20"
+            className="absolute top-4 right-4 z-20"
           >
-            <span className="text-[9px] tracking-[0.2em] uppercase text-orange-400 font-medium">
+            <span className="text-[9px] tracking-[0.2em] uppercase text-orange-400 font-medium" data-cursor="none">
               Tap to view
             </span>
           </motion.div>
@@ -189,7 +189,6 @@ export default function Page() {
   function animateGrid() {
     if (gridFired.current) return
     gridFired.current = true
-
     gsap.fromTo(gridAccent.current, { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: "expo.out", transformOrigin: "left center" })
     gsap.fromTo(gridTag.current, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.25 })
     gsap.fromTo(gridCount.current, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.4 })
@@ -198,7 +197,6 @@ export default function Page() {
   function animateContact() {
     if (contactFired.current) return
     contactFired.current = true
-
     gsap.fromTo(contactAccent.current, { scaleX: 0 }, { scaleX: 1, duration: 1.2, ease: "expo.out", transformOrigin: "left center" })
     gsap.fromTo(contactTag.current, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, ease: "power3.out", delay: 0.25 })
     gsap.fromTo(contactHeading.current, { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 1.4, ease: "power4.out", delay: 0.45 })
@@ -218,6 +216,8 @@ export default function Page() {
     <main className="bg-[#0b0b0b]">
       <SmoothScroll />
       <StackScroll stackRef={stackRef} onScrollProgress={handleScrollProgress}>
+
+        {/* ── Section 1 — Hero ───────────────────────────────────────────── */}
         <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">
           <Image src="/work.png" alt="members" fill priority className="hidden md:block -z-10 object-cover object-[center_30%]" />
           <Image src="/work2.png" alt="member" fill priority className="block md:hidden -z-10 object-cover" />
@@ -235,7 +235,6 @@ export default function Page() {
                 >
                   Our Work
                 </motion.h1>
-
                 <div className="flex justify-start">
                   {"SHOT".split("").map((l, i) => (
                     <div key={i} className="overflow-hidden">
@@ -251,7 +250,6 @@ export default function Page() {
                     </div>
                   ))}
                 </div>
-
                 <div className="flex justify-start">
                   {"IN".split("").map((l, i) => (
                     <div key={i} className="overflow-hidden">
@@ -285,7 +283,6 @@ export default function Page() {
                     </div>
                   ))}
                 </div>
-
                 <div className="flex justify-end">
                   {"HOUR".split("").map((l, i, arr) => (
                     <div key={i} className="overflow-hidden">
@@ -337,19 +334,39 @@ export default function Page() {
           </div>
         </section>
 
+        {/* ── Section 2 — Portfolio carousel ────────────────────────────── */}
         <section className="stack-panel absolute inset-0 w-full bg-[#0b0b0b] flex flex-col">
-          <div className="flex flex-col items-center pt-24 pb-4 flex-shrink-0">
-            <div ref={gridAccent} className="w-12 h-[2px] bg-orange-500 mb-4" style={{ transformOrigin: "left center", transform: "scaleX(0)" }} />
-            <p ref={gridTag} className="text-xs tracking-[0.3em] mb-1" style={{ opacity: 0, transform: "translateY(28px)" }}>
+
+          {/* header — reduced top padding */}
+          <div className="flex flex-col items-center self-center w-fit pt-12 pb-6 flex-shrink-0">
+            <div
+              ref={gridAccent}
+              className="w-12 h-[2px] bg-orange-500 mb-3"
+              style={{ transformOrigin: "left center", transform: "scaleX(0)" }}
+              data-cursor="none"
+            />
+            <p
+              ref={gridTag}
+              className="text-xs tracking-[0.3em] mb-1"
+              style={{ opacity: 0, transform: "translateY(28px)" }}
+              data-cursor="none"
+            >
               PORTFOLIO
             </p>
-            <p ref={gridCount} className="text-sm tabular-nums" style={{ opacity: 0, transform: "translateY(28px)" }}>
+            <p
+              ref={gridCount}
+              className="text-sm tabular-nums"
+              style={{ opacity: 0, transform: "translateY(28px)" }}
+              data-cursor="none"
+            >
               {String(brands.length).padStart(2, "0")} BRANDS
             </p>
           </div>
 
+          {/* cards — constrained so bottom never bleeds into next section */}
           <div
-            className="flex-1 min-h-0 flex items-stretch gap-3 px-4 sm:px-6 md:px-10 xl:px-16 pb-4 overflow-hidden"
+            className="flex-1 min-h-0 flex items-stretch gap-3 px-4 sm:px-6 md:px-10 xl:px-16 mb-4 overflow-hidden"
+            style={{ maxHeight: "calc(80svh - 100px)" }}
             onTouchStart={onBrandTouchStart}
             onTouchEnd={onBrandTouchEnd}
           >
@@ -372,13 +389,14 @@ export default function Page() {
             ))}
           </div>
 
-          <div className="flex items-center justify-center gap-4 py-5 flex-shrink-0">
+          {/* dots + arrows — tighter padding */}
+          <div className="flex items-center justify-center gap-4 py-3 flex-shrink-0">
             <button
               data-cursor="none"
               onClick={handleBrandPrev}
               disabled={brandIndex === 0}
               aria-label="Previous"
-              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
+              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
             >
               <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
                 <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -408,7 +426,7 @@ export default function Page() {
               onClick={handleBrandNext}
               disabled={brandIndex === TOTAL_BRANDS - 1}
               aria-label="Next"
-              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
+              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
             >
               <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
                 <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -417,13 +435,28 @@ export default function Page() {
           </div>
         </section>
 
+        {/* ── Section 3 — Contact ────────────────────────────────────────── */}
         <section className="z-20 stack-panel absolute inset-0 h-screen w-full bg-[#141414] flex items-center px-6">
           <div className={contactInnerCls}>
-            <div ref={contactAccent} className="w-10 h-[2px] bg-orange-500 mb-6" style={{ transformOrigin: "left center", transform: "scaleX(0)" }} />
-            <div ref={contactTag} data-cursor="expand" className="font-bold text-lg sm:text-2xl mb-4" style={{ opacity: 0, transform: "translateY(28px)" }}>
+            <div
+              ref={contactAccent}
+              className="w-10 h-[2px] bg-orange-500 mb-6"
+              style={{ transformOrigin: "left center", transform: "scaleX(0)" }}
+            />
+            <div
+              ref={contactTag}
+              data-cursor="expand"
+              className="font-bold text-lg sm:text-2xl mb-4"
+              style={{ opacity: 0, transform: "translateY(28px)" }}
+            >
               Ready to start your journey?
             </div>
-            <div ref={contactHeading} data-cursor="expand" className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]" style={{ opacity: 0, transform: "translateY(60px)" }}>
+            <div
+              ref={contactHeading}
+              data-cursor="expand"
+              className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px]"
+              style={{ opacity: 0, transform: "translateY(60px)" }}
+            >
               We design and build digital experiences that feel effortless, intentional, and quietly powerful.
             </div>
             <div
@@ -444,13 +477,17 @@ export default function Page() {
               <div className="font-semibold text-2xl sm:text-3xl md:text-5xl leading-tight mb-8 max-w-[900px] text-black">
                 Every project is shaped through strategy, design, and execution that speaks with clarity.
               </div>
-              <div style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }} className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide text-black">
-                <div onClick={() => navigate("/work")}>Explore work →</div>
-                <div onClick={() => navigate("/contact")}>Get in touch →</div>
+              <div
+                style={{ WebkitTouchCallout: "none", WebkitUserSelect: "none", userSelect: "none" }}
+                className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm uppercase tracking-wide text-black"
+              >
+                <div onClick={() => navigate("/work")} className="cursor-pointer">Explore work →</div>
+                <div onClick={() => navigate("/contact")} className="cursor-pointer">Get in touch →</div>
               </div>
             </div>
           </div>
         </section>
+
       </StackScroll>
     </main>
   )

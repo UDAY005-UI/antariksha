@@ -88,12 +88,12 @@ function CarouselCard({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ delay: 0.22, duration: 0.35, ease: "easeOut" }}
-            className="absolute bottom-6 left-0 right-0 px-6 z-20"
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 w-fit flex flex-col items-center z-20"
           >
-            <p className="text-[10px] tracking-widest uppercase text-white/50 mb-1 text-center">
+            <p className="text-[10px] tracking-widest uppercase text-white/50 mb-1 text-center" data-cursor="none">
               {item.type}
             </p>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white text-center" data-cursor="none">
               {item.title}
             </h2>
           </motion.div>
@@ -110,7 +110,7 @@ function CarouselCard({
             transition={{ delay: 0.28, duration: 0.3 }}
             className="absolute top-5 right-5 z-20"
           >
-            <span className="text-[9px] tracking-[0.2em] uppercase text-orange-400 font-medium">
+            <span className="text-[9px] tracking-[0.2em] uppercase text-orange-400 font-medium" data-cursor="none">
               Tap to watch
             </span>
           </motion.div>
@@ -133,6 +133,7 @@ export default function BrandGallery({
 
   const [active, setActive] = useState<WorkItem | null>(null)
   const modalVideoRef = useRef<HTMLVideoElement>(null)
+  const maskedHeader = useRef<HTMLDivElement>(null)
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState<Dir>(1)
 
@@ -195,15 +196,18 @@ export default function BrandGallery({
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex flex-col items-center pt-24 pb-4">
+      {/* ── Header — real animated layer + masked cursor-reveal layer ── */}
+      <div className="relative flex flex-col items-center pt-24 pb-4">
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           style={{ transformOrigin: "left center" }}
           className="w-12 h-[2px] bg-orange-500 mb-4"
+          data-cursor="none"
         />
         <motion.p
+          data-cursor="none"
           initial={{ y: 28, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}
@@ -212,6 +216,7 @@ export default function BrandGallery({
           {brandName}
         </motion.p>
         <motion.p
+          data-cursor="none"
           initial={{ y: 28, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
@@ -219,6 +224,17 @@ export default function BrandGallery({
         >
           {String(index + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
         </motion.p>
+
+        <div
+          ref={maskedHeader}
+          className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex flex-col items-center pt-24 pb-4"
+        >
+          <div className="w-12 h-[2px] bg-black mb-4" />
+          <p className="text-xs tracking-[0.3em] mb-1 text-black">{brandName}</p>
+          <p className="text-sm tabular-nums text-black">
+            {String(index + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
+          </p>
+        </div>
       </div>
 
       <div
