@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useRef } from "react"
+import { usePathname } from "next/navigation"
 import StackScroll from "../../components/StackScroll"
 import SmoothScroll from "../../components/SmoothScroll"
 import BrandGallery from "../../components/BrandGallery"
@@ -9,11 +10,12 @@ import Image from "next/image"
 import type { Brand } from "../data/brand"
 
 export default function BrandPageClient({ brand }: { brand: Brand }) {
+  const pathname = usePathname()
   const maskedHero = useRef<HTMLDivElement>(null)
   const stackRef = useRef<HTMLDivElement>(null)
 
   return (
-    <main className="bg-[#0b0b0b]">
+    <main key={pathname} className="bg-[#0b0b0b]">
       <SmoothScroll />
       <StackScroll stackRef={stackRef}>
         <section className="-z-10 stack-panel absolute inset-0 h-screen w-full overflow-hidden">

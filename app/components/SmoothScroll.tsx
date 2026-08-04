@@ -28,7 +28,24 @@ export default function SmoothScroll() {
     };
     rafId = requestAnimationFrame(raf);
 
+    // ── bfcache fix ──────────────────────────────────────────────────
+    // Chrome's back-forward cache restores this page as a frozen
+    // snapshot on browser back/forward instead of remounting it.
+    // React effects, GSAP's ScrollTrigger pins, and Lenis never
+    // re-initialize in that case — you get whatever visual state
+    // (opacity/position) happened to be mid-animation the instant
+    // you navigated away, permanently stuck. Forcing a reload when
+    // the page is restored from bfcache guarantees a clean remount
+    // with GSAP/Lenis set up correctly again.
+    const handlePageShow = (event: PageTransitionEvent) => {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    };
+    window.addEventListener("pageshow", handlePageShow);
+
     return () => {
+      window.removeEventListener("pageshow", handlePageShow);
       cancelAnimationFrame(rafId);
       lenis.destroy();
     };

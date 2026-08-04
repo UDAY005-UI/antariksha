@@ -19,9 +19,22 @@ export default function StackScroll({
   const containerRef = (stackRef ?? internalRef) as RefObject<HTMLDivElement>;
 
   useLayoutEffect(() => {
+    let ctx: gsap.Context | undefined;
+    let cancelled = false;
+
     const timer = setTimeout(() => {
-      const ctx = gsap.context(() => {
-        const panels = gsap.utils.toArray<HTMLElement>(".stack-panel");
+      if (cancelled || !containerRef.current) return;
+
+      ctx = gsap.context(() => {
+        // IMPORTANT: query panels scoped to THIS container only.
+        // gsap.utils.toArray(".stack-panel") queries the whole document,
+        // which picks up leftover/other-page panels during route
+        // transitions and causes pin/removeChild crashes on back-nav.
+        const panels = gsap.utils.toArray<HTMLElement>(
+          containerRef.current!.querySelectorAll(".stack-panel")
+        );
+
+        if (panels.length === 0) return;
 
         panels.forEach((panel, i) => {
           if (i !== 0) gsap.set(panel, { yPercent: 100 });
@@ -57,11 +70,21 @@ export default function StackScroll({
 
         ScrollTrigger.refresh();
       }, containerRef);
-
-      return () => ctx.revert();
     }, 100);
 
-    return () => clearTimeout(timer);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+      // ctx.revert() properly unwinds everything THIS context created:
+      // kills its ScrollTriggers, unpins, and removes GSAP's pin-spacer
+      // wrapper divs so React's DOM tree matches what it expects again.
+      // We do NOT additionally call ScrollTrigger.getAll().forEach(kill)
+      // here — that would kill triggers belonging to other component
+      // instances (e.g. a page transitioning in concurrently) and can
+      // leave a stray pin-spacer behind, which is what was causing the
+      // "Failed to execute 'removeChild' on 'Node'" crash on back-nav.
+      ctx?.revert();
+    };
   }, []);
 
   return (

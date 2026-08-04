@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import Logo from "./Logo";
 import { YouTubeIcon } from "./Yt";
 import { InstagramIcon } from "./Insta";
+import { FacebookIcon } from "./Fb";
 import { useAudio } from "./Audio";
 import Link from "next/link";
 import { useNavigate } from "./UseNavigate";
@@ -151,6 +152,7 @@ export default function Navbar() {
         <div data-cursor="none" className="flex flex-col gap-2 lg:gap-4 w-fit pointer-events-auto">
           <Link href="https://youtube.com/@theantariksha_in?si=ygBEwLMzszPamYrA" className="w-fit"><YouTubeIcon /></Link>
           <Link href="https://www.instagram.com/the.antariksha?igsh=MWtyNHI3MTRhdDBhdA==" className="w-fit"><InstagramIcon /></Link>
+          <Link href="https://www.facebook.com/share/1CQuR2T8oj/?mibextid=wwXIfr" className="w-fit"><FacebookIcon /></Link>
         </div>
       </div>
 

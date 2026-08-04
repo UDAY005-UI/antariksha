@@ -43,8 +43,7 @@ function CarouselCard({
   return (
     <motion.div
       animate={{
-        flexGrow: item ? (isActive ? 2.4 : 1) : 0,
-        flexShrink: item ? 1 : 0,
+        flexGrow: isActive ? 2.4 : 1,
         opacity: item ? (isActive ? 1 : 0.5) : 0,
         scale: isActive ? 1 : 0.93,
       }}
@@ -89,12 +88,12 @@ function CarouselCard({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ delay: 0.22, duration: 0.35, ease: "easeOut" }}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 w-fit flex flex-col items-center z-20"
+            className="absolute bottom-5 left-1/2 -translate-x-1/2 w-fit flex flex-col items-center z-20"
           >
             <p className="text-[10px] tracking-widest uppercase text-white/50 mb-1 text-center" data-cursor="none">
               {item.type}
             </p>
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-white text-center" data-cursor="none">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white text-center" data-cursor="none">
               {item.title}
             </h2>
           </motion.div>
@@ -109,7 +108,7 @@ function CarouselCard({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ delay: 0.28, duration: 0.3 }}
-            className="absolute top-5 right-5 z-20"
+            className="absolute top-4 right-4 z-20"
           >
             <span className="text-[9px] tracking-[0.2em] uppercase text-orange-400 font-medium" data-cursor="none">
               Tap to watch
@@ -197,14 +196,15 @@ export default function BrandGallery({
 
   return (
     <div className="w-full h-full flex flex-col">
-      {/* ── Header — real animated layer + masked cursor-reveal layer ── */}
-      <div className="relative flex flex-col items-center px-4 sm:px-6 md:px-10 xl:px-16 pt-24 pb-4 text-center">
+
+      {/* ── Header ─────────────────────────────────────────────────────── */}
+      <div className="relative flex flex-col items-center px-4 sm:px-6 md:px-10 xl:px-16 pt-4 pb-3 text-center">
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           style={{ transformOrigin: "left center" }}
-          className="w-12 h-[2px] bg-orange-500 mb-4"
+          className="w-12 h-[2px] bg-orange-500 mb-3"
           data-cursor="none"
         />
         <motion.p
@@ -228,9 +228,9 @@ export default function BrandGallery({
 
         <div
           ref={maskedHeader}
-          className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex flex-col items-center px-4 sm:px-6 md:px-10 xl:px-16 pt-24 pb-4 text-center"
+          className="cursor-text-layer absolute inset-0 w-full h-full bg-orange-500 flex flex-col items-center px-4 sm:px-6 md:px-10 xl:px-16 pt-4 pb-3 text-center"
         >
-          <div className="w-12 h-[2px] bg-black mb-4" />
+          <div className="w-12 h-[2px] bg-black mb-3" />
           <p className="text-xs tracking-[0.3em] mb-1 text-black text-center">{brandName}</p>
           <p className="text-sm tabular-nums text-black text-center">
             {String(index + 1).padStart(2, "0")} / {String(TOTAL).padStart(2, "0")}
@@ -238,8 +238,10 @@ export default function BrandGallery({
         </div>
       </div>
 
+      {/* ── Cards ──────────────────────────────────────────────────────── */}
       <div
-        className="flex-1 flex items-stretch gap-3 px-4 sm:px-6 md:px-10 xl:px-16 pb-4 overflow-hidden"
+        className="flex-1 min-h-0 flex items-stretch gap-3 px-4 sm:px-6 md:px-10 xl:px-16 mb-4 overflow-hidden"
+        style={{ maxHeight: "calc(80svh - 100px)" }}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
@@ -262,13 +264,14 @@ export default function BrandGallery({
         ))}
       </div>
 
-      <div className="flex items-center justify-center gap-4 py-5">
+      {/* ── Dots + arrows ──────────────────────────────────────────────── */}
+      <div className="flex items-center justify-center gap-4 py-3 flex-shrink-0">
         <button
           data-cursor="none"
           onClick={handlePrev}
           disabled={index === 0}
           aria-label="Previous"
-          className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
+          className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
         >
           <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
             <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -298,7 +301,7 @@ export default function BrandGallery({
           onClick={handleNext}
           disabled={index === TOTAL - 1}
           aria-label="Next"
-          className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
+          className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white bg-black/30 backdrop-blur-sm hover:border-orange-500 hover:text-orange-500 disabled:opacity-20 disabled:cursor-not-allowed transition-all duration-300"
         >
           <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
             <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -306,6 +309,7 @@ export default function BrandGallery({
         </button>
       </div>
 
+      {/* ── Modal ──────────────────────────────────────────────────────── */}
       {active && (
         <div
           data-cursor="none"
